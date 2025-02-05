@@ -1,0 +1,35 @@
+name: Hexo Deploy
+
+on:
+  push:
+    branches:
+      - main  # 當 main 分支有變更時，自動觸發部署
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: 📦 Install Dependencies
+        run: |
+          npm install
+          npm install hexo-cli -g
+          npm install hexo-renderer-pug hexo-renderer-stylus --save
+
+      - name: 🚀 Generate Hexo Static Files
+        run: hexo generate
+
+      - name: 🌍 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
