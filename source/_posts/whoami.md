@@ -22,3 +22,43 @@ Hi，我是 Noth
 只有真正理解開發邏輯、運維流程與架構設計，攻防分析才會變得從容。
 
 能力的價值，不在於被多少人看見，而在於能否在關鍵時刻站得住腳。
+
+## 個人經歷
+
+### CVE ID
+
+- CVE-2020-15600
+- CVE-2020-25453
+- CVE-2020-27533
+- CVE-2020-23522
+
+### Security Certificates / 安全證書
+
+- CEH  
+- ECSA  
+- CTIA  
+- CHFI  
+- CPENT  
+- LPT Master  
+- OSCP  
+- OSEP  
+- OSWE 
+
+### Preparing / 準備中
+
+- CRTP  
+- CISSP
+
+### Security Hall of Fame / 安全名人堂
+
+- Apple (2022)  
+- United Nations (2021)  
+- Dcard (2020)  
+- Trend Micro (2020)  
+- Telekom (2020)  
+- Naver – Special Contributor (2020)  
+- CERT-EU (2020)  
+- ResMed (2020)  
+- UN Women (2020)  
+- Visma (2020)  
+- Gogoshop (2019) 
