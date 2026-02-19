@@ -29,7 +29,7 @@ https://nodejs.org/zh-tw/download
 
 安裝完成後確認版本：
 
-```
+```bash=
 node -v
 npm -v
 ```
@@ -38,7 +38,7 @@ npm -v
 
 ### 安裝 Hexo Cli
 
-```
+```bash=
 npm install -g hexo-cli
 hexo -v
 ```
@@ -47,7 +47,7 @@ hexo -v
 
 建立新專案
 
-```
+```bash=
 cd %USERPROFILE%\Desktop
 hexo init noth-blog
 cd noth-blog
@@ -58,19 +58,19 @@ npm install
 
 ### 安裝 Butterfly 主題
 
-```
+```bash=
 npm install hexo-theme-butterfly --save
 ```
 
 打開 _config.yml，修改：
 
-```
+```bash=
 theme: butterfly
 ```
 
 ### 本機測試
 
-```
+```bash=
 hexo clean   # 清除快取與舊生成檔案
 hexo g       # 產生靜態網站
 hexo s       # 啟動本機伺服器
@@ -78,7 +78,7 @@ hexo s       # 啟動本機伺服器
 
 打開：
 
-```
+```bash=
 http://localhost:4000
 ```
 
