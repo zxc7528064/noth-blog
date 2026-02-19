@@ -216,6 +216,8 @@ jobs:
           publish_dir: ./public
 ```
 
+CI/CD 的本質是：每次程式碼變動，自動觸發建置流程，產生一致且可重現的產物。
+
 ### GitHub Pages 設定步驟
 
 ```bash=
