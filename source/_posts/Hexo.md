@@ -118,6 +118,24 @@ Actions = 自動化機器人
 
 ### Git 基本設定與推送流程
 
+```bash=
+Working Directory
+(實際檔案)
+   │
+   │ git add
+   ▼
+Staging Area
+(暫存區)
+   │
+   │ git commit
+   ▼
+Local Repository
+(main 分支)
+   │
+   │ git push
+   ▼
+```
+
 Git 基本設定與推送流程
 
 設定本質原因：
