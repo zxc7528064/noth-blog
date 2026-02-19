@@ -175,3 +175,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
 ```
+
+### GitHub Pages 設定步驟
+
+```bash=
+Repository → Settings → Pages
+Source: Deploy from branch
+Branch: gh-pages
+Folder: / (root)
+```
+
+### 常見錯誤與排錯
