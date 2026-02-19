@@ -86,6 +86,7 @@ http://localhost:4000
 
 ### Hexo → GitHub → Actions → Pages 架構
 
+```bash=
 你的電腦 (Hexo 原始碼)
         │
         ▼ git push main
@@ -93,16 +94,17 @@ GitHub main 分支 (存原始碼)
         │
         ▼
 GitHub Actions 自動執行
-  1. npm install
-  2. hexo generate
-  3. 產生 public/
-  4. push 到 gh-pages
+ 1. npm install
+ 2. hexo generate
+ 3. 產生 public/
+ 4. push 到 gh-pages
         │
         ▼
 gh-pages 分支 (靜態網站檔)
         │
         ▼
 GitHub Pages 對外顯示網站
+```
 
 重點理解：
 main = 原始碼
@@ -120,7 +122,7 @@ git config --global user.email "yourname@gmail.com"
 
 初次推送
 
-```
+```bash=
 git add .
 git commit -m "initial hexo setup"
 git branch -M main
@@ -129,7 +131,7 @@ git push --set-upstream origin main
 
 日常發文流程
 
-```
+```bash=
 git add .
 git commit -m "add new post"
 git push
@@ -140,7 +142,8 @@ git push
 GitHub Pages 不會幫你執行 hexo generate
 👉 GitHub 只會部署「已存在的靜態檔」
 👉 main 分支如果只有原始碼，不會自動生成
-解決方式：新增 .github/workflows/deploy.yml
+解決方式：
+新增 .github/workflows/deploy.yml
 
 ```bash=
 name: Deploy Hexo to GitHub Pages
