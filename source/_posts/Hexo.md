@@ -136,25 +136,6 @@ Local Repository
    ▼
 ```
 
-Git 基本設定與推送流程
-
-設定本質原因：
-
-```bash=
-每一次 commit 都會記錄：
-1. 作者
-2. Email
-3. 時間
-4. 修改內容
-如果不設定：
-commit 會沒有正確作者資訊
-GitHub 可能無法把 commit 綁定到你的帳號
-為什麼是 --global?
-代表：
-套用到你電腦上的所有 Git 專案
-你只需要設定一次。
-```
-
 ```bash=
 git config --global user.name "yourname"
 git config --global user.email "yourname@gmail.com"
