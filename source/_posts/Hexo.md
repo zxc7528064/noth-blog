@@ -36,7 +36,10 @@ npm -v
 
 ![check version](/img/image.png)
 
-### 安裝 Hexo Cli
+### 安裝 Hexo CLI（Hexo 的指令工具，用來建立與管理網站）
+
+一個基於 Node.js 的靜態網站生成框架，
+透過 Markdown + 模板引擎，在建置階段產生靜態網站。
 
 ```bash=
 npm install -g hexo-cli
@@ -63,6 +66,7 @@ npm install hexo-theme-butterfly --save
 ```
 
 打開 _config.yml，修改：
+_config.yml 是 Hexo 的全域設定檔，用來控制網站標題、主題、URL 等基本配置。
 
 ```bash=
 theme: butterfly
