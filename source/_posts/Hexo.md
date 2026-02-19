@@ -34,7 +34,7 @@ node -v
 npm -v
 ```
 
-![check version](image.png)
+![check version](/img/image.png)
 
 ### 安裝 Hexo Cli
 
@@ -43,7 +43,7 @@ npm install -g hexo-cli
 hexo -v
 ```
 
-![hexo cli](image-1.png)
+![hexo cli](/img/image-1.png)
 
 建立新專案
 
@@ -54,4 +54,35 @@ cd noth-blog
 npm install
 ```
 
-![alt text](image-2.png)
+![alt text](/img/image-2.png)
+
+### 安裝 Butterfly 主題
+
+```
+npm install hexo-theme-butterfly --save
+```
+
+打開 _config.yml，修改：
+
+```
+theme: butterfly
+```
+
+### 本機測試
+
+```
+hexo clean   # 清除快取與舊生成檔案
+hexo g       # 產生靜態網站
+hexo s       # 啟動本機伺服器
+```
+
+打開：
+
+```
+http://localhost:4000
+```
+
+看到畫面即代表成功
+
+### Hexo → GitHub → Actions → Pages 架構
+
