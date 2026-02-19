@@ -40,6 +40,8 @@ npm -v
 
 一個基於 Node.js 的靜態網站生成框架，透過 Markdown + 模板引擎，在建置階段產生靜態網站。
 
+.md → hexo generate → public/index.html
+
 ```bash=
 npm install -g hexo-cli
 hexo -v
@@ -114,6 +116,7 @@ GitHub Pages 對外顯示網站
 重點理解：
 main = 原始碼
 gh-pages = 靜態網站
+public/ = build 產物
 Actions = 自動化機器人
 
 ### Git 基本設定與推送流程
