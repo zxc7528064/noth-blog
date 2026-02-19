@@ -18,3 +18,40 @@ tags :
 自己並非本科出身，早期更多是從實戰與攻防經驗中累積能力。但隨著紅隊工作做得越久，越能理解：單純會打並不夠，只有理解開發流程、部署架構與自動化思維，才能真正看清整個系統的全貌。
 
 ## 如何安裝
+
+### 安裝 Node.js
+
+前往官網下載 Windows (.msi) 安裝包：
+
+```bash=
+https://nodejs.org/zh-tw/download
+```
+
+安裝完成後確認版本：
+
+```
+node -v
+npm -v
+```
+
+![check version](image.png)
+
+### 安裝 Hexo Cli
+
+```
+npm install -g hexo-cli
+hexo -v
+```
+
+![hexo cli](image-1.png)
+
+建立新專案
+
+```
+cd %USERPROFILE%\Desktop
+hexo init noth-blog
+cd noth-blog
+npm install
+```
+
+![alt text](image-2.png)
