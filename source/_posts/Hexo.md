@@ -40,7 +40,22 @@ npm -v
 
 一個基於 Node.js 的靜態網站生成框架，透過 Markdown + 模板引擎，在建置階段產生靜態網站。
 
-.md → hexo generate → public/index.html
+核心流程
+
+```bash= 
+Markdown (.md)
+        ↓
+hexo generate
+        ↓
+產生 public/ 靜態 HTML
+```
+
+重點理解：
+
+.md 是原始內容
+public/ 是 build 產物
+Hexo 不提供動態後端
+最終輸出的是純靜態網站
 
 ```bash=
 npm install -g hexo-cli
