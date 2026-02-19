@@ -167,34 +167,43 @@ GitHub Pages 不會幫你執行 hexo generate
 需要一個「自動建置機器人」，新增 .github/workflows/deploy.yml 檔案
 
 ```bash=
+# Workflow 名稱（顯示在 GitHub Actions 頁面）
 name: Deploy Hexo to GitHub Pages
 
+# 觸發條件
 on:
   push:
     branches:
-      - main
+      - main   # 當 push 到 main 分支時觸發
 
+# 設定 workflow 權限
 permissions:
-  contents: write
+  contents: write   # 允許 workflow push 到 gh-pages 分支
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  deploy:   # 工作名稱（可以自訂）
+    runs-on: ubuntu-latest   # 使用 GitHub 提供的 Ubuntu 環境執行
 
     steps:
+      # 1️⃣ 把你的 repo 原始碼抓下來
       - uses: actions/checkout@v4
 
+      # 2️⃣ 安裝 Node.js 環境
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 18   # 指定 Node.js 版本
 
+      # 3️⃣ 安裝專案依賴（package.json 裡的套件）
       - run: npm install
+
+      # 4️⃣ 產生靜態網站（生成 public/ 資料夾）
       - run: npx hexo generate
 
+      # 5️⃣ 把 public/ 裡的靜態檔 push 到 gh-pages 分支
       - uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          github_token: ${{ secrets.GITHUB_TOKEN }}   # 使用 GitHub 內建 token
+          publish_dir: ./public   # 指定要部署的資料夾
 ```
 
 CI/CD 的本質是：每次程式碼變動，自動觸發建置流程，產生一致且可重現的產物。
