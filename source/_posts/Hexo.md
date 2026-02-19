@@ -164,7 +164,7 @@ GitHub Pages 不會幫你執行 hexo generate
 👉 GitHub 只會部署「已存在的靜態檔」
 👉 main 分支如果只有原始碼，不會自動生成
 解決方式：
-新增 .github/workflows/deploy.yml
+需要一個「自動建置機器人」，新增 .github/workflows/deploy.yml 檔案
 
 ```bash=
 name: Deploy Hexo to GitHub Pages
