@@ -210,6 +210,8 @@ CI/CD 的本質是：每次程式碼變動，自動觸發建置流程，產生�
 
 ### GitHub Pages 設定步驟
 
+讀取一個 branch 裡已經存在的 HTML 檔案。
+
 ```bash=
 Repository → Settings → Pages
 Source: Deploy from branch
