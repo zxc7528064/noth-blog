@@ -38,8 +38,7 @@ npm -v
 
 ### 安裝 Hexo CLI（Hexo 的指令工具，用來建立與管理網站）
 
-一個基於 Node.js 的靜態網站生成框架，
-透過 Markdown + 模板引擎，在建置階段產生靜態網站。
+一個基於 Node.js 的靜態網站生成框架，透過 Markdown + 模板引擎，在建置階段產生靜態網站。
 
 ```bash=
 npm install -g hexo-cli
@@ -60,6 +59,8 @@ npm install
 ![alt text](/img/image-2.png)
 
 ### 安裝 Butterfly 主題
+
+Hexo 在 build 時要使用 butterfly 當作模板
 
 ```bash=
 npm install hexo-theme-butterfly --save
@@ -118,6 +119,23 @@ Actions = 自動化機器人
 ### Git 基本設定與推送流程
 
 Git 基本設定與推送流程
+
+設定本質原因：
+
+```bash=
+每一次 commit 都會記錄：
+1. 作者
+2. Email
+3. 時間
+4. 修改內容
+如果不設定：
+commit 會沒有正確作者資訊
+GitHub 可能無法把 commit 綁定到你的帳號
+為什麼是 --global?
+代表：
+套用到你電腦上的所有 Git 專案
+你只需要設定一次。
+```
 
 ```bash=
 git config --global user.name "yourname"
