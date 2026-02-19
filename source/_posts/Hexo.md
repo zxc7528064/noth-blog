@@ -51,7 +51,6 @@ hexo generate
 ```
 
 重點理解：
-
 .md 是原始內容
 public/ 是 build 產物
 Hexo 不提供動態後端
