@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zxc7528064.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2026-02-19T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-19T14:46:48.992Z">
+<meta property="article:modified_time" content="2026-02-19T14:56:03.063Z">
 <meta property="article:author" content="Noth Shen">
 <meta property="article:tag" content="DevOps">
 <meta property="article:tag" content="CI&#x2F;CD">
@@ -20,7 +20,7 @@
   "url": "https://zxc7528064.github.io/2026/02/19/Hexo/",
   "image": "https://zxc7528064.github.io/img/avatar.jpg",
   "datePublished": "2026-02-19T00:00:00.000Z",
-  "dateModified": "2026-02-19T14:46:48.992Z",
+  "dateModified": "2026-02-19T14:56:03.063Z",
   "author": [
     {
       "@type": "Person",
@@ -161,7 +161,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">Hexo 部署流程</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Hexo 部署流程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-19T00:00:00.000Z" title="Created 2026-02-19 00:00:00">2026-02-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-19T14:46:48.992Z" title="Updated 2026-02-19 14:46:48">2026-02-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/DevOps/">DevOps</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">Hexo 部署流程</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Hexo 部署流程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-19T00:00:00.000Z" title="Created 2026-02-19 00:00:00">2026-02-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-19T14:56:03.063Z" title="Updated 2026-02-19 14:56:03">2026-02-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/DevOps/">DevOps</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
 之前對於自架 Blog 並沒有太多實際經驗。趁著過年期間有空，決定從零開始搭建一個屬於自己的網站，也順便把整個部署流程完整走一遍。
 
 <p>在實作過程中，除了前端主題設定與結構調整外，也接觸到 CI&#x2F;CD 自動化部署，包括 GitHub Actions、靜態檔生成與版本控制等流程。過去做紅隊時，思考重心多半放在攻擊面與弱點利用上，較少從「系統是如何被建構與部署」的角度去理解。這次實際操作後，才真正體會到工程化流程對穩定性與可維護性的價值。</p>
@@ -173,7 +173,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
 
 <p><img src="/noth-blog/img/image.png" alt="check version"></p>
-<h3 id="安裝-Hexo-CLI（Hexo-的指令工具，用來建立與管理網站）"><a href="#安裝-Hexo-CLI（Hexo-的指令工具，用來建立與管理網站）" class="headerlink" title="安裝 Hexo CLI（Hexo 的指令工具，用來建立與管理網站）"></a>安裝 Hexo CLI（Hexo 的指令工具，用來建立與管理網站）</h3><p>一個基於 Node.js 的靜態網站生成框架，<br>透過 Markdown + 模板引擎，在建置階段產生靜態網站。</p>
+<h3 id="安裝-Hexo-CLI（Hexo-的指令工具，用來建立與管理網站）"><a href="#安裝-Hexo-CLI（Hexo-的指令工具，用來建立與管理網站）" class="headerlink" title="安裝 Hexo CLI（Hexo 的指令工具，用來建立與管理網站）"></a>安裝 Hexo CLI（Hexo 的指令工具，用來建立與管理網站）</h3><p>一個基於 Node.js 的靜態網站生成框架，透過 Markdown + 模板引擎，在建置階段產生靜態網站。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
 
 <p><img src="/noth-blog/img/image-1.png" alt="hexo cli"></p>
@@ -181,7 +181,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> %USERPROFILE%\Desktop</span><br><span class="line">hexo init noth-blog</span><br><span class="line"><span class="built_in">cd</span> noth-blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 
 <p><img src="/noth-blog/img/image-2.png" alt="alt text"></p>
-<h3 id="安裝-Butterfly-主題"><a href="#安裝-Butterfly-主題" class="headerlink" title="安裝 Butterfly 主題"></a>安裝 Butterfly 主題</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-butterfly --save</span><br></pre></td></tr></table></figure>
+<h3 id="安裝-Butterfly-主題"><a href="#安裝-Butterfly-主題" class="headerlink" title="安裝 Butterfly 主題"></a>安裝 Butterfly 主題</h3><p>Hexo 在 build 時要使用 butterfly 當作模板</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-butterfly --save</span><br></pre></td></tr></table></figure>
 
 <p>打開 _config.yml，修改：<br>_config.yml 是 Hexo 的全域設定檔，用來控制網站標題、主題、URL 等基本配置。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: butterfly</span><br></pre></td></tr></table></figure>
@@ -196,6 +197,9 @@
 
 <p>重點理解：<br>main &#x3D; 原始碼<br>gh-pages &#x3D; 靜態網站<br>Actions &#x3D; 自動化機器人</p>
 <h3 id="Git-基本設定與推送流程"><a href="#Git-基本設定與推送流程" class="headerlink" title="Git 基本設定與推送流程"></a>Git 基本設定與推送流程</h3><p>Git 基本設定與推送流程</p>
+<p>設定本質原因：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">每一次 commit 都會記錄：</span><br><span class="line">1. 作者</span><br><span class="line">2. Email</span><br><span class="line">3. 時間</span><br><span class="line">4. 修改內容</span><br><span class="line">如果不設定：</span><br><span class="line">commit 會沒有正確作者資訊</span><br><span class="line">GitHub 可能無法把 commit 綁定到你的帳號</span><br><span class="line">為什麼是 --global?</span><br><span class="line">代表：</span><br><span class="line">套用到你電腦上的所有 Git 專案</span><br><span class="line">你只需要設定一次。</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;yourname&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;yourname@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>初次推送</p>
