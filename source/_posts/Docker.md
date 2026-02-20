@@ -32,13 +32,15 @@ Docker 幾乎已經成為現代開發流程中不可或缺的一環。與其只�
 https://docs.docker.com/desktop/setup/install/windows-install/
 ```
 
-選擇 Docker Desktop for Windows - x86_64 版本
+選擇 Docker Desktop for Windows - x86_64 版本。
 
 ![Download Docker](/img/download_docker.png)
 
 啟動完成即可以看到這台電腦現在的容器 (Container) 列表、映像 (Image) 列表、控制台、網路等等圖形化介面。
 
 ![圖形化 Docker](/img/docker-1.png)
+
+### 驗證安裝
 
 想確認更完整，可以在終端機執行 :
 
@@ -48,3 +50,10 @@ docker info
 ```
 
 ![docker 資訊](/img/docker-info.png)
+
+```bash=
+docker run hello-world
+```
+
+[驗證安裝](/img/docker-check.png)
+
