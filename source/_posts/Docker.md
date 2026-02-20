@@ -62,3 +62,6 @@ docker run hello-world
 圖形化可以看的出來已經成功從 Docker Hub 下載官方 image。
 
 ![下載 Docker Hub image](/img/docker-hub-image.png)
+
+### Docker 基礎架構
+
