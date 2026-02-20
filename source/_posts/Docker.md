@@ -32,5 +32,9 @@ Docker 幾乎已經成為現代開發流程中不可或缺的一環。與其只�
 https://docs.docker.com/desktop/setup/install/windows-install/
 ```
 
+選擇 Docker Desktop for Windows - x86_64 版本
+
 ![Download Docker](/img/download_docker.png)
+
+
 
