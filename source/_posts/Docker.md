@@ -51,7 +51,7 @@ docker info
 
 ![docker 資訊](/img/docker-info.png)
 
-從一個 image 建立 container，然後執行它。
+從 Docker Hub 下載官方 image 並建立 container，然後執行。
 
 ```bash=
 docker run hello-world
@@ -59,3 +59,6 @@ docker run hello-world
 
 ![驗證安裝](/img/docker-check.png)
 
+圖形化可以看的出來已經成功從 Docker Hub 下載官方 image。
+
+![下載 Docker Hub image](/img/docker-hub-image.png)
