@@ -51,6 +51,8 @@ docker info
 
 ![docker 資訊](/img/docker-info.png)
 
+從一個 image 建立 container，然後執行它。
+
 ```bash=
 docker run hello-world
 ```
