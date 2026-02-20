@@ -36,5 +36,13 @@ https://docs.docker.com/desktop/setup/install/windows-install/
 
 ![Download Docker](/img/download_docker.png)
 
+啟動完成即可以看到這台電腦現在的容器 (Container) 列表、映像 (Image) 列表、控制台、網路等等圖形化介面。
 
+![圖形化 Docker](/img/docker-1.png)
 
+可以嘗試在 cmd 中下
+
+```bash=
+docker --version
+docker info
+```
