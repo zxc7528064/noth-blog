@@ -40,9 +40,11 @@ https://docs.docker.com/desktop/setup/install/windows-install/
 
 ![圖形化 Docker](/img/docker-1.png)
 
-可以嘗試在 cmd 中下
+想確認更完整，可以在終端機執行 :
 
 ```bash=
 docker --version
 docker info
 ```
+
+![docker 資訊](/img/docker-info.png)
