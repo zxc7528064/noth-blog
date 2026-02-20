@@ -151,6 +151,8 @@ Local Repository
    │
    │ git push
    ▼
+Remote Repository
+(GitHub)
 ```
 
 ```bash=
