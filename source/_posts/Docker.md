@@ -55,5 +55,5 @@ docker info
 docker run hello-world
 ```
 
-[驗證安裝](/img/docker-check.png)
+![驗證安裝](/img/docker-check.png)
 
