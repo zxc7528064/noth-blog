@@ -185,7 +185,7 @@ docker rm -f <container_id>
 
 #### 建立與執行容器（docker run）
 
-```
+```bash=
 # 基本執行
 docker run <image_name>
 
@@ -205,6 +205,6 @@ docker run -p 8080:80 <image_name>
 docker run -v /host/path:/container/path <image_name>
 ```
 
-小補充：run 與 start 的差異
+補充：run 與 start 的差異
 - docker run = 建立 + 啟動
 - docker start = 啟動已存在的容器
