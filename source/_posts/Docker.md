@@ -70,6 +70,90 @@ docker run hello-world
 
 ![Docker 架構](/img/docker-build.png)
 
+Client (發送命令的人) :
+
+操作 Docker 的地方。
+
+包含：
+
+```bash=
+docker run
+docker build
+docker pull
+```
+
+這些指令不是直接操作容器，而是發送請求給中間那層的 Docker Daemon。
+
+Docker Host（核心運作區）: 
+
+整個系統的心臟。
+
+Docker Daemon，它是背景服務（docker engine）。
+
+所有 Client 發出的指令，都會交給它處理。
+
+它負責：
+
+```
+拉 image
+建立 container
+啟動 container
+管理 image
+管理 network
+管理 volume
+```
+
+使用者打的每個指令，本質上都是在和 daemon 溝通。
+
+Images :
+
+這裡存放：
+
+nginx
+
+redis
+
+python
+
+ubuntu
+
+你自己 build 的 image
+
+Image 是模板，唯讀。
+
+③ Containers
+
+Container 是從 Image 建立出來的「執行實例」。
+
+Image → 可以產生多個 container
+Container → 才是真正跑程式的地方
+
+🔹 右邊：Registry（倉庫）
+
+Registry 是 image 的來源。
+
+例如：
+
+Docker Hub
+
+私有 registry
+
+裡面存放各種官方或第三方 image：
+
+NGINX
+
+Ubuntu
+
+PostgreSQL
+
+當你執行：
+
+docker pull nginx
+
+其實就是：
+
+Client → Daemon → Registry → 把 image 拉回本機
+
 理解 Docker 的核心結構，需掌握三個概念：
 - Image：容器的模板（唯讀）
 - Container：Image 的執行實例
