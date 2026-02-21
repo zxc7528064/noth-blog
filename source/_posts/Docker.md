@@ -72,9 +72,7 @@ docker run hello-world
 
 #### Client (發送命令的人)
 
-操作 Docker 的地方。
-
-包含：
+使用者操作 Docker 的地方，包含：
 
 ```bash=
 docker run
@@ -84,7 +82,7 @@ docker pull
 
 這些指令不是直接操作容器，而是發送請求給中間那層的 Docker Daemon。
 
-#### Docker Host（核心運作區)
+#### Docker Host (核心運作區)
 
 Docker Daemon 是 Docker 架構中的核心服務（即 Docker Engine）。它在系統背景持續運行，負責接收並處理來自 Docker Client 的指令請求。
 
