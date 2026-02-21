@@ -119,7 +119,7 @@ Container 執行環境(執行程式的地方)
 #### Registry (倉庫)
 
 常見的 Registry 包括 Docker Hub（官方公開倉庫）以及企業自行建置的私有 Registry。
-這些倉庫中存放著各種官方或第三方維護的 Image，例如 NGINX、Ubuntu、PostgreSQL 等，也可以儲存團隊自行建構的映像檔。
+這些倉庫中存放著各種官方或第三方維護的 Image，例如 `NGINX`、`Ubuntu`、`PostgreSQL` 等，也可以儲存團隊自行建構的映像檔。
 
 當你執行：
 
