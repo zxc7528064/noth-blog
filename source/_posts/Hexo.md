@@ -76,7 +76,7 @@ npm install
 
 ### 安裝 Butterfly 主題
 
-Hexo 在 build 時要使用 butterfly 當作模板
+Hexo 在 build 時使用 butterfly 當作模板
 
 ```bash=
 npm install hexo-theme-butterfly --save
@@ -103,7 +103,7 @@ hexo s       # 啟動本機伺服器
 http://localhost:4000
 ```
 
-看到畫面即代表成功
+看到畫面即代表成功。
 
 ### Hexo → GitHub → Actions → Pages 架構
 
