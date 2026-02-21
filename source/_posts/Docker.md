@@ -140,3 +140,7 @@ docker pull nginx
 ```bash=
 Image → Container → Process
 ```
+
+真正的應用程式程序（Process）則在 Container 內部運行。
+
+### 常見指令
