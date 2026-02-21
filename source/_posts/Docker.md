@@ -145,25 +145,66 @@ Image → Container → Process
 
 ### 常見指令
 
-####　Management Commands（資源類型）
+####　系統資訊相關
 
-這一層代表「你要操作哪一種資源」。
+```bash=
+# 查看 Docker 版本
+docker version
 
-例如：
-- docker container → 管理容器
-- docker image → 管理映像
-- docker network → 管理網路
-- docker volume → 管理儲存空間
+# 查看 Docker 系統詳細資訊
+docker info
 
-####　Commands（動作）
+# 查看 Docker 磁碟使用情況
+docker system df
+```
 
-這一層代表「要對資源做什麼動作」。
+#### 容器管理指令（Container Management）
 
-常見動作包括：
+```bash=
+# 列出執行中的容器
+docker ps
 
-- run → 建立並執行
-- build → 建構映像
-- pull → 下載映像
-- start → 啟動容器
-- stop → 停止容器
-- rm → 刪除
+# 列出所有容器（包含已停止）
+docker ps -a
+
+# 啟動容器
+docker start <container_id>
+
+# 停止容器
+docker stop <container_id>
+
+# 重新啟動容器
+docker restart <container_id>
+
+# 刪除容器
+docker rm <container_id>
+
+# 強制刪除執行中的容器
+docker rm -f <container_id>
+```
+
+#### 建立與執行容器（docker run）
+
+```
+# 基本執行
+docker run <image_name>
+
+# 互動模式（進入容器）
+docker run -it <image_name> /bin/bash
+
+# 背景執行（Detached mode）
+docker run -d <image_name>
+
+# 指定容器名稱
+docker run --name my-container <image_name>
+
+# 映射連接埠（Host:Container）
+docker run -p 8080:80 <image_name>
+
+# 掛載磁碟區（Host:Container）
+docker run -v /host/path:/container/path <image_name>
+```
+
+小補充：run 與 start 的差異
+- docker run = 建立 + 啟動
+- docker start = 啟動已存在的容器
