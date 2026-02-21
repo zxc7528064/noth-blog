@@ -70,7 +70,7 @@ docker run hello-world
 
 ![Docker 架構](/img/docker-build.png)
 
-Client (發送命令的人) :
+#### Client (發送命令的人)
 
 操作 Docker 的地方。
 
@@ -84,26 +84,20 @@ docker pull
 
 這些指令不是直接操作容器，而是發送請求給中間那層的 Docker Daemon。
 
-Docker Host（核心運作區）: 
+#### Docker Host（核心運作區)
 
-整個系統的心臟。
+Docker Daemon 是 Docker 架構中的核心服務（即 Docker Engine）。它在系統背景持續運行，負責接收並處理來自 Docker Client 的指令請求。
 
-Docker Daemon，它是背景服務（docker engine）。
+當使用者在終端機執行 `docker run`、`docker build` 或 `docker pull` 等指令時，這些指令並不會直接操作容器或映像檔，而是透過 API 傳送給 Docker Daemon。真正建立、管理與執行容器相關資源的，是由 Daemon 負責完成。
 
-所有 Client 發出的指令，都會交給它處理。
+Docker Daemon 的主要職責包括：
+- 管理 Image（下載、儲存、刪除）
+- 建立與啟動 Container
+- 管理網路與 Volume
+- 分配系統資源（CPU、記憶體）
+- 與 Registry 溝通（例如 Docker Hub）
 
-它負責：
-
-```
-拉 image
-建立 container
-啟動 container
-管理 image
-管理 network
-管理 volume
-```
-
-使用者打的每個指令，本質上都是在和 daemon 溝通。
+因此，可以將 Docker Client 視為操作介面，而 Docker Daemon 則是實際執行與管理容器運作的核心引擎。
 
 Images :
 
