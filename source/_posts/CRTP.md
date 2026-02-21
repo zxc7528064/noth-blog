@@ -8,7 +8,7 @@ tags :
 ---
 
 ## 前言
-
+<br>
 CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊證照，核心聚焦在 Active Directory 內網攻擊技術。
 
 如果用一句話概括：
