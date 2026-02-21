@@ -137,7 +137,7 @@ docker pull nginx
 
 基本流程如下：
 
-```
+```bash=
 使用者
    ↓
 Docker Client
@@ -216,3 +216,5 @@ docker run -v /host/path:/container/path <image_name>
 補充：run 與 start 的差異
 - docker run = 建立 + 啟動
 - docker start = 啟動已存在的容器
+
+### 例子
