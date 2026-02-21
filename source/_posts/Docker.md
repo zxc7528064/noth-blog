@@ -65,3 +65,4 @@ docker run hello-world
 
 ### Docker 基礎架構
 
+![Docker 架構](/img/docker-build.png)
