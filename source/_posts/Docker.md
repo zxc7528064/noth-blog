@@ -144,3 +144,26 @@ Image → Container → Process
 真正的應用程式程序（Process）則在 Container 內部運行。
 
 ### 常見指令
+
+####　Management Commands（資源類型）
+
+這一層代表「你要操作哪一種資源」。
+
+例如：
+- docker container → 管理容器
+- docker image → 管理映像
+- docker network → 管理網路
+- docker volume → 管理儲存空間
+
+####　Commands（動作）
+
+這一層代表「要對資源做什麼動作」。
+
+常見動作包括：
+
+- run → 建立並執行
+- build → 建構映像
+- pull → 下載映像
+- start → 啟動容器
+- stop → 停止容器
+- rm → 刪除
