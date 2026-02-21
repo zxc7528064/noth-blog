@@ -137,8 +137,16 @@ docker pull nginx
 
 基本流程如下：
 
-```bash=
+```
+使用者
+   ↓
+Docker Client
+   ↓
+Docker Daemon
+   ↓
 Image → Container → Process
+   ↑
+Registry
 ```
 
 真正的應用程式程序（Process）則在 Container 內部運行。
