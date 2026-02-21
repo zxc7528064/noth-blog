@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zxc7528064.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2026-02-19T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-21T11:33:40.769Z">
+<meta property="article:modified_time" content="2026-02-21T13:14:06.178Z">
 <meta property="article:author" content="Noth Shen">
 <meta property="article:tag" content="DevOps">
 <meta property="article:tag" content="CI&#x2F;CD">
@@ -20,7 +20,7 @@
   "url": "https://zxc7528064.github.io/2026/02/19/Hexo/",
   "image": "https://zxc7528064.github.io/img/avatar.jpg",
   "datePublished": "2026-02-19T00:00:00.000Z",
-  "dateModified": "2026-02-21T11:33:40.769Z",
+  "dateModified": "2026-02-21T13:14:06.178Z",
   "author": [
     {
       "@type": "Person",
@@ -161,7 +161,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">Hexo 部署流程</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Hexo 部署流程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-19T00:00:00.000Z" title="Created 2026-02-19 00:00:00">2026-02-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-21T11:33:40.769Z" title="Updated 2026-02-21 11:33:40">2026-02-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/DevOps/">DevOps</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">Hexo 部署流程</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Hexo 部署流程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-19T00:00:00.000Z" title="Created 2026-02-19 00:00:00">2026-02-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-21T13:14:06.178Z" title="Updated 2026-02-21 13:14:06">2026-02-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/DevOps/">DevOps</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
 之前對於自架 Blog 並沒有太多實際經驗。趁著過年期間有空，決定從零開始搭建一個屬於自己的網站，也順便把整個部署流程完整走一遍。
 
 <p>在實作過程中，除了前端主題設定與結構調整外，也接觸到 CI&#x2F;CD 自動化部署，包括 GitHub Actions、靜態檔生成與版本控制等流程。過去做紅隊時，思考重心多半放在攻擊面與弱點利用上，較少從「系統是如何被建構與部署」的角度去理解。這次實際操作後，才真正體會到工程化流程對穩定性與可維護性的價值。</p>
@@ -185,7 +185,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> %USERPROFILE%\Desktop</span><br><span class="line">hexo init noth-blog</span><br><span class="line"><span class="built_in">cd</span> noth-blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 
 <p><img src="/noth-blog/img/image-2.png" alt="alt text"></p>
-<h3 id="安裝-Butterfly-主題"><a href="#安裝-Butterfly-主題" class="headerlink" title="安裝 Butterfly 主題"></a>安裝 Butterfly 主題</h3><p>Hexo 在 build 時要使用 butterfly 當作模板</p>
+<h3 id="安裝-Butterfly-主題"><a href="#安裝-Butterfly-主題" class="headerlink" title="安裝 Butterfly 主題"></a>安裝 Butterfly 主題</h3><p>Hexo 在 build 時使用 butterfly 當作模板</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-butterfly --save</span><br></pre></td></tr></table></figure>
 
 <p>打開 _config.yml，修改：<br>_config.yml 是 Hexo 的全域設定檔，用來控制網站標題、主題、URL 等基本配置。</p>
@@ -196,7 +196,7 @@
 <p>打開：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:4000</span><br></pre></td></tr></table></figure>
 
-<p>看到畫面即代表成功</p>
+<p>看到畫面即代表成功。</p>
 <h3 id="Hexo-→-GitHub-→-Actions-→-Pages-架構"><a href="#Hexo-→-GitHub-→-Actions-→-Pages-架構" class="headerlink" title="Hexo → GitHub → Actions → Pages 架構"></a>Hexo → GitHub → Actions → Pages 架構</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">你的電腦 (Hexo 原始碼)</span><br><span class="line">        │</span><br><span class="line">        ▼ git push main</span><br><span class="line">GitHub main 分支 (存原始碼)</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">GitHub Actions 自動執行</span><br><span class="line"> 1. npm install</span><br><span class="line"> 2. hexo generate</span><br><span class="line"> 3. 產生 public/</span><br><span class="line"> 4. push 到 gh-pages</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">gh-pages 分支 (靜態網站檔)</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">GitHub Pages 對外顯示網站</span><br></pre></td></tr></table></figure>
 
 <p>重點理解：<br>main &#x3D; 原始碼<br>gh-pages &#x3D; 靜態網站<br>public&#x2F; &#x3D; build 產物<br>Actions &#x3D; 自動化機器人</p>
