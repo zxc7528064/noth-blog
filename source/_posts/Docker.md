@@ -51,11 +51,13 @@ docker info
 
 ![docker 資訊](/img/docker-info.png)
 
-如果本機沒有 hello-world 這個 image，就從 Docker Hub 下載官方 image，然後用這個 image 建立一個 container，接著執行 container 內的預設程式。
+執行 docker run 命令 :
 
 ```bash=
 docker run hello-world
 ```
+
+如果本機沒有 hello-world 這個 image，就從 Docker Hub 下載官方 image，然後用這個 image 建立一個 container，接著執行 container 內的預設程式。
 
 ![驗證安裝](/img/docker-check.png)
 
