@@ -118,39 +118,25 @@ Container 執行環境(執行程式的地方)
 
 #### Registry (倉庫)
 
-Registry 是 image 的來源。
-
-例如：
-
-Docker Hub
-
-私有 registry
-
-裡面存放各種官方或第三方 image：
-
-NGINX
-
-Ubuntu
-
-PostgreSQL
+常見的 Registry 包括 Docker Hub（官方公開倉庫）以及企業自行建置的私有 Registry。
+這些倉庫中存放著各種官方或第三方維護的 Image，例如 NGINX、Ubuntu、PostgreSQL 等，也可以儲存團隊自行建構的映像檔。
 
 當你執行：
 
+```Bash=
 docker pull nginx
+```
 
-其實就是：
+實際上發生的流程是：
+- Docker Client 發送請求
+- Docker Daemon 接收並處理
+- Daemon 向 Registry 查詢並下載對應的 Image
+- Image 被儲存到本機的 Image Repository
 
-Client → Daemon → Registry → 把 image 拉回本機
-
-理解 Docker 的核心結構，需掌握三個概念：
-- Image：容器的模板（唯讀）
-- Container：Image 的執行實例
-- Docker Engine：負責建立與管理容器的核心服務
+換句話說，Registry 是 Image 的來源，而 Docker Daemon 負責將所需的映像檔拉取至本機並進行管理。
 
 基本流程如下：
 
 ```bash=
 Image → Container → Process
 ```
-
-docker run 的本質，就是從 Image 建立 Container，並在其中執行指定程式。
