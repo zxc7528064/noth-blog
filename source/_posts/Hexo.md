@@ -183,7 +183,7 @@ git push
 
 ### CI/CD Workflow 設定
 
-GitHub Pages 不會幫你執行 hexo generate
+GitHub Pages 不會幫你執行 hexo generate，因為 GitHub Pages 只是靜態檔案伺服器，不負責 build 過程。
 👉 GitHub 只會部署「已存在的靜態檔」
 👉 main 分支如果只有原始碼，不會自動生成
 解決方式：
