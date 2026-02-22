@@ -113,8 +113,8 @@ Container 是由 Image 建立出來的執行實例（runtime instance），當�
 - 一個 python image → 可以同時跑不同的應用
 
 簡單來說：
-Image 定義環境
-Container 執行環境 -> 執行程式的地方
+Image = 環境模板（作業系統 + 套件 + 程式碼 + 啟動指令）
+Container = 從 Image 啟動後的執行實體（正在跑的程序）
 
 #### Registry (倉庫)
 
