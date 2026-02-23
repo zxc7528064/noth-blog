@@ -1,5 +1,5 @@
 ---
-title: CRTP 學習
+title: CRTP 學習準備與策略規劃
 date: 2026-02-21
 categories:
   - 紅隊
@@ -63,3 +63,10 @@ Access Lab Material
 Walkthrough Videos
 （僅在卡關時使用）
 ```
+整體原則為：
+
+```bash=
+先建立全局架構，再透過 Lab 驗證理解，Walkthrough 僅作為輔助，而非主要學習來源。
+```
+
+本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容，逐步重構 Active Directory 攻擊模型。
