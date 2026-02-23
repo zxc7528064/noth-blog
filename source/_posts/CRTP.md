@@ -69,4 +69,6 @@ Walkthrough Videos
 先建立全局架構，再透過 Lab 驗證理解，Walkthrough 僅作為輔助，而非主要學習來源。
 ```
 
+### Active Directory 架構核心拆解
+
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容，逐步重構 Active Directory 攻擊模型。
