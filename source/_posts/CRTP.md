@@ -24,3 +24,16 @@ CRTP 是一張專門針對 AD 攻擊路徑與權限濫用技術的證照。
 1day CVE → Webshell → RDP → 關閉防護機制 → 工具利用 → 橫向移動 → 進入 AD
 ```
 這種打法屬於高度結果導向的實戰流程。任務能完成、目標能達成，但回頭檢視會發現，對於 AD 架構本身的設計邏輯、權限模型以及認證機制，理解多半停留在操作層，而非系統層。思考後發現，最大的差異是軍中通常是以目標導向為主，與其只依賴工具與既有手法，不如回頭把 AD 的核心知識與攻擊原理重新整理一次。最近剛好有兩位朋友對 CRTP 感興趣，提議一起準備這張證照，於是決定花時間系統化補齊這一塊。
+
+### 策略性學習
+
+官方網址 : 
+
+```bash= 
+https://www.enterprisesecurity.io/callback?code=4%2F0AfrIepAgnxwwhJhStnOasM1xf7HiN8iaVQt5wJVZTX1Zi0_3blynamcVIs_fQK2lWUeSCQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent
+```
+
+登入後即可看見 `Attacking and Defending Active Directory Lab - CRTP` 訂閱主題，Disboard 有幾項功能分別為 `Lab Details`、`Lab Manual`、`Certification Exam`、`Flag Verification`、`Lab Material`、`How to use Discord`、`FAQs`。
+其中最核心的學習資源集中在 `Lab Manual`，內容涵蓋課程影片、PDF 教材以及相關工具包，是整套 CRTP 的知識主體，其他區塊則偏向環境說明、考試資訊與實驗室操作相關輔助。
+
+![CRTP-Lab Material](/img/Material.png)
