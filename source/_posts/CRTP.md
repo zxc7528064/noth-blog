@@ -96,10 +96,12 @@ https://www.gyan.dev/ffmpeg/builds/
 
 ![ffmpeg](/img/ffmpeg.png)
 
-批量將所有 .mp4 檔案轉成 .str 並存放在 Course_output 資料夾中 :
+批量將所有 .mp4 檔案轉成 .str 檔案，並存放在 Course_output 資料夾中 :
 
 ```bash= 
 for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir Course_output --output_format srt
 ```
+
+![批量轉 str 檔案](/img/str.png)
 
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
