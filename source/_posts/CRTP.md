@@ -82,10 +82,24 @@ pip install torch
 
 執行 Whisper : 
 
-```
+```bash=
 Whisper
 ```
 
 ![Whisper](/img/Whisper.png)
+
+下載 ffmpeg 並選擇 full_build.7z 解壓縮後將 ffmpeg.exe 加入環境變數 : 
+
+```bash=
+https://www.gyan.dev/ffmpeg/builds/
+```
+
+![ffmpeg](/img/ffmpeg.png)
+
+批量將所有 .mp4 檔案轉成 .str 並存放在 Course_output 資料夾中 :
+
+```bash= 
+for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir Course_output --output_format srt
+```
 
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
