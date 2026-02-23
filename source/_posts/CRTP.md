@@ -73,4 +73,11 @@ Walkthrough Videos
 
 CRTP 課程皆為全英文解說、無中文字幕，單純硬聽其實效率不高。與其反覆倒帶，不如把問題工程化處理。因此結合 Whisper 與 ChatGPT，先將影片轉為字幕，再進行翻譯與結構化整理，建立一套雙語輔助學習流程。保留技術術語原文，同時提升理解效率。後續也會將整個流程封裝成工具，放上 GitHub，並考慮導入 CI/CD 或容器化，方便長期維護與團隊使用。
 
+安裝 Whisper :
+
+```bash=
+pip install -U openai-whisper
+pip install torch
+```
+
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
