@@ -80,4 +80,12 @@ pip install -U openai-whisper
 pip install torch
 ```
 
+執行 Whisper : 
+
+```
+Whisper
+```
+
+![Whisper](/img/Whisper.png)
+
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
