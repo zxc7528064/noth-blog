@@ -98,7 +98,7 @@ Whisper
 
 ![Whisper](/img/Whisper.png)
 
-下載 full_build.7z 並將 ffmpeg.exe 加入環境變數：
+下載 full_build.7z 並將 `ffmpeg.exe` 加入環境變數：
 
 ```bash=
 https://www.gyan.dev/ffmpeg/builds/
@@ -106,7 +106,7 @@ https://www.gyan.dev/ffmpeg/builds/
 
 ![ffmpeg](/img/ffmpeg.png)
 
-批量將所有 .mp4 檔案轉成 .srt 檔案，並存放在 Course_output_en 資料夾中 :
+批量將所有 `.mp4` 檔案轉成 `.srt` 檔案，並存放在 `Course_output_en` 資料夾中 :
 
 ```bash= 
 for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir Course_output_en --output_format srt
@@ -118,17 +118,17 @@ for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir 
 
 ![srt_en](/img/srt_en.png)
 
-接下來串 open ai token，這邊已經有寫好的工具，詳細的使用方式寫在 github：
+接著透過自製工具批量翻譯字幕：
 
 ```bash=
 https://github.com/zxc7528064/SRT-Translator
 ```
 
-轉換成 srt_zh 最後的結果 : 
+翻譯後生成 srt_zh，並確認時間軸未發生錯位。
 
 ![srt_cn](/img/srt_cn.png)
 
-實際匯入 srt_zh 檔案，時間字幕沒有跑掉 
+實際匯入後，字幕與時間同步正常，即可正式進入學習階段。
 
 ![sucess_srt_zn](/img/sucess_srt_zn.png)
 
