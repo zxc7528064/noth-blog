@@ -120,6 +120,6 @@ https://github.com/zxc7528064/SRT-Translator
 
 最後的結果 : 
 
-![srt_cn](/img/srt_cn)
+![srt_cn](/img/srt_cn.png)
 
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
