@@ -75,6 +75,12 @@ Walkthrough Videos
 
 CRTP 課程皆為全英文解說、無中文字幕，單純硬聽其實效率不高。與其反覆倒帶，不如把問題工程化處理。因此結合 Whisper 與 ChatGPT，先將影片轉為字幕，再進行翻譯與結構化整理，建立一套雙語輔助學習流程。保留技術術語原文，同時提升理解效率。後續也會將整個流程封裝成工具，放上 GitHub，並考慮導入 CI/CD 或容器化，方便長期維護與團隊使用。
 
+因此建立以下流程：
+
+```bash=
+Whisper → 產生 SRT → ChatGPT 翻譯 → 結構化整理 → 建立雙語學習素材
+```
+
 ##### 環境準備
 
 安裝 Whisper :
@@ -92,7 +98,7 @@ Whisper
 
 ![Whisper](/img/Whisper.png)
 
-下載 ffmpeg 並選擇 full_build.7z 解壓縮後將 ffmpeg.exe 加入環境變數 : 
+下載 full_build.7z 並將 ffmpeg.exe 加入環境變數：
 
 ```bash=
 https://www.gyan.dev/ffmpeg/builds/
@@ -108,7 +114,7 @@ for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir 
 
 ![批量轉 srt 檔案](/img/srt.png)
 
-全部轉完花了不少時間，但應該還有更快的方式 :
+轉換時間較長，後續可研究更高效處理方式。
 
 ![srt_en](/img/srt_en.png)
 
@@ -118,8 +124,12 @@ for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir 
 https://github.com/zxc7528064/SRT-Translator
 ```
 
-最後的結果 : 
+轉換成 srt_zh 最後的結果 : 
 
 ![srt_cn](/img/srt_cn.png)
+
+實際匯入 srt_zh 檔案，時間字幕沒有跑掉 
+
+![sucess_srt_zn](/img/sucess_srt_zn.png)
 
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
