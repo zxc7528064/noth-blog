@@ -52,7 +52,7 @@ https://www.enterprisesecurity.io/
 
 ```bash=
 Lab Connection Guide
-（解決環境問題）
+（解決 Lab 連線問題）
         ↓
 Course Videos
 （快速理解整體架構）
@@ -131,5 +131,9 @@ https://github.com/zxc7528064/SRT-Translator
 實際匯入後，字幕與時間同步正常，即可正式進入學習階段。
 
 ![sucess_srt_zn](/img/sucess_srt_zn.png)
+
+### Active Directory 攻擊體系藍圖
+
+#### Domain Enumeration 與資訊收集
 
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
