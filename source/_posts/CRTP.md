@@ -132,7 +132,7 @@ https://github.com/zxc7528064/SRT-Translator
 
 ![sucess_srt_zn](/img/sucess_srt_zn.png)
 
-### Active Directory 攻擊體系藍圖
+### Active Directory 攻擊體系框架
 
 #### Domain Enumeration 與資訊收集
 
