@@ -100,12 +100,26 @@ https://www.gyan.dev/ffmpeg/builds/
 
 ![ffmpeg](/img/ffmpeg.png)
 
-批量將所有 .mp4 檔案轉成 .srt 檔案，並存放在 Course_output 資料夾中 :
+批量將所有 .mp4 檔案轉成 .srt 檔案，並存放在 Course_output_en 資料夾中 :
 
 ```bash= 
-for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir Course_output --output_format srt
+for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir Course_output_en --output_format srt
 ```
 
-![批量轉 str 檔案](/img/str.png)
+![批量轉 srt 檔案](/img/srt.png)
+
+全部轉完花了不少時間，但應該還有更快的方式 :
+
+![srt_en](/img/srt_en.png)
+
+接下來串 open ai token，這邊已經有寫好的工具，詳細的使用方式寫在 github：
+
+```bash=
+https://github.com/zxc7528064/SRT-Translator
+```
+
+最後的結果 : 
+
+![srt_cn](/img/srt_cn)
 
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
