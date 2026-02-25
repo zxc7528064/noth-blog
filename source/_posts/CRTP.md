@@ -141,10 +141,7 @@ https://github.com/zxc7528064/SRT-Translator
 - Offensive PowerShell and .NET tradecraft
 - Domain Enumeration
 
-AD 的核心功能：
-Active Directory 是企業環境的身分與政策控制中樞。
-
-它提供三大核心能力：
+AD 的核心功能，它提供三大核心能力：
 - Manageability（集中管理）
 - Security（驗證與授權）
 - Interoperability（跨系統整合）
@@ -154,32 +151,38 @@ Active Directory 是企業環境的身分與政策控制中樞。
 從紅隊角度來看：
 
 ```bash=
-控制 AD = 控制整個企業環境**
+控制 AD = 控制整個企業環境
 ```
 
-Schema 與物件屬性：
+Schema 與物件屬性
 
-AD 本質是一個「物件導向的目錄資料庫」，每一個物件（Object）都有屬性（Attribute），例如：
-- 使用者（User）
-- 電腦（Computer）
-- 群組（Group）
+Active Directory 本質上是一個「物件導向的目錄資料庫」。
+
+每個物件（Object）都擁有屬性（Attribute），例如：
+- User
+- Computer
+- Group
 - OU
 - Domain Controller
 
-Schema 定義：
-- 有哪些物件類型
-- 每個物件可以擁有哪些屬性
+Schema 負責定義：
 
-例如：
-- user 物件包含：
-  - sAMAccountName
-  - userPrincipalName
-  - memberOf
-  - servicePrincipalName
-  - pwdLastSet
+- 系統中有哪些物件類型
+- 每種物件可以擁有哪些屬性
 
-紅隊重點：  
-很多攻擊（Kerberoasting、SPN abuse、Delegation abuse）都是基於這些屬性。
+換句話說，Schema 是 AD 的「資料結構藍圖」。
+
+User 物件常見屬性包括：
+- sAMAccountName
+- userPrincipalName
+- memberOf
+- servicePrincipalName
+- pwdLastSet
+
+紅隊重點：
+```bash=
+很多攻擊（Kerberoasting、SPN abuse、Delegation abuse）上述攻擊手法，皆建立在「物件屬性可被濫用」之上。
+```
 
 Domain (網域) :
 
