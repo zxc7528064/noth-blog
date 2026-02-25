@@ -132,7 +132,7 @@ https://github.com/zxc7528064/SRT-Translator
 
 ![sucess_srt_zn](/img/sucess_srt_zn.png)
 
-### Active Directory 攻擊體系框架
+### Active Directory 攻擊框架
 
 待畫心智圖
 
@@ -176,10 +176,10 @@ User 物件常見屬性包括：
 - sAMAccountName
 - userPrincipalName
 - memberOf
-- servicePrincipalName -> 
+- servicePrincipalName
 - pwdLastSet
 
-| 攻擊類型                   | 關鍵屬性                                     | 本質       |
+| 攻擊類型                | 關鍵屬性                                  | 本質       |
 | ---------------------- | ---------------------------------------- | ---------------- |
 | Kerberoasting          | servicePrincipalName                     | SPN 存在           |
 | SPN Abuse              | servicePrincipalName                     | 可寫 SPN           |
@@ -187,8 +187,8 @@ User 物件常見屬性包括：
 | RBCD                   | msDS-AllowedToActOnBehalfOfOtherIdentity | 可寫 delegation    |
 | Delegation Flag        | userAccountControl                       | flag 可濫用         |
 | ACL Abuse              | nTSecurityDescriptor                     | 可寫 ACL           |
-| 密碼重設                   | unicodePwd                               | ResetPassword 權限 |
-| 群組提權                   | group.member                             | WriteMember 權限   |
+| 密碼重設                | unicodePwd                               | ResetPassword 權限 |
+| 群組提權                | group.member                             | WriteMember 權限   |
 
 重點：
 ```bash=
