@@ -182,7 +182,7 @@ User 物件常見屬性包括：
 很多攻擊（Kerberoasting、SPN abuse、Delegation abuse）上述攻擊手法，皆建立在「物件屬性可被濫用」之上。
 ```
 
-Domain (網域) : Domain 是 AD 的邏輯管理單位。
+Domain (網域)  :Domain 是 AD 的邏輯管理單位。
 - 每個 Domain 有自己的使用者與群組
 - 由 Domain Controller(DC) 管理
 - 使用 Kerberos / NTLM 做驗證
@@ -205,62 +205,34 @@ OU（Organizational Unit）: 是 Domain 內部的邏輯分組單位。
 GPO 濫用、ACL 濫用常與 OU 結構有關。
 ```
 
-Domain Replication（同步複製機制）
-
-AD 採用多主機複寫（Multi-master replication）。
-
+Domain Replication（同步複製機制）: AD 採用多主機複寫（Multi-master replication）。
 - 每台 Domain Controller 都會同步資料
 - 使用 AD Replication Service
 - 透過 RPC / Kerberos 等機制同步
 
-👉 紅隊重點：
-
+重點：
 - DCSync 攻擊
 - DCShadow
 - 取得 KRBTGT hash
 
 ---
 
-Forest（森林）
+Forest（森林）: 是 AD 架構的最高層級。
 
-Forest 是 AD 架構的最高層級。
-
-一個 Forest 可以包含：
-
+包含：
 - 多個 Domain
 - 共用同一個 Schema
 - 共用全域目錄（Global Catalog）
 
 例如：
-
 Forest
  ├── Domain 1
  └── Domain 2
-
-### 🔹 關鍵概念
-
+ 
+重點 :
 - 同一 Forest 內的 Domain 預設存在信任關係
 - 可以建立跨 Domain 的存取權限
 - Enterprise Admin 可控制整個 Forest
-
----
-
-## 🔥 紅隊視角：為什麼 Forest 很重要？
-
-如果只攻破一個 Domain：
-
-- 你是 Domain Admin
-
-但如果取得：
-
-- Enterprise Admin
-- 或信任關係濫用
-
-你可能可以：
-
-- 橫向移動至其他 Domain
-- 控制整個 Forest
-- 接管整個企業環境
 
 Forest 是企業 AD 環境的「最高戰略目標」。
 
