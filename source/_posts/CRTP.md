@@ -134,10 +134,12 @@ https://github.com/zxc7528064/SRT-Translator
 
 ### Active Directory 攻擊體系框架
 
+待畫心智圖
+
 #### Module 1 
 - Introduction to Active Directory and Attack Methodology
 - Offensive PowerShell and .NET tradecraft
-- Offensive PowerShell and .NET tradecraft
+- Domain Enumeration
 
 #### Module 2 
 - Local Privilege Escalation
