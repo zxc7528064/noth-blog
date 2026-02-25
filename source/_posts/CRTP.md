@@ -141,6 +141,8 @@ https://github.com/zxc7528064/SRT-Translator
 - Offensive PowerShell and .NET tradecraft
 - Domain Enumeration
 
+![AD_image](/img/AD_image.png)
+
 AD 的核心功能，它提供三大核心能力：
 - Manageability（集中管理）
 - Security（驗證與授權）
@@ -182,9 +184,9 @@ User 物件常見屬性包括：
 很多攻擊（Kerberoasting、SPN abuse、Delegation abuse）上述攻擊手法，皆建立在「物件屬性可被濫用」之上。
 ```
 
-Domain (網域)  :Domain 是 AD 的邏輯管理單位。
+Domain (網域) : Domain 是 AD 的邏輯管理單位。
 - 每個 Domain 有自己的使用者與群組
-- 由 Domain Controller(DC) 管理
+- 由 Domain Controller (DC) 管理
 - 使用 Kerberos / NTLM 做驗證
 
 Domain 內部通常共享：
@@ -215,19 +217,14 @@ Domain Replication（同步複製機制）: AD 採用多主機複寫（Multi-mas
 - DCShadow
 - 取得 KRBTGT hash
 
----
-
 Forest（森林）: 是 AD 架構的最高層級。
+
+![Forest](/img/Forest.png)
 
 包含：
 - 多個 Domain
 - 共用同一個 Schema
 - 共用全域目錄（Global Catalog）
-
-例如：
-Forest
- ├── Domain 1
- └── Domain 2
  
 重點 :
 - 同一 Forest 內的 Domain 預設存在信任關係
@@ -235,10 +232,6 @@ Forest
 - Enterprise Admin 可控制整個 Forest
 
 Forest 是企業 AD 環境的「最高戰略目標」。
-
-![AD_image](/img/AD_image.png)
-
-![Forest](/img/Forest.png)
 
 #### Module 2 
 - Local Privilege Escalation
