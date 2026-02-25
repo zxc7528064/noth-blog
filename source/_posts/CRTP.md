@@ -195,16 +195,16 @@ User 物件常見屬性包括：
 Kerberoasting、SPN abuse、Delegation abuse 等上述攻擊手法，建立在「物件屬性 + 權限可修改」之上。
 ```
 
-Domain (網域) : AD 的邏輯管理單位。
+Domain (網域) : AD 的邏輯管理單位 = 公司內部帳號與電腦的管理範圍。
 - 每個 Domain 有自己的使用者與群組
-- 由 Domain Controller (DC) 管理
+- 由 Domain Controller (DC) 管理 -> 專門負責管理整個網域資料庫的伺服器。
 - 使用 Kerberos 為預設驗證機制 / NTLM 為 fallback 機制
 
 Domain 內部通常共享：
-- 使用者與群組資料庫
-- 安全政策（Security Policy）
-- 群組原則（GPO）
-- 信任關係（Trust Relationship）
+- 使用者與群組資料庫 -> 所有帳號資訊都存在 AD 資料庫裡。
+- 安全政策（Security Policy）-> 密碼長度、密碼複雜度、帳號鎖定次數。
+- 群組原則（GPO）-> 批量管理電腦設定的機制。
+- 信任關係（Trust Relationship) -> 信任 = 可以跨網域存取資源。
 
 OU（Organizational Unit）: Domain 內部的邏輯分組單位。
 
