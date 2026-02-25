@@ -139,4 +139,17 @@ https://github.com/zxc7528064/SRT-Translator
 - Offensive PowerShell and .NET tradecraft
 - Offensive PowerShell and .NET tradecraft
 
+#### Module 2 
+- Local Privilege Escalation
+- Lateral Movement
+- Domain Privilege Escalation
+
+#### Module 3
+- Domain Persistensce
+- Cross Trust Attacks
+
+#### Module 4
+- Bypass Defenses (MDE and MDI)
+- Monitoring and Detections
+
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
