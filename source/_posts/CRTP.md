@@ -136,7 +136,7 @@ https://github.com/zxc7528064/SRT-Translator
 
 待畫心智圖
 
-#### Module 1 
+### Module 1 
 - Introduction to Active Directory and Attack Methodology
 - Offensive PowerShell and .NET tradecraft
 - Domain Enumeration
@@ -181,7 +181,7 @@ User 物件常見屬性包括：
 
 重點：
 ```bash=
-很多攻擊（Kerberoasting、SPN abuse、Delegation abuse）上述攻擊手法，皆建立在「物件屬性可被濫用」之上。
+很多攻擊（Kerberoasting、SPN abuse、Delegation abuse）等上述攻擊手法，皆建立在「物件屬性可被濫用」之上。
 ```
 
 Domain (網域) : Domain 是 AD 的邏輯管理單位。
@@ -217,7 +217,7 @@ Domain Replication（同步複製機制）: AD 採用多主機複寫（Multi-mas
 - DCShadow
 - 取得 KRBTGT hash
 
-Forest（森林）: 是 AD 架構的最高層級。
+Forest（森林）: AD 架構的最高層級，企業 AD 環境的「最高戰略目標」。
 
 ![Forest](/img/Forest.png)
 
@@ -231,18 +231,16 @@ Forest（森林）: 是 AD 架構的最高層級。
 - 可以建立跨 Domain 的存取權限
 - Enterprise Admin 可控制整個 Forest
 
-Forest 是企業 AD 環境的「最高戰略目標」。
-
-#### Module 2 
+### Module 2 
 - Local Privilege Escalation
 - Lateral Movement
 - Domain Privilege Escalation
 
-#### Module 3
+### Module 3
 - Domain Persistensce
 - Cross Trust Attacks
 
-#### Module 4
+### Module 4
 - Bypass Defenses (MDE and MDI)
 - Monitoring and Detections
 
