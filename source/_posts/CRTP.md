@@ -185,10 +185,7 @@ User 物件常見屬性包括：
 | SPN Abuse              | servicePrincipalName                     | 可寫 SPN           |
 | Constrained Delegation | msDS-AllowedToDelegateTo                 | Delegation 目標    |
 | RBCD                   | msDS-AllowedToActOnBehalfOfOtherIdentity | 可寫 delegation    |
-| Delegation Flag        | userAccountControl                       | flag 可濫用         |
 | ACL Abuse              | nTSecurityDescriptor                     | 可寫 ACL           |
-| 密碼重設                | unicodePwd                               | ResetPassword 權限 |
-| 群組提權                | group.member                             | WriteMember 權限   |
 
 重點：
 ```bash=
