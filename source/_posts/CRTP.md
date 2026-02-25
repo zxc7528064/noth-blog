@@ -148,15 +148,13 @@ AD 的核心功能，它提供三大核心能力：
 
 幾乎所有 Windows Server、Client、Application、Email、Network Device 都圍繞 AD 運作。
 
-從紅隊角度來看：
+重點：
 
 ```bash=
 控制 AD = 控制整個企業環境
 ```
 
-Schema 與物件屬性
-
-Active Directory 本質上是一個「物件導向的目錄資料庫」。
+Schema 與物件屬性 : Active Directory 本質上是一個「物件導向的目錄資料庫」。
 
 每個物件（Object）都擁有屬性（Attribute），例如：
 - User
@@ -179,7 +177,7 @@ User 物件常見屬性包括：
 - servicePrincipalName
 - pwdLastSet
 
-紅隊重點：
+重點：
 ```bash=
 很多攻擊（Kerberoasting、SPN abuse、Delegation abuse）上述攻擊手法，皆建立在「物件屬性可被濫用」之上。
 ```
