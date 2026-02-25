@@ -124,7 +124,7 @@ for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir 
 https://github.com/zxc7528064/SRT-Translator
 ```
 
-翻譯後生成 srt_zh，並確認時間軸未發生錯位。
+翻譯後生成 `srt_zh` 檔案，並確認時間軸未發生錯位。
 
 ![srt_cn](/img/srt_cn.png)
 
@@ -176,18 +176,30 @@ User 物件常見屬性包括：
 - sAMAccountName
 - userPrincipalName
 - memberOf
-- servicePrincipalName
+- servicePrincipalName -> 
 - pwdLastSet
+
+| 攻擊類型                | 關鍵屬性                                 |
+| ---------------------- | ---------------------------------------- |
+| Kerberoasting          | servicePrincipalName                     |
+| SPN Abuse              | servicePrincipalName                     |
+| Constrained Delegation | msDS-AllowedToDelegateTo                 |
+| RBCD                   | msDS-AllowedToActOnBehalfOfOtherIdentity |
+| Delegation Flag        | userAccountControl                       |
+| ACL Abuse              | nTSecurityDescriptor                     |
+| 密碼濫用                | unicodePwd / pwdLastSet                  |
+| 群組提權                | memberOf                                 |
+
 
 重點：
 ```bash=
-很多攻擊（Kerberoasting、SPN abuse、Delegation abuse）等上述攻擊手法，皆建立在「物件屬性可被濫用」之上。
+Kerberoasting、SPN abuse、Delegation abuse 等上述攻擊手法，建立在「物件屬性 + 權限可修改」之上。
 ```
 
-Domain (網域) : Domain 是 AD 的邏輯管理單位。
+Domain (網域) : AD 的邏輯管理單位。
 - 每個 Domain 有自己的使用者與群組
 - 由 Domain Controller (DC) 管理
-- 使用 Kerberos / NTLM 做驗證
+- 使用 Kerberos 為預設驗證機制 / NTLM 為 fallback 機制
 
 Domain 內部通常共享：
 - 使用者與群組資料庫
@@ -195,7 +207,7 @@ Domain 內部通常共享：
 - 群組原則（GPO）
 - 信任關係（Trust Relationship）
 
-OU（Organizational Unit）: 是 Domain 內部的邏輯分組單位。
+OU（Organizational Unit）: Domain 內部的邏輯分組單位。
 
 主要用途：
 - 組織使用者或電腦
@@ -209,12 +221,12 @@ GPO 濫用、ACL 濫用常與 OU 結構有關。
 
 Domain Replication（同步複製機制）: AD 採用多主機複寫（Multi-master replication）。
 - 每台 Domain Controller 都會同步資料
-- 使用 AD Replication Service
+- 使用 MS-DRSR（Directory Replication Service Remote Protocol）
 - 透過 RPC / Kerberos 等機制同步
 
 重點：
-- DCSync 攻擊
-- DCShadow
+- DCSync 攻擊 -> 本質是模擬 DC 請求複寫資料
+- DCShadow -> 模擬 DC 請求複寫資料
 - 取得 KRBTGT hash
 
 Forest（森林）: AD 架構的最高層級，企業 AD 環境的「最高戰略目標」。
