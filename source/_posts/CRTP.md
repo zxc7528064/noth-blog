@@ -141,6 +141,153 @@ https://github.com/zxc7528064/SRT-Translator
 - Offensive PowerShell and .NET tradecraft
 - Domain Enumeration
 
+AD 的核心功能：
+Active Directory 是企業環境的身分與政策控制中樞。
+
+它提供三大核心能力：
+- Manageability（集中管理）
+- Security（驗證與授權）
+- Interoperability（跨系統整合）
+
+幾乎所有 Windows Server、Client、Application、Email、Network Device 都圍繞 AD 運作。
+
+從紅隊角度來看：
+
+```bash=
+控制 AD = 控制整個企業環境**
+```
+
+Schema 與物件屬性：
+
+AD 本質是一個「物件導向的目錄資料庫」，每一個物件（Object）都有屬性（Attribute），例如：
+- 使用者（User）
+- 電腦（Computer）
+- 群組（Group）
+- OU
+- Domain Controller
+
+Schema 定義：
+- 有哪些物件類型
+- 每個物件可以擁有哪些屬性
+
+例如：
+- user 物件包含：
+  - sAMAccountName
+  - userPrincipalName
+  - memberOf
+  - servicePrincipalName
+  - pwdLastSet
+
+紅隊重點：  
+很多攻擊（Kerberoasting、SPN abuse、Delegation abuse）都是基於這些屬性。
+
+Domain (網域) :
+
+Domain 是 AD 的邏輯管理單位。
+- 每個 Domain 有自己的使用者與群組
+- 由 Domain Controller 管理
+- 使用 Kerberos / NTLM 做驗證
+
+Domain 內部通常共享：
+- 使用者資料庫
+- 安全政策
+- GPO
+- 信任關係
+
+OU（Organizational Unit）
+
+OU 是 Domain 內部的邏輯分組單位。
+
+用途：
+
+- 組織使用者或電腦
+- 套用不同 GPO
+- 分層管理權限
+
+例如：
+
+Domain
+ ├── OU = IT
+ ├── OU = HR
+ ├── OU = Finance
+
+👉 紅隊重點：  
+GPO 濫用、ACL 濫用常與 OU 結構有關。
+
+---
+
+Domain Replication（同步複製機制）
+
+AD 採用多主機複寫（Multi-master replication）。
+
+- 每台 Domain Controller 都會同步資料
+- 使用 AD Replication Service
+- 透過 RPC / Kerberos 等機制同步
+
+👉 紅隊重點：
+
+- DCSync 攻擊
+- DCShadow
+- 取得 KRBTGT hash
+
+---
+
+Forest（森林）
+
+Forest 是 AD 架構的最高層級。
+
+一個 Forest 可以包含：
+
+- 多個 Domain
+- 共用同一個 Schema
+- 共用全域目錄（Global Catalog）
+
+例如：
+
+Forest
+ ├── Domain 1
+ └── Domain 2
+
+### 🔹 關鍵概念
+
+- 同一 Forest 內的 Domain 預設存在信任關係
+- 可以建立跨 Domain 的存取權限
+- Enterprise Admin 可控制整個 Forest
+
+---
+
+## 🔥 紅隊視角：為什麼 Forest 很重要？
+
+如果只攻破一個 Domain：
+
+- 你是 Domain Admin
+
+但如果取得：
+
+- Enterprise Admin
+- 或信任關係濫用
+
+你可能可以：
+
+- 橫向移動至其他 Domain
+- 控制整個 Forest
+- 接管整個企業環境
+
+Forest 是企業 AD 環境的「最高戰略目標」。
+
+## 小結
+
+- AD 是企業信任核心
+- Schema 定義物件與屬性
+- Domain 是邏輯管理單位
+- OU 是組織分層工具
+- Replication 是同步機制
+- Forest 是最高層級架構
+
+![AD_image](/img/AD_image.png)
+
+![Forest](/img/Forest.png)
+
 #### Module 2 
 - Local Privilege Escalation
 - Lateral Movement
