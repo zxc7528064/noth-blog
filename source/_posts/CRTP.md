@@ -134,6 +134,9 @@ https://github.com/zxc7528064/SRT-Translator
 
 ### Active Directory 攻擊體系框架
 
-#### Domain Enumeration 與資訊收集
+#### Module 1 
+- Introduction to Active Directory and Attack Methodology
+- Offensive PowerShell and .NET tradecraft
+- Offensive PowerShell and .NET tradecraft
 
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
