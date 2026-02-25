@@ -179,17 +179,16 @@ User 物件常見屬性包括：
 - servicePrincipalName -> 
 - pwdLastSet
 
-| 攻擊類型                | 關鍵屬性                                 |
-| ---------------------- | ---------------------------------------- |
-| Kerberoasting          | servicePrincipalName                     |
-| SPN Abuse              | servicePrincipalName                     |
-| Constrained Delegation | msDS-AllowedToDelegateTo                 |
-| RBCD                   | msDS-AllowedToActOnBehalfOfOtherIdentity |
-| Delegation Flag        | userAccountControl                       |
-| ACL Abuse              | nTSecurityDescriptor                     |
-| 密碼濫用                | unicodePwd / pwdLastSet                  |
-| 群組提權                | memberOf                                 |
-
+| 攻擊類型                   | 關鍵屬性                                     | 本質       |
+| ---------------------- | ---------------------------------------- | ---------------- |
+| Kerberoasting          | servicePrincipalName                     | SPN 存在           |
+| SPN Abuse              | servicePrincipalName                     | 可寫 SPN           |
+| Constrained Delegation | msDS-AllowedToDelegateTo                 | Delegation 目標    |
+| RBCD                   | msDS-AllowedToActOnBehalfOfOtherIdentity | 可寫 delegation    |
+| Delegation Flag        | userAccountControl                       | flag 可濫用         |
+| ACL Abuse              | nTSecurityDescriptor                     | 可寫 ACL           |
+| 密碼重設                   | unicodePwd                               | ResetPassword 權限 |
+| 群組提權                   | group.member                             | WriteMember 權限   |
 
 重點：
 ```bash=
