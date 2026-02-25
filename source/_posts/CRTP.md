@@ -154,7 +154,7 @@ AD 的核心功能，它提供三大核心能力：
 控制 AD = 控制整個企業環境
 ```
 
-Schema 與物件屬性 : Active Directory 本質上是一個「物件導向的目錄資料庫」。
+Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的目錄資料庫」。
 
 每個物件（Object）都擁有屬性（Attribute），例如：
 - User
@@ -182,40 +182,28 @@ User 物件常見屬性包括：
 很多攻擊（Kerberoasting、SPN abuse、Delegation abuse）上述攻擊手法，皆建立在「物件屬性可被濫用」之上。
 ```
 
-Domain (網域) :
-
-Domain 是 AD 的邏輯管理單位。
+Domain (網域) : Domain 是 AD 的邏輯管理單位。
 - 每個 Domain 有自己的使用者與群組
-- 由 Domain Controller 管理
+- 由 Domain Controller(DC) 管理
 - 使用 Kerberos / NTLM 做驗證
 
 Domain 內部通常共享：
-- 使用者資料庫
-- 安全政策
-- GPO
-- 信任關係
+- 使用者與群組資料庫
+- 安全政策（Security Policy）
+- 群組原則（GPO）
+- 信任關係（Trust Relationship）
 
-OU（Organizational Unit）
+OU（Organizational Unit）: 是 Domain 內部的邏輯分組單位。
 
-OU 是 Domain 內部的邏輯分組單位。
-
-用途：
-
+主要用途：
 - 組織使用者或電腦
 - 套用不同 GPO
 - 分層管理權限
 
-例如：
-
-Domain
- ├── OU = IT
- ├── OU = HR
- ├── OU = Finance
-
-👉 紅隊重點：  
+重點：  
+```bash=
 GPO 濫用、ACL 濫用常與 OU 結構有關。
-
----
+```
 
 Domain Replication（同步複製機制）
 
@@ -275,15 +263,6 @@ Forest
 - 接管整個企業環境
 
 Forest 是企業 AD 環境的「最高戰略目標」。
-
-## 小結
-
-- AD 是企業信任核心
-- Schema 定義物件與屬性
-- Domain 是邏輯管理單位
-- OU 是組織分層工具
-- Replication 是同步機制
-- Forest 是最高層級架構
 
 ![AD_image](/img/AD_image.png)
 
