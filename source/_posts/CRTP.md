@@ -201,7 +201,7 @@ Domain 內部通常共享：
 - 使用者與群組資料庫 -> 所有帳號資訊都存在 AD 資料庫裡。
 - 安全政策（Security Policy）-> 密碼長度、密碼複雜度、帳號鎖定次數。
 - 群組原則（GPO）-> 批量管理電腦設定的機制。
-- 信任關係（Trust Relationship) -> 信任 = 可以跨網域存取資源。
+- 信任關係（Trust Relationship) -> 可以跨網域存取資源。
 
 OU（Organizational Unit）: Domain 內部的邏輯分組單位。
 
@@ -225,7 +225,7 @@ Domain Replication（同步複製機制）: AD 採用多主機複寫（Multi-mas
 - DCShadow -> 模擬 DC 請求複寫資料
 - 取得 KRBTGT hash
 
-Forest（森林）: AD 架構的最高層級，企業 AD 環境的「最高戰略目標」。
+Forest（森林）: AD 架構的最高層級。
 
 ![Forest](/img/Forest.png)
 
