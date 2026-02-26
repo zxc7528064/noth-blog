@@ -244,6 +244,13 @@ AD 架構的最高層級。
 Enterprise Admins 群組擁有整個 Forest 層級的最高權限。
 ```
 
+---
+
+Powershell 
+
+---
+
+
 ### Module 2 
 - Local Privilege Escalation
 - Lateral Movement
