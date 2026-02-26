@@ -201,7 +201,7 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 
 重點：
 ```bash=
-Kerberoasting、SPN abuse、Delegation abuse 等上述攻擊手法，建立在「物件屬性 + 權限可修改」之上。
+多數 AD 攻擊建立在「物件屬性 + ACL 權限機制」之上。
 ```
 
 Domain (網域) : 公司內部帳號與電腦的管理範圍。
