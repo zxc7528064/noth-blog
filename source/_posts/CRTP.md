@@ -239,9 +239,9 @@ AD 架構的最高層級。
  
 重點 :
 ```bash=
-- 同一 Forest 內的 Domain 之間預設存在雙向、可傳遞的信任關係（Transitive Trust）。
-- 可在不同 Domain 之間建立跨網域的存取控制（例如跨 Domain 加入群組）。
-- Enterprise Admins 群組擁有整個 Forest 層級的最高權限。
+同一 Forest 內的 Domain 之間預設存在雙向、可傳遞的信任關係（Transitive Trust）。
+可在不同 Domain 之間建立跨網域的存取控制（例如跨 Domain 加入群組）。
+Enterprise Admins 群組擁有整個 Forest 層級的最高權限。
 ```
 
 ### Module 2 
@@ -258,3 +258,5 @@ AD 架構的最高層級。
 - Monitoring and Detections
 
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
+
+## 總結
