@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zxc7528064.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2026-02-21T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-26T13:21:06.456Z">
+<meta property="article:modified_time" content="2026-02-26T13:27:43.618Z">
 <meta property="article:author" content="Noth Shen">
 <meta property="article:tag" content="CRTP">
 <meta name="twitter:card" content="summary">
@@ -18,7 +18,7 @@
   "url": "https://zxc7528064.github.io/2026/02/21/CRTP/",
   "image": "https://zxc7528064.github.io/img/avatar.jpg",
   "datePublished": "2026-02-21T00:00:00.000Z",
-  "dateModified": "2026-02-26T13:21:06.456Z",
+  "dateModified": "2026-02-26T13:27:43.618Z",
   "author": [
     {
       "@type": "Person",
@@ -159,7 +159,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習準備與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習準備與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-26T13:21:06.456Z" title="Updated 2026-02-26 13:21:06">2026-02-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習準備與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習準備與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-26T13:27:43.618Z" title="Updated 2026-02-26 13:27:43">2026-02-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
 CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊證照，核心聚焦在 Active Directory 內網攻擊技術。
 
 <p>如果用一句話概括：</p>
@@ -308,24 +308,11 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 <li>群組原則（GPO）：集中套用系統設定與安全設定至電腦與使用者。</li>
 <li>信任關係（Trust Relationship）：允許跨 Domain 或跨 Forest 的身份驗證與資源存取。</li>
 </ul>
-<p>OU（Organizational Unit）: </p>
-<p>Domain 內部的邏輯分組單位。</p>
-<p>主要用途：</p>
-<ul>
-<li>組織使用者或電腦</li>
-<li>套用不同 GPO</li>
-<li>分層管理權限</li>
-</ul>
-<p>Domain Replication（同步複製機制）:<br>AD 採用多主機複寫（Multi-master replication）。</p>
-<ul>
-<li>每台 Domain Controller 都會同步資料</li>
-<li>使用 MS-DRSR（Directory Replication Service Remote Protocol）</li>
-<li>透過 RPC &#x2F; Kerberos 等機制同步</li>
-</ul>
-<p>攻擊重點：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- DCSync 攻擊 -&gt; 本質是模擬 DC 請求複寫資料</span><br><span class="line">- DCShadow -&gt; 模擬 DC 請求複寫資料</span><br><span class="line">- 取得 KRBTGT <span class="built_in">hash</span></span><br></pre></td></tr></table></figure>
+<p>重點：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- DCSync：濫用 Directory Replication 權限，模擬 DC 請求複寫敏感資料（如 KRBTGT <span class="built_in">hash</span>）。</span><br><span class="line">- DCShadow：模擬惡意 DC 進行物件變更與複寫。</span><br><span class="line">- 控制 KRBTGT <span class="built_in">hash</span> = 可偽造 Kerberos Golden Ticket。</span><br></pre></td></tr></table></figure>
 
-<p>Forest（森林）:<br>AD 架構的最高層級。</p>
+<p>Forest（森林）:</p>
+<p>AD 架構的最高層級。</p>
 <p><img src="/noth-blog/img/Forest.png" alt="Forest"></p>
 <p>包含：</p>
 <ul>
