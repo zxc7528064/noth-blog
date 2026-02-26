@@ -51,11 +51,11 @@ https://www.enterprisesecurity.io/
 基本學習思路 : 
 
 ```bash=
-Lab Connection Guide
-（解決 Lab 連線問題）
-        ↓
 Course Videos
 （快速理解整體架構）
+        ↓
+Lab Connection Guide
+（解決 Lab 連線問題）        
         ↓
 Access Lab Material
 （Lab 驗證）
