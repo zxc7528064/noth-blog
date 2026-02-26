@@ -172,26 +172,23 @@ Object (實體資料)
 
 Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的目錄資料庫」。
 
-每個物件（Object）都擁有屬性（Attribute），例如：
+在 AD 中，所有資源都以「物件（Object）」的形式存在，例如：
+
 - User
 - Computer
 - Group
-- OU
+- Organizational Unit (OU)
 - Domain Controller
+- Service Account
+- GPO
 
-Schema 負責定義：
+每個物件都包含多個「屬性（Attribute）」，例如：
 
-- 系統中有哪些物件類型
-- 每種物件可以擁有哪些屬性
-
-換句話說，Schema 是 AD 的「資料結構藍圖」。
-
-User 物件常見屬性包括：
 - sAMAccountName
 - userPrincipalName
 - memberOf
+- objectSID
 - servicePrincipalName
-- pwdLastSet
 
 | 攻擊類型                | 關鍵屬性                                  | 本質       |
 | ---------------------- | ---------------------------------------- | ---------------- |
@@ -217,29 +214,30 @@ Domain 內部通常共享：
 - 群組原則（GPO）-> 批量管理電腦設定的機制。
 - 信任關係（Trust Relationship) -> 可以跨網域存取資源。
 
-OU（Organizational Unit）: Domain 內部的邏輯分組單位。
+OU（Organizational Unit）: 
+
+Domain 內部的邏輯分組單位。
 
 主要用途：
 - 組織使用者或電腦
 - 套用不同 GPO
 - 分層管理權限
 
-重點：  
-```bash=
-GPO 濫用、ACL 濫用常與 OU 結構有關。
-```
-
-Domain Replication（同步複製機制）: AD 採用多主機複寫（Multi-master replication）。
+Domain Replication（同步複製機制）: 
+AD 採用多主機複寫（Multi-master replication）。
 - 每台 Domain Controller 都會同步資料
 - 使用 MS-DRSR（Directory Replication Service Remote Protocol）
 - 透過 RPC / Kerberos 等機制同步
 
-重點：
+攻擊重點：
+```bash=
 - DCSync 攻擊 -> 本質是模擬 DC 請求複寫資料
 - DCShadow -> 模擬 DC 請求複寫資料
 - 取得 KRBTGT hash
+```
 
-Forest（森林）: AD 架構的最高層級。
+Forest（森林）:
+AD 架構的最高層級。
 
 ![Forest](/img/Forest.png)
 
@@ -249,9 +247,11 @@ Forest（森林）: AD 架構的最高層級。
 - 共用全域目錄（Global Catalog）
  
 重點 :
+```bash=
 - 同一 Forest 內的 Domain 預設存在信任關係
 - 可以建立跨 Domain 的存取權限
 - Enterprise Admin 可控制整個 Forest
+```
 
 ### Module 2 
 - Local Privilege Escalation
