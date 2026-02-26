@@ -221,9 +221,9 @@ Domain 內部通常共享：
 重點：
 
 ```bash=
-- DCSync：濫用 Directory Replication 權限，模擬 DC 請求複寫敏感資料（如 KRBTGT hash）。
-- DCShadow：模擬惡意 DC 進行物件變更與複寫。
-- 控制 KRBTGT hash = 可偽造 Kerberos Golden Ticket。
+DCSync：濫用 Directory Replication 權限，模擬 DC 請求複寫敏感資料（如 KRBTGT hash）。
+DCShadow：模擬惡意 DC 進行物件變更與複寫。
+控制 KRBTGT hash = 可偽造 Kerberos Golden Ticket。
 ```
 
 Forest（森林）:
