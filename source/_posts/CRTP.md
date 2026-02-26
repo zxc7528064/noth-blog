@@ -156,6 +156,22 @@ AD 的核心功能，它提供三大核心能力：
 控制 AD = 控制整個企業環境
 ```
 
+理解 AD 的結構框架（mental model）
+
+```bash=
+Domain
+   ↓
+Object Class (定義這種類型能有哪些欄位)
+   ↓
+Object (一筆資料)
+   ↓
+Attribute (欄位)
+   ↓
+Value (欄位內容)
+   ↓
+ACL (誰能改這個欄位)
+```
+
 Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的目錄資料庫」。
 
 每個物件（Object）都擁有屬性（Attribute），例如：
