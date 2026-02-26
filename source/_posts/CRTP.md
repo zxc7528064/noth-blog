@@ -63,6 +63,7 @@ Access Lab Material
 Walkthrough Videos
 （僅在卡關時使用）
 ```
+
 整體原則為：
 
 ```bash=
@@ -190,13 +191,13 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 - objectSID
 - servicePrincipalName
 
-| 攻擊類型                | 關鍵屬性                                  | 本質       |
-| ---------------------- | ---------------------------------------- | ---------------- |
-| Kerberoasting          | servicePrincipalName                     | SPN 存在           |
-| SPN Abuse              | servicePrincipalName                     | 可寫 SPN           |
-| Constrained Delegation | msDS-AllowedToDelegateTo                 | Delegation 目標    |
-| RBCD                   | msDS-AllowedToActOnBehalfOfOtherIdentity | 可寫 delegation    |
-| ACL Abuse              | nTSecurityDescriptor                     | 可寫 ACL           |
+| 攻擊類型                   | 關鍵屬性                               | 真正本質              |
+| ---------------------- | ---------------------------------------- | ----------------- |
+| Kerberoasting          | servicePrincipalName                     | 可請求 TGS (可讀 SPN)  |
+| SPN Abuse              | servicePrincipalName                     | 可寫 SPN            |
+| Constrained Delegation | msDS-AllowedToDelegateTo                 | 可控制委派目標           |
+| RBCD                   | msDS-AllowedToActOnBehalfOfOtherIdentity | 可寫 delegation ACL |
+| ACL Abuse              | nTSecurityDescriptor                     | 可改物件權限            |
 
 重點：
 ```bash=
