@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zxc7528064.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2026-02-21T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-26T13:12:03.403Z">
+<meta property="article:modified_time" content="2026-02-26T13:19:11.014Z">
 <meta property="article:author" content="Noth Shen">
 <meta property="article:tag" content="CRTP">
 <meta name="twitter:card" content="summary">
@@ -18,7 +18,7 @@
   "url": "https://zxc7528064.github.io/2026/02/21/CRTP/",
   "image": "https://zxc7528064.github.io/img/avatar.jpg",
   "datePublished": "2026-02-21T00:00:00.000Z",
-  "dateModified": "2026-02-26T13:12:03.403Z",
+  "dateModified": "2026-02-26T13:19:11.014Z",
   "author": [
     {
       "@type": "Person",
@@ -159,7 +159,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習準備與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習準備與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-26T13:12:03.403Z" title="Updated 2026-02-26 13:12:03">2026-02-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習準備與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習準備與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-26T13:19:11.014Z" title="Updated 2026-02-26 13:19:11">2026-02-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
 CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊證照，核心聚焦在 Active Directory 內網攻擊技術。
 
 <p>如果用一句話概括：</p>
@@ -294,18 +294,19 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 <p>重點：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">多數 AD 攻擊建立在「物件屬性 + ACL 權限機制」之上。</span><br></pre></td></tr></table></figure>
 
-<p>Domain (網域) : 公司內部帳號與電腦的管理範圍。</p>
+<p>Domain (網域) : </p>
+<p>公司內部帳號與電腦的管理範圍。</p>
 <ul>
-<li>每個 Domain 有自己的使用者與群組</li>
-<li>由 Domain Controller (DC) 管理 -&gt; 專門負責管理整個網域資料庫的伺服器。</li>
-<li>使用 Kerberos 為預設驗證機制 &#x2F; NTLM 為 fallback 機制</li>
+<li>每個 Domain 擁有獨立的使用者、電腦與群組物件（User、Computer、Group、Service Account），<br>這些物件都儲存在該 Domain 的 AD 資料庫中。</li>
+<li>Domain 由一或多台 Domain Controller (DC) 維護，<br>DC 負責儲存 AD 資料庫（NTDS.dit）、驗證使用者身分與發放存取權限。</li>
+<li>預設使用 Kerberos 作為主要驗證機制，<br>在某些情況下（例如舊系統或 SPN 解析失敗）會回退至 NTLM。</li>
 </ul>
 <p>Domain 內部通常共享：</p>
 <ul>
-<li>使用者與群組資料庫 -&gt; 所有帳號資訊都存在 AD 資料庫裡。</li>
-<li>安全政策（Security Policy）-&gt; 密碼長度、密碼複雜度、帳號鎖定次數。</li>
-<li>群組原則（GPO）-&gt; 批量管理電腦設定的機制。</li>
-<li>信任關係（Trust Relationship) -&gt; 可以跨網域存取資源。</li>
+<li>身份資料庫：所有帳號與群組資訊儲存在 AD 物件中。</li>
+<li>安全政策（Security Policy）：密碼長度、複雜度、帳號鎖定策略等。</li>
+<li>群組原則（GPO）：集中套用系統設定與安全設定至電腦與使用者。</li>
+<li>信任關係（Trust Relationship）：允許跨 Domain 或跨 Forest 的身份驗證與資源存取。</li>
 </ul>
 <p>OU（Organizational Unit）: </p>
 <p>Domain 內部的邏輯分組單位。</p>
