@@ -204,16 +204,22 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 多數 AD 攻擊建立在「物件屬性 + ACL 權限機制」之上。
 ```
 
-Domain (網域) : 公司內部帳號與電腦的管理範圍。
-- 每個 Domain 有自己的使用者與群組
-- 由 Domain Controller (DC) 管理 -> 專門負責管理整個網域資料庫的伺服器。
-- 使用 Kerberos 為預設驗證機制 / NTLM 為 fallback 機制
+Domain (網域) : 
+
+公司內部帳號與電腦的管理範圍。
+
+- 每個 Domain 擁有獨立的使用者、電腦與群組物件（User、Computer、Group、Service Account），
+  這些物件都儲存在該 Domain 的 AD 資料庫中。
+- Domain 由一或多台 Domain Controller (DC) 維護，
+  DC 負責儲存 AD 資料庫（NTDS.dit）、驗證使用者身分與發放存取權限。
+- 預設使用 Kerberos 作為主要驗證機制，
+  在某些情況下（例如舊系統或 SPN 解析失敗）會回退至 NTLM。
 
 Domain 內部通常共享：
-- 使用者與群組資料庫 -> 所有帳號資訊都存在 AD 資料庫裡。
-- 安全政策（Security Policy）-> 密碼長度、密碼複雜度、帳號鎖定次數。
-- 群組原則（GPO）-> 批量管理電腦設定的機制。
-- 信任關係（Trust Relationship) -> 可以跨網域存取資源。
+- 身份資料庫：所有帳號與群組資訊儲存在 AD 物件中。
+- 安全政策（Security Policy）：密碼長度、複雜度、帳號鎖定策略等。
+- 群組原則（GPO）：集中套用系統設定與安全設定至電腦與使用者。
+- 信任關係（Trust Relationship）：允許跨 Domain 或跨 Forest 的身份驗證與資源存取。
 
 OU（Organizational Unit）: 
 
