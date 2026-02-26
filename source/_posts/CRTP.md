@@ -218,29 +218,16 @@ Domain 內部通常共享：
 - 群組原則（GPO）：集中套用系統設定與安全設定至電腦與使用者。
 - 信任關係（Trust Relationship）：允許跨 Domain 或跨 Forest 的身份驗證與資源存取。
 
-OU（Organizational Unit）: 
+重點：
 
-Domain 內部的邏輯分組單位。
-
-主要用途：
-- 組織使用者或電腦
-- 套用不同 GPO
-- 分層管理權限
-
-Domain Replication（同步複製機制）: 
-AD 採用多主機複寫（Multi-master replication）。
-- 每台 Domain Controller 都會同步資料
-- 使用 MS-DRSR（Directory Replication Service Remote Protocol）
-- 透過 RPC / Kerberos 等機制同步
-
-攻擊重點：
 ```bash=
-- DCSync 攻擊 -> 本質是模擬 DC 請求複寫資料
-- DCShadow -> 模擬 DC 請求複寫資料
-- 取得 KRBTGT hash
+- DCSync：濫用 Directory Replication 權限，模擬 DC 請求複寫敏感資料（如 KRBTGT hash）。
+- DCShadow：模擬惡意 DC 進行物件變更與複寫。
+- 控制 KRBTGT hash = 可偽造 Kerberos Golden Ticket。
 ```
 
 Forest（森林）:
+
 AD 架構的最高層級。
 
 ![Forest](/img/Forest.png)
