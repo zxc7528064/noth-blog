@@ -161,15 +161,13 @@ AD 的核心功能，它提供三大核心能力：
 ```bash=
 Domain
    ↓
-Object Class (定義這種類型能有哪些欄位)
+Schema (定義有哪些 ObjectClass 與 Attribute)
    ↓
-Object (一筆資料)
+Object Class (定義物件類型)
    ↓
-Attribute (欄位)
-   ↓
-Value (欄位內容)
-   ↓
-ACL (誰能改這個欄位)
+Object (實體資料)
+   ├── Attributes (資料)
+   └── Security Descriptor (ACL 權限)
 ```
 
 Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的目錄資料庫」。
