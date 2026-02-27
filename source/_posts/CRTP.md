@@ -208,8 +208,8 @@ Domain (網域) :
 
 公司內部帳號與電腦的管理範圍。
 
-- 每個 Domain 擁有獨立的使用者、電腦與群組物件（User、Computer、Group、Service Account），這些物件都儲存在該 Domain 的 AD 資料庫 (NTDS.dit) 中。
-- Domain 由一或多台 Domain Controller (DC) 維護，負責儲存 AD 資料庫（NTDS.dit）、驗證使用者身分與發放存取權限。
+- 每個 Domain 擁有獨立的使用者、電腦與群組物件（User、Computer、Group、Service Account），這些物件都儲存在該 Domain 的 AD 資料庫（NTDS.dit）中。
+- Domain 由一或多台 Domain Controller（DC）維護，負責儲存 AD 資料庫（NTDS.dit）、驗證使用者身分與發放存取權限。
 - 預設使用 Kerberos 作為主要驗證機制，在某些情況下（例如舊系統或 SPN 解析失敗）會回退至 NTLM。
 
 Domain 內部通常共享：
