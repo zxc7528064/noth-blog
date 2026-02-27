@@ -326,7 +326,6 @@ $env:PSExecutionPolicyPreference="bypass"
 ```
 
 重點：
-- Execution Policy 不是安全邊界
 - 它只是防止誤執行腳本
 - 真正的限制來自 AMSI / CLM / AV
 
