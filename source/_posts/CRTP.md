@@ -36,13 +36,13 @@ https://www.enterprisesecurity.io/
 成功登入後，可在 Dashboard 中看到 `Attacking and Defending Active Directory Lab - CRTP` 訂閱 Lab。
 
 主要功能區包含：
-- `Lab Details`
-- `Lab Manual`
-- `Certification Exam`
-- `Flag Verification`
-- `Lab Material`
-- `How to use Discord`
-- `FAQs`
+- Lab Details
+- Lab Manual
+- Certification Exam
+- Flag Verification
+- Lab Material
+- How to use Discord
+- FAQs
 
 其中最核心的學習資源集中在 `Lab Manual`，內容涵蓋課程影片、PDF 教材與相關工具包，是整套 CRTP 的知識主體，其他區塊則偏向環境說明、考試資訊與實驗室操作輔助。
 
