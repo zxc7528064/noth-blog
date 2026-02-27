@@ -301,6 +301,7 @@ $env:PSExecutionPolicyPreference="bypass"
 - 真正的限制來自 AMSI / CLM / AV
 
 AV / AMSI 相關研究工具
+
 常見研究工具：
   - AMSITrigger
     - 測試哪段程式碼被 AMSI 觸發
@@ -318,7 +319,7 @@ PowerShell 本質是 .NET。
 - 用 .NET API 操作 LDAP
 - 避免明顯 PowerShell artifact
 
-常見概念：
+重點：
 - Source Code Obfuscation
 - 編譯後 payload 混淆
 - 降低 signature 命中率
