@@ -376,6 +376,7 @@ PowerShell 本質是 .NET。
 
 本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
 
-## Lab Methodology - Assume Breach
+## Lab Methodology - Assume Breach (實驗室方法論)
+
 
 ## 總結
