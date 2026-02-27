@@ -300,16 +300,16 @@ PowerShell Detection Surface（偵測面）
 理解防禦面，才能理解攻擊面。
 
 ```bash=
-- System-wide transcription
+System-wide transcription
   - 記錄整個 PowerShell 操作過程
 
-- Script Block Logging
+Script Block Logging
   - 記錄完整 script 內容
 
-- AMSI (AntiMalware Scan Interface)
+AMSI (AntiMalware Scan Interface)
   - 將腳本內容送給 AV 掃描
 
-- Constrained Language Mode (CLM)
+Constrained Language Mode (CLM)
   - 限制 PowerShell 功能
   - 通常搭配 AppLocker / WDAC
 ```
