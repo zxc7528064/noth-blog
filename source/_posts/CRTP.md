@@ -251,9 +251,8 @@ Enterprise Admins 群組擁有整個 Forest 層級的最高權限。
 - 理解 PowerShell 在 AD 攻擊中的角色
 - 理解 Windows 環境的偵測面
 - 理解何時應使用 PowerShell、何時應改用 .NET Binary
-- 建立攻防可見度（visibility）思維
 
-為什麼 PowerShell 是 AD 攻擊核心載體?
+為什麼 PowerShell 是 AD 攻擊核心載體 ?
 
 PowerShell 具備：
 
