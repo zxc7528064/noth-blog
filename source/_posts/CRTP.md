@@ -238,14 +238,18 @@ AD 架構的最高層級。
 
 包含：
 - 多個 Domain
-- 共用同一個 Schema
+- 共用同一個 Schema（所有 Domain 的資料結構都必須一致）
 - 共用全域目錄（Global Catalog）
  
 重點 :
 ```bash=
 同一 Forest 內的 Domain 之間預設存在雙向、可傳遞的信任關係（Transitive Trust）。
-可在不同 Domain 之間建立跨網域的存取控制（例如跨 Domain 加入群組）。
-Enterprise Admins 群組擁有整個 Forest 層級的最高權限。
+這使得：
+- 使用者可跨 Domain 存取資源
+- 可將不同 Domain 的帳號加入其他 Domain 的群組
+- 可進行跨網域授權控制
+
+Enterprise Admins 群組擁有 Forest 層級的最高權限，可管理整個 Forest 的 Schema、Configuration 與所有 Domain 的關鍵設定。
 ```
 
 ---
