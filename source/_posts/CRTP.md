@@ -221,11 +221,25 @@ Domain 內部通常共享：
 重點：
 
 ```bash=
+MS-DRSR : 
+是 Domain Controller 之間用來同步 Active Directory 資料的官方協定。
+
+Active Directory
+      ↓
+Replication 機制
+      ↓
+MS-DRSR 協定
+      ↓
+DRSUAPI 介面
+      ↓
+物件屬性資料同步
+
 DCSync：
 - 濫用 Directory Replication（目錄複寫）權限，透過 MS-DRSR（DRSUAPI）複寫介面向 Domain Controller，請求帳號屬性資料，可取得 NTLM hash、Kerberos 金鑰與 KRBTGT hash。
 
 DCShadow：模擬惡意 DC 進行物件變更與複寫。
 - 濫用 AD 複寫機制，暫時將攻擊主機註冊為一台 Domain Controller，注入惡意物件屬性變更，並透過正常 replication 流程推送至其他 DC。
+
 
 控制 KRBTGT hash = 可偽造 Kerberos Golden Ticket。
 ```
