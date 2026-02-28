@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zxc7528064.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2026-02-21T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-28T07:17:42.086Z">
+<meta property="article:modified_time" content="2026-02-28T07:22:46.517Z">
 <meta property="article:author" content="Noth Shen">
 <meta property="article:tag" content="CRTP">
 <meta name="twitter:card" content="summary">
@@ -18,7 +18,7 @@
   "url": "https://zxc7528064.github.io/2026/02/21/CRTP/",
   "image": "https://zxc7528064.github.io/img/avatar.jpg",
   "datePublished": "2026-02-21T00:00:00.000Z",
-  "dateModified": "2026-02-28T07:17:42.086Z",
+  "dateModified": "2026-02-28T07:22:46.517Z",
   "author": [
     {
       "@type": "Person",
@@ -159,7 +159,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習準備與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習準備與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-28T07:17:42.086Z" title="Updated 2026-02-28 07:17:42">2026-02-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習準備與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習準備與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-28T07:22:46.517Z" title="Updated 2026-02-28 07:22:46">2026-02-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
 CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊證照，核心聚焦在 Active Directory 內網攻擊技術。
 
 <p>如果用一句話概括：</p>
@@ -424,10 +424,10 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 <li>Monitoring and Detections</li>
 </ul>
 <p>本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。</p>
-<h2 id="Lab-Methodology-Assume-Breach-實驗室方法論"><a href="#Lab-Methodology-Assume-Breach-實驗室方法論" class="headerlink" title="Lab Methodology - Assume Breach (實驗室方法論)"></a>Lab Methodology - Assume Breach (實驗室方法論)</h2><p>核心精神：<br>在滲透測試中預設攻擊者已取得內網初始立足點（Initial Foothold），接著評估其是否能透過：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 權限濫用 (Privilege Abuse)</span><br><span class="line">- 憑證竊取 (Credential Theft)</span><br><span class="line">- 橫向移動 (Lateral Movement)</span><br><span class="line">- 權限提升 (Privilege Escalation)</span><br></pre></td></tr></table></figure>
+<h2 id="Lab-Methodology-Assume-Breach-實驗室方法論"><a href="#Lab-Methodology-Assume-Breach-實驗室方法論" class="headerlink" title="Lab Methodology - Assume Breach (實驗室方法論)"></a>Lab Methodology - Assume Breach (實驗室方法論)</h2><p>核心精神： </p>
+<p>預設攻擊者已取得內網初始立足點（Initial Foothold），並評估其是否能沿著攻擊鏈持續擴張權限，最終達成：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">控制整個 Active Directory 網域環境（Domain Dominance）</span><br></pre></td></tr></table></figure>
 
-<p>最終達成：控制整個 Active Directory 網域環境（Domain Dominance）</p>
 <p>Lab 入口資訊</p>
 <ul>
 <li>Portal URL: <code>https://enterprisesecurity.io</code></li>
