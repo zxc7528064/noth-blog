@@ -167,8 +167,12 @@ Schema (定義有哪些 ObjectClass 與 Attribute)
 Object Class (定義物件類型)
    ↓
 Object (實體資料)
-   ├── Attributes (資料)
-   └── Security Descriptor (ACL 權限)
+   ├── Attributes (資料屬性)
+   └── Security Descriptor
+          ├── Owner
+          ├── DACL (Discretionary ACL)
+          │      └── ACE (Allow / Deny 規則)
+          └── SACL (Audit 記錄)
 ```
 
 Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的目錄資料庫」。
@@ -433,6 +437,34 @@ Domain Dominance
 | SOAPHound | ADCS 枚舉 | ADCS 與憑證模板關係枚舉工具 |
 | PowerHuntShares | 共享枚舉 | 尋找敏感檔案與憑證（GPP密碼、備份檔、設定檔）|
 | RunWithRegistryNonAdmin.bat | 執行技巧 | 利用註冊表機制在低權限情境下啟動程式 |
+
+Bloodhound 尋找最短路徑 (Shortest Paths)  
+
+Active Directory / Windows 權限判斷的核心機制 :
+
+![ACLs](/img/ACLs.png)
+
+```bash=
+使用者登入
+     ↓
+DC 驗證成功（Kerberos / NTLM）
+     ↓
+LSASS 建立 Access Token
+     ↓
+Process 繼承 Access Token
+     ↓
+嘗試存取 Object
+     ↓
+讀取 Object 的 DACL
+     ↓
+逐條比對 ACE
+     ↓
+命中 Deny → 立即拒絕（Deny 優先）
+命中 Allow → 允許
+全部未命中 → 拒絕
+```
+
+Windows 權限判斷本質是：Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先。
 
 ### Module 2 
 - Local Privilege Escalation
