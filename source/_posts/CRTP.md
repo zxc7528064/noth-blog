@@ -438,9 +438,9 @@ Domain Dominance
 | PowerHuntShares | 共享枚舉 | 尋找敏感檔案與憑證（GPP密碼、備份檔、設定檔）|
 | RunWithRegistryNonAdmin.bat | 執行技巧 | 利用註冊表機制在低權限情境下啟動程式 |
 
-Bloodhound 尋找最短路徑 (Shortest Paths)  
-
 Active Directory / Windows 權限判斷的核心機制 :
+
+Windows 權限判斷本質是：Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先。
 
 ![ACLs](/img/ACLs.png)
 
@@ -463,8 +463,6 @@ Process 繼承 Access Token
 命中 Allow → 允許
 全部未命中 → 拒絕
 ```
-
-Windows 權限判斷本質是：Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先。
 
 ### Module 2 
 - Local Privilege Escalation
