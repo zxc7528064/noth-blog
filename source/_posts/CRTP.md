@@ -528,9 +528,7 @@ GPO（Group Policy Object）的本質
 
 ## Lab Methodology - Assume Breach (實驗室方法論)
 
-核心精神： 
-
-預設攻擊者已取得內網初始立足點（Initial Foothold），並評估其是否能沿著攻擊鏈持續擴張權限，最終達成：
+預設攻擊者已取得內網初始立足點（Initial Foothold），並評估其是否能沿著攻擊鏈持續擴張權限，最終達成 : 
 
 ```bash=
 控制整個 Active Directory 網域環境
