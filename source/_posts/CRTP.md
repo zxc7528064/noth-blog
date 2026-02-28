@@ -193,7 +193,7 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 
 | 攻擊類型                   | 關鍵屬性                               | 真正本質              |
 | ---------------------- | ---------------------------------------- | ----------------- |
-| Kerberoasting          | servicePrincipalName                     | 可請求 TGS (可讀 SPN)  |
+| Kerberoasting          | servicePrincipalName                     | 可讀 SPN + 可請求 TGS  |
 | SPN Abuse              | servicePrincipalName                     | 可寫 SPN            |
 | Constrained Delegation | msDS-AllowedToDelegateTo                 | 可控制委派目標           |
 | RBCD                   | msDS-AllowedToActOnBehalfOfOtherIdentity | 可寫 delegation ACL |
@@ -286,9 +286,8 @@ Domain A ↔ Domain B ↔ Domain C
 
 Enterprise Admins 群組擁有 Forest 層級的最高權限，可管理整個 Forest 的 Schema、Configuration 與所有 Domain 的關鍵設定。
 - Enterprise Admins
-```
 
----
+```
 
 在 Active Directory 內網滲透中，PowerShell 與 .NET 是最核心的攻擊載體。
 
@@ -406,6 +405,34 @@ PowerShell 本質是 .NET。
 
 ---
 
+Active Directory Post-Exploitation Attack Model
+
+```bash=
+Initial Foothold
+      ↓
+PowerView 手動枚舉
+      ↓
+建立 AD 權限模型
+      ↓
+BloodHound 計算攻擊路徑
+      ↓
+ACL / Delegation / Credential Abuse
+      ↓
+Domain Controller Compromise
+      ↓
+Domain Dominance
+```
+
+常用工具：
+
+| 工具 | 角色 | 功能定位 |
+|------|------|----------|
+| PowerView | 手動枚舉 | 查詢 AD 物件與 ACL |
+| SharpView | 隱蔽枚舉 | C# 版 AD 枚舉工具，適用於限制 PowerShell 的環境 |
+| BloodHound CE | 圖論分析 | 計算最短攻擊路徑 |
+| SOAPHound | ADCS 枚舉 | ADCS 與憑證模板關係枚舉工具 |
+| PowerHuntShares | 共享枚舉 | 尋找敏感檔案與憑證（GPP密碼、備份檔、設定檔）|
+| RunWithRegistryNonAdmin.bat | 執行技巧 | 利用註冊表機制在低權限情境下啟動程式 |
 
 ### Module 2 
 - Local Privilege Escalation
