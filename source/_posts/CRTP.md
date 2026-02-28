@@ -425,15 +425,12 @@ PowerShell 本質是 .NET。
 ## Lab Methodology - Assume Breach (實驗室方法論)
 
 核心精神： 
-在滲透測試中預設攻擊者已取得內網初始立足點（Initial Foothold），接著評估其是否能透過：
-```bash=
-- 權限濫用 (Privilege Abuse)
-- 憑證竊取 (Credential Theft)
-- 橫向移動 (Lateral Movement)
-- 權限提升 (Privilege Escalation)
-```
 
-最終達成：控制整個 Active Directory 網域環境（Domain Dominance）
+預設攻擊者已取得內網初始立足點（Initial Foothold），並評估其是否能沿著攻擊鏈持續擴張權限，最終達成：
+
+```bash=
+控制整個 Active Directory 網域環境（Domain Dominance）
+```
 
 Lab 入口資訊
 - Portal URL: `https://enterprisesecurity.io`
@@ -446,7 +443,6 @@ Lab 入口資訊
 - 最少 30 天存取權限
 - 若時間異常需立即確認
 - Lab 時間與考試資格直接相關
-
 
 區域選擇 (Region Selection)
 - North America
