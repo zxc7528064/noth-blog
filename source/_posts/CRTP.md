@@ -440,7 +440,9 @@ Domain Dominance
 
 Active Directory / Windows 權限判斷的核心機制 :
 
+```bash=
 本質是：Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先。
+```
 
 ```bash=
 使用者登入
@@ -463,6 +465,49 @@ Process 繼承 Access Token
 ```
 
 ![ACLs](/img/ACLs.png)
+
+在 Active Directory 中：
+
+```bash=
+GPO + OU = 批量控制權限與行為的機制
+```
+
+更重要的是：
+OU 與 GPO 本身也是受 ACL 控制的物件，可以被濫用的控制節點。
+
+常見濫用權限，如果攻擊者對 OU 具有以下權限：
+
+```bash=
+WriteDACL
+GenericAll
+WriteOwner
+```
+
+GPO（Group Policy Object）的本質
+
+GPO 是一種可以套用到 OU / Domain 的設定物件。
+
+它可以影響：
+- 電腦設定
+- 使用者設定
+- 安全政策
+- 啟動腳本
+- 登入腳本
+
+簡單說：
+
+GPO 是批量控制系統行為的工具。
+
+權限放大流程 : 
+```bash=
+控制 OU
+      ↓
+修改 GPO Link
+      ↓
+修改 GPO 設定
+      ↓
+控制多台主機
+```
 
 ### Module 2 
 - Local Privilege Escalation
