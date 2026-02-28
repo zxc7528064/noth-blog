@@ -440,9 +440,7 @@ Domain Dominance
 
 Active Directory / Windows 權限判斷的核心機制 :
 
-Windows 權限判斷本質是：Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先。
-
-![ACLs](/img/ACLs.png)
+本質是：Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先。
 
 ```bash=
 使用者登入
@@ -463,6 +461,8 @@ Process 繼承 Access Token
 命中 Allow → 允許
 全部未命中 → 拒絕
 ```
+
+![ACLs](/img/ACLs.png)
 
 ### Module 2 
 - Local Privilege Escalation
