@@ -469,7 +469,7 @@ Process 繼承 Access Token
 在 Active Directory 中：
 
 ```bash=
-GPO + OU = 批量控制權限與行為的機制
+GPO + OU Link = 批量控制行為的機制
 ```
 
 更重要的是：
@@ -485,9 +485,11 @@ WriteOwner
 
 GPO（Group Policy Object）的本質
 
-GPO 是一種可以套用到 OU / Domain 的設定物件。
+```bash=
+是一種可以套用到 OU / Domain 的設定物件。
+```
 
-它可以影響：
+可以影響：
 - 電腦設定
 - 使用者設定
 - 安全政策
@@ -495,7 +497,6 @@ GPO 是一種可以套用到 OU / Domain 的設定物件。
 - 登入腳本
 
 簡單說：
-
 GPO 是批量控制系統行為的工具。
 
 權限放大流程 : 
