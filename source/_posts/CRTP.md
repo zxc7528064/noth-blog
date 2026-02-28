@@ -256,13 +256,36 @@ AD 架構的最高層級。
  
 重點 :
 ```bash=
-同一 Forest 內的 Domain 之間預設存在雙向、可傳遞的信任關係（Transitive Trust）。
-這使得：
+Active Directory 森林權限與信任模型 : 
+
+森林（Forest）－最高邏輯邊界
+│
+├── 架構分割區（Schema Partition）        ← 整個森林共用
+├── 設定分割區（Configuration Partition） ← 整個森林共用
+├── 全域目錄（Global Catalog）
+│
+├── 森林根網域（Forest Root Domain）
+│      ├── 網域系統管理員（Domain Admins）
+│      └── 企業系統管理員（Enterprise Admins）
+│              ↑
+│              └── 存在於根網域，但擁有森林層級權限
+│
+├── 子網域 A
+│      └── 網域系統管理員（Domain Admins）
+│
+└── 子網域 B
+       └── 網域系統管理員（Domain Admins）
+
+同一 Forest 內的 Domain 之間預設存在雙向、可傳遞的信任關係（Transitive Trust）：
+Domain A ↔ Domain B ↔ Domain C
+        ↑______________↑
+         自動形成傳遞信任
 - 使用者可跨 Domain 存取資源
 - 可將不同 Domain 的帳號加入其他 Domain 的群組
 - 可進行跨網域授權控制
 
 Enterprise Admins 群組擁有 Forest 層級的最高權限，可管理整個 Forest 的 Schema、Configuration 與所有 Domain 的關鍵設定。
+- Enterprise Admins
 ```
 
 ---
