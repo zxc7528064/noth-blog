@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zxc7528064.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2026-02-20T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-28T16:38:52.984Z">
+<meta property="article:modified_time" content="2026-02-28T16:59:26.653Z">
 <meta property="article:author" content="Noth Shen">
 <meta property="article:tag" content="DevOps">
 <meta property="article:tag" content="Docker">
@@ -19,7 +19,7 @@
   "url": "https://zxc7528064.github.io/2026/02/20/Docker/",
   "image": "https://zxc7528064.github.io/img/avatar.jpg",
   "datePublished": "2026-02-20T00:00:00.000Z",
-  "dateModified": "2026-02-28T16:38:52.984Z",
+  "dateModified": "2026-02-28T16:59:26.653Z",
   "author": [
     {
       "@type": "Person",
@@ -160,7 +160,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">Docker 容器基礎概念與安裝</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Docker 容器基礎概念與安裝</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-20T00:00:00.000Z" title="Created 2026-02-20 00:00:00">2026-02-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-28T16:38:52.984Z" title="Updated 2026-02-28 16:38:52">2026-02-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/DevOps/">DevOps</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">Docker 容器基礎概念與安裝</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Docker 容器基礎概念與安裝</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-20T00:00:00.000Z" title="Created 2026-02-20 00:00:00">2026-02-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-28T16:59:26.653Z" title="Updated 2026-02-28 16:59:26">2026-02-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/DevOps/">DevOps</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
 Docker 幾乎已經成為現代開發流程中不可或缺的一環。與其只是停留在會使用指令的層次，不如真正理解它背後的設計思維與應用價值。這次打算從基礎概念開始重新梳理，並思考如何把容器化技術融入自己的工作與研究場景。
 在實務上，不論是搭建漏洞實驗環境、重現特定攻擊場景，或是建立報告產出流程，都會遇到環境不一致的問題。團隊成員使用不同作業系統、不同套件版本，往往讓原本簡單的流程變得複雜。
 透過 Docker 可以把所有依賴與設定封裝進 image 映像檔中，讓環境具備可重現性與一致性，減少因系統差異而產生的錯誤與時間成本。
