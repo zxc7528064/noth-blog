@@ -240,7 +240,7 @@ DCSync：
 DCShadow：
 - 濫用 AD 複寫機制，暫時將攻擊主機註冊為一台 Domain Controller，注入惡意物件屬性變更，並透過正常 replication 流程推送至其他 DC。
 
-控制 KRBTGT hash = 可偽造 Kerberos Golden Ticket，偽造任意使用者身份（Golden Ticket），可以「假裝成任何人」，而整個網域都會相信。
+控制 KRBTGT hash = 可偽造 Kerberos Golden Ticket，偽造任意使用者身份（Golden Ticket），而整個網域都會相信。
 ```
 
 Forest（森林）:
@@ -429,11 +429,11 @@ PowerShell 本質是 .NET。
 預設攻擊者已取得內網初始立足點（Initial Foothold），並評估其是否能沿著攻擊鏈持續擴張權限，最終達成：
 
 ```bash=
-控制整個 Active Directory 網域環境（Domain Dominance）
+控制整個 Active Directory 網域環境
 ```
 
 Lab 入口資訊
-- Portal URL: `https://enterprisesecurity.io`
+- Portal URL： `https://enterprisesecurity.io`
 - 登入後可查看：
   - 訂閱開始與結束時間
   - Lab 存取剩餘時間
