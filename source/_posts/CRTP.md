@@ -302,7 +302,7 @@ PowerShell 具備：
 
 - 預設安裝於 Windows 系統
 - 原生 .NET 支援
-- 直接存取 LDAP / AD API
+- PowerShell 可直接跟 AD 交互（查資料、改資料，而不需要額外工具）。
 - 支援記憶體執行
 - 可直接調用 Windows API
 
@@ -348,7 +348,7 @@ System-wide transcription
   - 記錄整個 PowerShell 操作過程
 
 Script Block Logging
-  - 記錄完整 script 內容
+  - 會把「還原後的實際 script 內容」記錄下來
 
 AMSI (AntiMalware Scan Interface)
   - 將腳本內容送給 AV 掃描
@@ -366,7 +366,8 @@ Execution Policy（執行策略）
 powershell -ep bypass
 powershell -c <cmd>
 powershell -encodedcommand <base64>
-$env:PSExecutionPolicyPreference="bypass"
+或在當前程序中：
+Set-ExecutionPolicy Bypass -Scope Process
 ```
 
 重點：
@@ -405,6 +406,7 @@ PowerShell 本質是 .NET。
 
 ---
 
+
 ### Module 2 
 - Local Privilege Escalation
 - Lateral Movement
@@ -422,9 +424,38 @@ PowerShell 本質是 .NET。
 
 ## Lab Methodology - Assume Breach (實驗室方法論)
 
-核心精神：
+核心精神： 
+在滲透測試中預設攻擊者已取得內網初始立足點（Initial Foothold），接著評估其是否能透過：
 ```bash=
-在滲透測試中預設攻擊者已經取得內網立足點，接著評估其是否能透過權限濫用、橫向移動與憑證竊取，最終掌控整個網域環境。
+- 權限濫用 (Privilege Abuse)
+- 憑證竊取 (Credential Theft)
+- 橫向移動 (Lateral Movement)
+- 權限提升 (Privilege Escalation)
 ```
+
+最終達成：控制整個 Active Directory 網域環境（Domain Dominance）
+
+Lab 入口資訊
+- Portal URL: `https://enterprisesecurity.io`
+- 登入後可查看：
+  - 訂閱開始與結束時間
+  - Lab 存取剩餘時間
+  - 最近一次考試嘗試時間
+
+重點 : 
+- 最少 30 天存取權限
+- 若時間異常需立即確認
+- Lab 時間與考試資格直接相關
+
+
+區域選擇 (Region Selection)
+- North America
+- Europe
+- East Asia / Pacific
+
+原則 : 
+- 依地理位置選擇最近區域
+- 降低延遲 (Latency)
+- 確保操作流暢度
 
 ## 總結
