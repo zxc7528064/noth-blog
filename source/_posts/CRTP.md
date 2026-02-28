@@ -441,8 +441,10 @@ Domain Dominance
 Active Directory / Windows 權限判斷的核心機制 :
 
 ```bash=
-本質是：Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先。
+Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先。
 ```
+
+驗證流程 :
 
 ```bash=
 使用者登入
