@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zxc7528064.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2026-02-21T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-01T09:10:56.195Z">
+<meta property="article:modified_time" content="2026-03-01T09:22:19.390Z">
 <meta property="article:author" content="Noth Shen">
 <meta property="article:tag" content="CRTP">
 <meta name="twitter:card" content="summary">
@@ -18,7 +18,7 @@
   "url": "https://zxc7528064.github.io/2026/02/21/CRTP/",
   "image": "https://zxc7528064.github.io/img/avatar.jpg",
   "datePublished": "2026-02-21T00:00:00.000Z",
-  "dateModified": "2026-03-01T09:10:56.195Z",
+  "dateModified": "2026-03-01T09:22:19.390Z",
   "author": [
     {
       "@type": "Person",
@@ -159,7 +159,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-03-01T09:10:56.195Z" title="Updated 2026-03-01 09:10:56">2026-03-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-03-01T09:22:19.390Z" title="Updated 2026-03-01 09:22:19">2026-03-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
 CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊證照，核心聚焦在 Active Directory 內網攻擊技術。
 
 <p>如果用一句話概括：</p>
@@ -462,7 +462,7 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 <p>在 Active Directory 中：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GPO + OU Link = 批量控制行為的機制</span><br></pre></td></tr></table></figure>
 
-<p>更重要的是： OU 與 GPO 本身也是受 ACL 控制的物件，可以被濫用的控制節點。</p>
+<p>重要的是： OU 與 GPO 本身也是受 ACL 控制的物件，可以被濫用的控制節點。</p>
 <p>常見濫用權限，如果攻擊者對 OU 具有以下權限：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WriteDACL</span><br><span class="line">GenericAll</span><br><span class="line">WriteOwner</span><br></pre></td></tr></table></figure>
 
@@ -526,7 +526,7 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 <li>降低延遲 (Latency)</li>
 <li>確保操作流暢度</li>
 </ul>
-<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>如果單純以「紅隊實戰能力成長」為目標，而非證照收藏，我認為可以依照能力堆疊邏輯，規劃如下順序：</p>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>以過去在軍中環境的觀察來說，OSCP 往往已被視為一個相當高的技術門檻，甚至可以說是「頂標」。在那樣的體系裡，能通過 OSCP 已經明顯高於平均水準。然而，如果放到具有實戰強度的一般乙方市場環境來看，OSCP 更像是一個起點，而不是終點。它代表的是基本滲透方法論與攻擊流程的建立，而非完整紅隊能力的成熟，如果單純以「紅隊實戰能力成長」為目標，而非證照收藏，我認為可以依照能力堆疊邏輯，規劃如下順序：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OSCP → CRTP → OSEP → OSWE → OSED（選修）</span><br></pre></td></tr></table></figure>
 
 <p>這樣的排序，並非以難度區分，而是依照能力模型的層次進行堆疊。</p>
