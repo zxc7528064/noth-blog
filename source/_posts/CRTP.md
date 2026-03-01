@@ -400,7 +400,7 @@ PowerShell 本質是 .NET。
 
 混淆與偵測研究工具（研究用途）
 
-這些工具的價值在於理解偵測邏輯，而非盲目繞過。
+工具的價值在於理解偵測邏輯，而非盲目繞過。
 
 - AMSITrigger → 測試哪段程式碼觸發 AMSI
 - DefenderCheck → 測試哪段內容被 Defender 標記
@@ -487,7 +487,7 @@ WriteOwner
 GPO（Group Policy Object）的本質
 
 ```bash=
-是一種可以套用到 OU / Domain 的設定物件。
+一種可以套用到 OU / Domain 的設定物件。
 ```
 
 可以影響：
@@ -502,13 +502,15 @@ GPO（Group Policy Object）的本質
 橫向權限放大流程：
 
 ```bash=
-控制 OU
-      ↓
-修改 GPO Link
-      ↓
-修改 GPO 設定
-      ↓
-控制多台主機
+取得 OU 控制權（GenericAll / WriteDACL）
+        ↓
+修改 GPO Link 或建立惡意 GPO
+        ↓
+修改 GPO 內容（加入惡意設定）
+        ↓
+等待 Group Policy 更新（gpupdate / 90 min）
+        ↓
+影響 OU 下所有電腦或使用者
 ```
 
 ### Module 2 
@@ -557,3 +559,63 @@ Lab 入口資訊
 - 確保操作流暢度
 
 ## 總結
+
+如果單純以「紅隊實戰能力成長」為目標，而非證照收藏，我認為可以依照能力堆疊邏輯，規劃如下順序：
+
+```bash=
+OSCP → CRTP → OSEP → OSWE → OSED（選修）
+```
+
+這樣的排序，並非以難度區分，而是依照能力模型的層次進行堆疊。
+
+### 第一階段：建立滲透方法論（OSCP）
+
+OSCP 的核心價值在於建立完整的滲透思維與攻擊流程：
+- 系統化的 Enumeration
+- 攻擊面拆解與優先順序判斷
+- 橫向移動與權限提升節奏
+- 目標導向的推進策略
+
+這個階段的重點不是招式，而是方法論，從這一步開始，才真正具備「能獨立完成滲透流程」的能力。
+
+### 第二階段：理解企業內網權限模型（CRTP）
+
+CRTP 補足的是企業環境中最核心的 Active Directory 架構理解。
+- ACL / DACL 與權限流動
+- Kerberos 認證與票證模型
+- Delegation 設計邏輯
+- Forest / Domain Trust 邊界
+
+這一步讓能力從「會打」轉向「看懂設計」，開始理解攻擊之所以成立，是因為架構本身如何運作。
+
+### 第三階段：真實環境對抗能力（OSEP）
+
+OSEP 強調的是攻防對抗思維。
+- AV / EDR 對抗
+- AMSI / AppLocker 繞過
+- Logging 與 Detection Surface 理解
+- Payload 與執行鏈設計
+
+這個階段讓攻擊能力從實驗室場景，進化到真實企業環境，不再只是「能打成功」，而是「能在被監控下打成功」。
+
+### 第四階段：漏洞原理與程式閱讀能力（OSWE）
+
+在具備完整攻擊鏈與對抗能力後，再回頭強化 Web 原始碼審計能力。
+
+OSWE 著重於：
+- Source Code Trace
+- 資料流與權限檢查分析
+- 邏輯漏洞辨識
+- 自行撰寫與修改 exploit
+
+這一層補的是內功，讓滲透能力從黑箱測試，轉為白箱理解。
+
+### 第五階段：底層漏洞利用研究（OSED）
+
+OSED 偏向研究導向與 exploit engineering
+- Stack Overflow
+- ROP Chain
+- DEP / ASLR Bypass
+- Shellcode 與 Windows Internals
+
+這並非一般紅隊必要能力，但對於希望深入理解漏洞本質或追求 OSCE3 的人而言，是重要進階方向，若非以研究或高階 exploit 開發為目標，可作為長期興趣投入。
