@@ -513,57 +513,63 @@ GPO（Group Policy Object）的本質
 影響 OU 下所有電腦或使用者
 ```
 
-Trust 是不同 Domain 或 Forest 之間的身份驗證信任機制。
-
-簡單來說：
+Trust 是什麼?
 
 ```bash=
-Domain A 是否接受 Domain B 所簽發的身份驗證？
+Trust 是不同 Domain / Forest 之間的身份驗證信任機制。
 ```
 
-若存在信任關係，代表身份驗證可以跨域流動，攻擊面自然可能被擴大。
+若存在 Trust，代表身份驗證可以跨域流動，攻擊面可能被擴大。
 
-理解 Trust 時，可以從三個層面切入：
+Trust 分析三大維度
+- Direction（方向）
+- Type（類型）
+- Attributes（屬性）
 
-```bash=
-1. Direction（方向）
-2. Type（類型）
-3. Attributes（屬性）
-```
-
-Direction – 信任方向
-
+Direction（方向）:
 - One-way trust（單向）
 - Two-way trust（雙向）
 
-雙向信任通常代表攻擊擴散風險更高。
+Trust 的方向 ≠ 存取方向
 
-Type – 信任類型
+若： A trusts B -> B 的使用者可以存取 A 的資源
 
-常見類型包括：
+![Trust_Direction](/img/Trust_Direction.png)
+
+Type（類型）:
 - Parent-Child
 - Tree-Root
 - Forest
 - External
 
-Forest Trust 影響範圍最大
-External Trust 通常較受限制
+Forest Trust 影響範圍最大，External Trust 通常較受限制。
 
-Attributes – 信任屬性 :
+Attributes（屬性）:
 
-關鍵屬性包括：
-
-- 是否可傳遞（Transitive）
+關鍵屬性：
+- 是否 Transitive（可傳遞）
 - 是否啟用 SID Filtering
 
-這些設定會直接影響攻擊能否跨域濫用。
+這些設定會直接影響是否能跨域濫用權限。
 
-常見可濫用情境
-| 攻擊情境                            | 前提條件              | 核心機制                   | 可能影響          | 攻擊結果                  |
-| ------------------------------- | ----------------- | ---------------------- | ------------- | --------------------- |
-| **SIDHistory 濫用**               | 未啟用 SID Filtering | 偽造高權限 SID 並透過信任關係傳遞    | 跨 Domain 身份提升 | 取得目標 Domain 高權限（如 DA） |
-| **Kerberos Delegation + Trust** | 跨域委派設計不當          | 透過 Kerberos 委派請求跨域服務票證 | 跨域身份模擬        | 橫向移動至其他 Domain        |
-| **Forest Trust 擴散**             | Forest Trust 設定寬鬆 | Forest 間身份驗證可通行        | 安全邊界擴大        | 攻擊範圍延伸至整個 Forest      |
+```bash=
+已控制 Domain A
+↓
+枚舉 Trust 關係
+↓
+分析 Direction / Type / Attributes
+↓
+判斷是否可跨域驗證
+↓
+尋找跨域可濫用權限
+↓
+User Hunting（高權限帳號在哪？）
+↓
+定位落點主機
+↓
+橫向移動至 Domain B or 提權
+```
+
 
 ### Module 2 
 - Local Privilege Escalation
