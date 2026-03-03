@@ -17,7 +17,8 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 CRTP 是一張專門針對 AD 攻擊路徑與權限濫用技術的證照。
 ```
 
-在過去的實戰經驗中，內網滲透往往是透過既有漏洞取得初始跳板，例如利用 CVE 進入主機後，直接開始橫向移動與權限提升，最終目標通常也是指向 Active Directory。
+過去的實戰經驗中，內網滲透往往是透過既有漏洞取得初始跳板，例如利用 CVE 進入主機後，直接開始橫向移動與權限提升，最終目標通常也是指向 Active Directory。
+
 整體流程大致為：
 
 ```bash=
@@ -82,7 +83,7 @@ CRTP 課程皆為全英文解說、無中文字幕，單純硬聽其實效率不
 Whisper → 產生 SRT → ChatGPT 翻譯 → 結構化整理 → 建立雙語學習素材
 ```
 
-##### 環境準備
+#### 環境準備
 
 安裝 Whisper :
 
@@ -107,7 +108,7 @@ https://www.gyan.dev/ffmpeg/builds/
 
 ![ffmpeg](/img/ffmpeg.png)
 
-批量將所有 `.mp4` 檔案轉成 `.srt` 檔案，並存放在 `Course_output_en` 資料夾中 :
+批量將所有 `.mp4` 檔案轉成 `.srt` 檔案，並存放在 `Course_output_en` 資料夾中。
 
 ```bash= 
 for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir Course_output_en --output_format srt
@@ -119,7 +120,7 @@ for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir 
 
 ![srt_en](/img/srt_en.png)
 
-接著透過自製工具批量翻譯字幕：
+接著透過自製工具批量翻譯字幕。
 
 ```bash=
 https://github.com/zxc7528064/SRT-Translator
@@ -423,8 +424,6 @@ BloodHound 計算攻擊路徑
 ACL / Delegation / Credential Abuse
       ↓
 Domain Controller Compromise
-      ↓
-Domain Dominance
 ```
 
 常用工具：
@@ -550,8 +549,6 @@ Attributes（屬性）:
 - 是否 Transitive（可傳遞）
 - 是否啟用 SID Filtering
 
-這些設定會直接影響是否能跨域濫用權限。
-
 ```bash=
 已控制 Domain A
 ↓
@@ -570,7 +567,6 @@ User Hunting（高權限帳號在哪？）
 橫向移動至 Domain B or 提權
 ```
 
-
 ### Module 2 
 - Local Privilege Escalation
 - Lateral Movement
@@ -588,10 +584,10 @@ User Hunting（高權限帳號在哪？）
 
 ## Lab Methodology - Assume Breach (實驗室方法論)
 
-預設攻擊者已取得內網初始立足點（Initial Foothold），並評估其是否能沿著攻擊鏈持續擴張權限，最終達成 : 
+預設攻擊者已取得內網初始立足點（Initial Foothold），並是否能沿著攻擊鏈持續擴張權限，最終達成 : 
 
 ```bash=
-控制整個 Active Directory 網域環境
+控制整個 AD 網域環境
 ```
 
 Lab 入口資訊
@@ -620,13 +616,13 @@ Lab 入口資訊
 
 CRTP 最主要是在教
 
-以過去在軍中環境的觀察來說，OSCP 往往已被視為一個相當高的技術門檻，甚至可以說是「頂標」。在那樣的體系裡，能通過 OSCP 已經明顯高於平均水準。但如果放到具有實戰強度的乙方市場環境來看，OSCP 更像是一個起點，而不是終點。它代表的是基本滲透方法論與攻擊流程的建立，而非完整紅隊能力的成熟，如果單純以「紅隊實戰能力成長」為目標，而非證照收藏，我認為可以依照能力堆疊邏輯，規劃如下順序：
+過去在軍中環境的觀察來說，OSCP 往往已被視為一個相當高的技術門檻，甚至可以說是「頂標」。在那樣的體系裡，能通過 OSCP 已經明顯高於平均水準。但如果放到具有實戰強度的乙方市場環境來看，OSCP 更像是一個起點，而不是終點。它代表的是基本滲透方法論與攻擊流程的建立，如果單純以「紅隊實戰能力成長」為目標，而非證照收藏，可以依照能力堆疊邏輯，規劃如下順序：
 
 ```bash=
 OSCP → CRTP → OSEP → OSWE → OSED（選修）
 ```
 
-這樣的排序，並非以難度區分，而是依照能力模型的層次進行堆疊。
+這樣的排序是依照能力模型的層次進行堆疊。
 
 ### 第一階段：建立滲透方法論（OSCP）
 
