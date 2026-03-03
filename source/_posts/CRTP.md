@@ -100,7 +100,7 @@ Whisper
 
 ![Whisper](/img/Whisper.png)
 
-下載 full_build.7z 並將 `ffmpeg.exe` 加入環境變數：
+下載 full_build.7z 並將 `ffmpeg.exe` 加入環境變數。
 
 ```bash=
 https://www.gyan.dev/ffmpeg/builds/
