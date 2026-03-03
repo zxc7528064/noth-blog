@@ -513,6 +513,58 @@ GPO（Group Policy Object）的本質
 影響 OU 下所有電腦或使用者
 ```
 
+Trust 是不同 Domain 或 Forest 之間的身份驗證信任機制。
+
+簡單來說：
+
+```bash=
+Domain A 是否接受 Domain B 所簽發的身份驗證？
+```
+
+若存在信任關係，代表身份驗證可以跨域流動，攻擊面自然可能被擴大。
+
+理解 Trust 時，可以從三個層面切入：
+
+```bash=
+1. Direction（方向）
+2. Type（類型）
+3. Attributes（屬性）
+```
+
+Direction – 信任方向
+
+- One-way trust（單向）
+- Two-way trust（雙向）
+
+雙向信任通常代表攻擊擴散風險更高。
+
+Type – 信任類型
+
+常見類型包括：
+- Parent-Child
+- Tree-Root
+- Forest
+- External
+
+Forest Trust 影響範圍最大
+External Trust 通常較受限制
+
+Attributes – 信任屬性 :
+
+關鍵屬性包括：
+
+- 是否可傳遞（Transitive）
+- 是否啟用 SID Filtering
+
+這些設定會直接影響攻擊能否跨域濫用。
+
+常見可濫用情境
+| 攻擊情境                            | 前提條件              | 核心機制                   | 可能影響          | 攻擊結果                  |
+| ------------------------------- | ----------------- | ---------------------- | ------------- | --------------------- |
+| **SIDHistory 濫用**               | 未啟用 SID Filtering | 偽造高權限 SID 並透過信任關係傳遞    | 跨 Domain 身份提升 | 取得目標 Domain 高權限（如 DA） |
+| **Kerberos Delegation + Trust** | 跨域委派設計不當          | 透過 Kerberos 委派請求跨域服務票證 | 跨域身份模擬        | 橫向移動至其他 Domain        |
+| **Forest Trust 擴散**             | Forest Trust 設定寬鬆 | Forest 間身份驗證可通行        | 安全邊界擴大        | 攻擊範圍延伸至整個 Forest      |
+
 ### Module 2 
 - Local Privilege Escalation
 - Lateral Movement
