@@ -537,23 +537,20 @@ Trust 分析三大維度
 - Type（類型）
 - Attributes（屬性）
 
-Direction（方向）：
-- One-way trust（單向）
-- Two-way trust（雙向）
-
 Trust 的方向 ≠ 存取方向
 
 ![Trust_Direction](/img/Trust_Direction.png)
 
-代表：左側網域「信任」右側網域所簽發的身分。
+代表：左側網域會接受右側網域的身分驗證結果（Authentication）
+但實際 Access 實際存取方向：右側網域的使用者 → 左側網域的資源
 
-也就是說：左側網域會接受右側網域的身分驗證結果（Authentication）。
+Direction（方向）：
+- One-way trust（單向）→ 只有一側可以跨域驗證
+- Two-way trust（雙向）→ 兩側都可以跨域驗證
 
-Access 實際存取方向：
+![Two-way-trust](/img/Two-way-trust.png)
 
-右側網域的使用者 → 左側網域的資源
-
-Type（類型）:
+Type（類型）：
 - Parent-Child
 - Tree-Root
 - Forest
@@ -561,7 +558,15 @@ Type（類型）:
 
 Forest Trust 影響範圍最大，External Trust 通常較受限制。
 
-Attributes（屬性）:
+Attributes（屬性）：
+
+![Transitive](/img/Transitive.png)
+
+若 A 信任 B，B 信任 C，且該 trust 為 transitive，則 A 會間接信任 C。
+
+A ↔ B ↔ C
+↑________↑
+自動形成信任鏈
 
 關鍵屬性：
 - 是否 Transitive（可傳遞）
