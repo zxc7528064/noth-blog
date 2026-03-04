@@ -360,7 +360,6 @@ AMSI (AntiMalware Scan Interface)
 - 是否阻擋取決於防毒引擎
 
 流程概念：
-
 PowerShell Script
         ↓
 AMSI Hook
@@ -423,7 +422,7 @@ PowerShell 本質是 .NET。
 
 ---
 
-Active Directory Post-Exploitation Attack Model
+AD 後滲透模型流程：
 
 ```bash=
 Initial Foothold
@@ -450,13 +449,15 @@ Domain Controller Compromise
 | PowerHuntShares | 共享枚舉 | 尋找敏感檔案與憑證（GPP密碼、備份檔、設定檔）|
 | RunWithRegistryNonAdmin.bat | 執行技巧 | 利用註冊表機制在低權限情境下啟動程式 |
 
-Active Directory / Windows 權限判斷的核心機制 :
+AD / Windows 權限判斷的核心機制：
 
 ```bash=
 Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先。
 ```
 
-驗證流程 :
+驗證流程：
+
+![ACLs](/img/ACLs.png)
 
 ```bash=
 使用者登入
@@ -477,8 +478,6 @@ Process 繼承 Access Token
 命中 Allow → 允許
 全部未命中 → 拒絕
 ```
-
-![ACLs](/img/ACLs.png)
 
 在 Active Directory 中：
 
@@ -525,7 +524,7 @@ GPO（Group Policy Object）的本質
 影響 OU 下所有電腦或使用者
 ```
 
-Trust 是什麼?
+Trust 是什麼 ?
 
 ```bash=
 Trust 是不同 Domain / Forest 之間的身份驗證信任機制。
@@ -538,15 +537,21 @@ Trust 分析三大維度
 - Type（類型）
 - Attributes（屬性）
 
-Direction（方向）:
+Direction（方向）：
 - One-way trust（單向）
 - Two-way trust（雙向）
 
 Trust 的方向 ≠ 存取方向
 
-若： A trusts B -> B 的使用者可以存取 A 的資源
-
 ![Trust_Direction](/img/Trust_Direction.png)
+
+代表：左側網域「信任」右側網域所簽發的身分。
+
+也就是說：左側網域會接受右側網域的身分驗證結果（Authentication）。
+
+Access 實際存取方向：
+
+右側網域的使用者 → 左側網域的資源
 
 Type（類型）:
 - Parent-Child
