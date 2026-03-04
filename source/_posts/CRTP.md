@@ -595,7 +595,7 @@ A ↔ B ↔ C
 ↓
 尋找跨域可濫用權限
 ↓
-User Hunting（高權限帳號在哪？）
+User Hunting（高權限帳號在哪?）
 ↓
 定位落點主機
 ↓
@@ -606,6 +606,57 @@ User Hunting（高權限帳號在哪？）
 - Local Privilege Escalation
 - Lateral Movement
 - Domain Privilege Escalation
+
+當取得初始立足點（Foothold）後，下一個目標通常是：
+
+```bash=
+將目前低權限使用者 → 提升為 SYSTEM 或 Local Administrator
+```
+
+漏洞型（Patch / Exploit）
+利用系統尚未修補的漏洞進行提權，例如：
+- Kernel 漏洞
+- 已知 Local Privilege Escalation CVE
+
+憑證型（Credential Exposure）
+透過系統遺留的明文憑證進行提權。
+常見來源包括：
+- unattended.xml（自動部署檔）
+- 自動登入密碼（AutoLogon）
+- Registry 中的明文憑證
+- 特殊設備（kiosk / 自動化設備）的內建帳號
+
+設定錯誤型（Misconfiguration）
+例如：
+- 可覆寫服務 binary
+- 可修改服務參數（Unquoted Service Path）
+- 過度寬鬆的 Service ACL
+- DLL Hijacking / DLL Side-loading
+- AlwaysInstallElevated 設定錯誤
+
+由於本地提權可能性眾多，通常會搭配自動化工具進行檢查：
+- PowerUp
+- winPEAS
+- Privesc 系列工具
+- AutoLogon 檢查工具
+
+實戰流程通常如下：
+
+```bash=
+Foothold
+   ↓
+檢查系統弱點（Patch / Kernel）
+   ↓
+檢查憑證殘留（XML / Registry / AutoLogon）
+   ↓
+檢查 ACL 與服務配置
+   ↓
+嘗試提升為 SYSTEM
+```
+
+本地特權提升的關鍵在於尋找「憑證殘留」與「系統設定錯誤」，而不是單純依賴漏洞。
+
+---
 
 ### Module 3
 - Domain Persistensce
