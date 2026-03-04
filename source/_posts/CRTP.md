@@ -556,9 +556,19 @@ Type（類型）：
 - Forest
 - External
 
-Forest Trust 影響範圍最大，External Trust 通常較受限制。
+Tree-Root：Forest 內的多個 Tree 不是隔離的，而是透過 Root Domain 串接，形成完整可傳遞的信任結構。
 
-Attributes（屬性）：
+![Tree-root-Trust](/img/Tree-root-Trust.png)
+
+External：跨 Forest 的點對點信任，預設不具傳遞性，範圍受限。
+
+![External-Trust](/img/External-Trust.png)
+
+Forest：
+
+![Forest-Trust](/img/Forest-Trust.png)
+
+Attributes（屬性）：如果某個 Forest 被攻破，而它和其他 Forest 有 Forest Trust，攻擊面可能會橫向擴散。
 
 ![Transitive](/img/Transitive.png)
 
