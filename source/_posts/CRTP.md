@@ -361,7 +361,6 @@ AMSI (AntiMalware Scan Interface)
 
 流程概念：
 
-```bash=
 PowerShell Script
         ↓
 AMSI Hook
@@ -369,7 +368,6 @@ AMSI Hook
 AV / EDR Engine
         ↓
 Allow / Block
-```
 
 Constrained Language Mode (CLM)
 - 限制 PowerShell 可使用的功能
