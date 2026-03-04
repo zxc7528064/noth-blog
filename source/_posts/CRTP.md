@@ -264,37 +264,31 @@ Forest（森林）： AD 架構的最高層級。
  
 重點 :
 ```bash=
-Active Directory 森林權限與信任模型 : 
+Active Directory 森林權限與信任模型：
 
-森林（Forest）－最高邏輯邊界
+Forest
 │
-├── 架構分割區（Schema Partition）        ← 整個森林共用
-├── 設定分割區（Configuration Partition） ← 整個森林共用
-├── 全域目錄（Global Catalog）
+├── Schema Partition
+├── Configuration Partition
 │
-├── 森林根網域（Forest Root Domain）
-│      ├── 網域系統管理員（Domain Admins）
-│      └── 企業系統管理員（Enterprise Admins）
-│              ↑
-│              └── 存在於根網域，但擁有森林層級權限
+├── Forest Root Domain
+│      ├── Domain Admins (管理 root domain)
+│      ├── Enterprise Admins (森林層級權限)
+│      └── Schema Admins (Schema 管理)
 │
-├── 子網域 A
-│      └── 網域系統管理員（Domain Admins）
+├── Child Domain A
+│      └── Domain Admins
 │
-└── 子網域 B
-       └── 網域系統管理員（Domain Admins）
+└── Child Domain B
+       └── Domain Admins
 
-同一 Forest 內的 Domain 之間預設存在雙向、可傳遞的信任關係（Transitive Trust）：
+在同一 Forest 內，各 Domain 透過 Parent-Child 與 Tree 架構，形成預設雙向且可傳遞（Transitive）的信任鏈。
+
 Domain A ↔ Domain B ↔ Domain C
         ↑______________↑
          自動形成傳遞信任
-- 使用者可跨 Domain 存取資源
-- 可將不同 Domain 的帳號加入其他 Domain 的群組
-- 可進行跨網域授權控制
 
-Enterprise Admins 群組擁有 Forest 層級的最高權限，可管理整個 Forest 的 Schema、Configuration 與所有 Domain 的關鍵設定。
-- Enterprise Admins
-
+Enterprise Admins 存在於 Root Domain，具有管理整個 Forest 結構（Schema、Configuration、Domain）的能力，但實際資源存取仍受各 Domain ACL 控制。
 ```
 
 在 Active Directory 內網滲透中，PowerShell 與 .NET 是最核心的攻擊載體。
@@ -309,7 +303,7 @@ PowerShell 具備：
 
 - 預設安裝於 Windows 系統
 - 原生 .NET 支援
-- PowerShell 可直接跟 AD 交互（查資料、改資料，而不需要額外工具）。
+- PowerShell 可直接跟 AD 交互（查資料、改資料，而不需要額外工具）
 - 支援記憶體執行
 - 可直接調用 Windows API
 
@@ -323,14 +317,14 @@ PowerShell 具備：
 
 AD 模組與基本操作
 
-載入 AD 模組 :
+載入 AD 模組：
 
 ```bash=
 Import-Module C:\AD\Tools\ADModule-master\ActiveDirectory\ActiveDirectory.psd1
 Get-Command -Module ActiveDirectory
 ```
 
-重點 : 
+重點：
 - 使用 AD 相關 cmdlet
 - 進行 Domain Enumeration
 - 查詢 user / group / SPN / ACL
@@ -352,22 +346,40 @@ PowerShell Detection Surface（偵測面）
 
 ```bash=
 System-wide transcription
-  - 記錄整個 PowerShell 操作過程
+- 記錄整個 PowerShell 互動過程（指令與輸出）
+- 主要用於事後取證
 
 Script Block Logging
-  - 會把「還原後的實際 script 內容」記錄下來
+- 記錄還原後的完整腳本內容
+- 即使混淆或編碼，仍可能被還原記錄
+- 重要事件 ID：4104
 
 AMSI (AntiMalware Scan Interface)
-  - 將腳本內容送給 AV 掃描
+- 將腳本內容送交 AV / EDR 掃描
+- 屬於即時掃描機制
+- 是否阻擋取決於防毒引擎
+
+流程概念：
+
+```bash=
+PowerShell Script
+        ↓
+AMSI Hook
+        ↓
+AV / EDR Engine
+        ↓
+Allow / Block
+```
 
 Constrained Language Mode (CLM)
-  - 限制 PowerShell 功能
-  - 通常搭配 AppLocker / WDAC
+- 限制 PowerShell 可使用的功能
+- 通常與 AppLocker
+- 屬於功能限制，而非純偵測機制
 ```
 
 Execution Policy（執行策略）
 
-常見參數 :
+常見參數：
 
 ```bash= 
 powershell -ep bypass
