@@ -570,8 +570,6 @@ Forest：如果某個 Forest 被攻破，而它和其他 Forest 有 Forest Trust
 
 Attributes（屬性）：
 
-![Transitive](/img/Transitive.png)
-
 若 A 信任 B，B 信任 C，且該 trust 為 transitive，則 A 會間接信任 C。
 
 A ↔ B ↔ C
@@ -581,6 +579,10 @@ A ↔ B ↔ C
 關鍵屬性：
 - 是否 Transitive（可傳遞）
 - 是否啟用 SID Filtering
+
+![Transitive](/img/Transitive.png)
+
+跨域攻擊決策模型：
 
 ```bash=
 已控制 Domain A
