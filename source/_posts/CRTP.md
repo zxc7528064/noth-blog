@@ -161,19 +161,27 @@ AD 的核心功能，它提供三大核心能力：
 理解 AD 的結構框架（mental model）
 
 ```bash=
-Domain
-   ↓
-Schema (定義有哪些 ObjectClass 與 Attribute)
-   ↓
-Object Class (定義物件類型)
-   ↓
-Object (實體資料)
-   ├── Attributes (資料屬性)
-   └── Security Descriptor
-          ├── Owner
-          ├── DACL (Discretionary ACL)
-          │      └── ACE (Allow / Deny 規則)
-          └── SACL (Audit 記錄)
+Forest
+│
+├── Schema Partition
+│     ├── ObjectClass 定義
+│     └── Attribute 定義
+│
+├── Configuration Partition
+│     ├── Sites
+│     ├── Services
+│     └── Trust Objects
+│
+└── Domain Partition
+      └── Object Tree
+            └── Object
+                  ├── ObjectClass
+                  ├── Attributes (資料欄位)
+                  └── Security Descriptor (權限控制)
+                        ├── Owner
+                        ├── DACL (決定誰可以對這個 Object 做什麼)
+                        │     └── ACE
+                        └── SACL
 ```
 
 Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的目錄資料庫」。
@@ -206,14 +214,14 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 
 重點：
 ```bash=
-多數 AD 攻擊建立在「物件屬性 + ACL 權限機制」之上。
+多數 AD 攻擊建立在「物件 Attribute 屬性 + ACL 權限機制」之上。
 ```
 
-Domain (網域) : 
+Domain (網域) ：
 
 公司內部帳號與電腦的管理範圍。
 
-- 每個 Domain 擁有獨立的使用者、電腦與群組物件（User、Computer、Group、Service Account），這些物件都儲存在該 Domain 的 AD 資料庫（NTDS.dit）中。
+- 每個 Domain 擁有獨立的使用者、電腦與群組物件（User、Computer、Group、Service Account），儲存在該 Domain 的 AD 資料庫（NTDS.dit）中。
 - Domain 由一或多台 Domain Controller（DC）維護，負責儲存 AD 資料庫（NTDS.dit）、驗證使用者身分與發放存取權限。
 - 預設使用 Kerberos 作為主要驗證機制，在某些情況下（例如舊系統或 SPN 解析失敗）會回退至 NTLM。
 
@@ -226,8 +234,7 @@ Domain 內部通常共享：
 重點：
 
 ```bash=
-MS-DRSR : 
-是 Domain Controller 之間用來同步 Active Directory 資料的官方協定。
+MS-DRSR 協定 : Domain Controller 之間用來同步 Active Directory 資料的官方協定。
 
 Active Directory
       ↓
@@ -239,18 +246,14 @@ DRSUAPI 介面
       ↓
 物件屬性資料同步
 
-DCSync：
-- 濫用 Directory Replication（目錄複寫）權限，透過 MS-DRSR（DRSUAPI）複寫介面向 Domain Controller，請求帳號屬性資料，可取得 NTLM hash、Kerberos 金鑰與 KRBTGT hash。
+DCSync：濫用 Directory Replication（目錄複寫）權限，透過 MS-DRSR（DRSUAPI）複寫介面向 Domain Controller，請求帳號屬性資料，可取得 NTLM hash、Kerberos 金鑰與 KRBTGT hash。
 
-DCShadow：
-- 濫用 AD 複寫機制，暫時將攻擊主機註冊為一台 Domain Controller，注入惡意物件屬性變更，並透過正常 replication 流程推送至其他 DC。
+DCShadow：濫用 AD 複寫機制，暫時將攻擊主機註冊為一台 Domain Controller，注入惡意物件屬性變更，並透過正常 replication 流程推送至其他 DC。
 
-控制 KRBTGT hash = 可偽造 Kerberos Golden Ticket，偽造任意使用者身份（Golden Ticket），而整個網域都會相信。
+控制 KRBTGT hash = 可偽造 Kerberos Golden Ticket，偽造任意使用者身份，而整個網域都會相信。
 ```
 
-Forest（森林）:
-
-AD 架構的最高層級。
+Forest（森林）： AD 架構的最高層級。
 
 ![Forest](/img/Forest.png)
 
