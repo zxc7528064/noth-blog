@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zxc7528064.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2026-02-21T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-04T07:43:50.818Z">
+<meta property="article:modified_time" content="2026-03-06T14:42:00.290Z">
 <meta property="article:author" content="Noth Shen">
 <meta property="article:tag" content="CRTP">
 <meta name="twitter:card" content="summary">
@@ -18,7 +18,7 @@
   "url": "https://zxc7528064.github.io/2026/02/21/CRTP/",
   "image": "https://zxc7528064.github.io/img/avatar.jpg",
   "datePublished": "2026-02-21T00:00:00.000Z",
-  "dateModified": "2026-03-04T07:43:50.818Z",
+  "dateModified": "2026-03-06T14:42:00.290Z",
   "author": [
     {
       "@type": "Person",
@@ -159,7 +159,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-03-04T07:43:50.818Z" title="Updated 2026-03-04 07:43:50">2026-03-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/noth-blog/"><span class="site-name">Noth blogs</span></a><a class="nav-page-title" href="/noth-blog/"><span class="site-name">CRTP 學習與策略規劃</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">CRTP 學習與策略規劃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-21T00:00:00.000Z" title="Created 2026-02-21 00:00:00">2026-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-03-06T14:42:00.290Z" title="Updated 2026-03-06 14:42:00">2026-03-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/noth-blog/categories/%E7%B4%85%E9%9A%8A/">紅隊</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
 CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊證照，核心聚焦在 Active Directory 內網攻擊技術。
 
 <p>如果用一句話概括：</p>
@@ -523,7 +523,7 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 </ul>
 <p><img src="/noth-blog/img/Transitive.png" alt="Transitive"></p>
 <p>跨域攻擊決策模型：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">已控制 Domain A</span><br><span class="line">↓</span><br><span class="line">枚舉 Trust 關係</span><br><span class="line">↓</span><br><span class="line">分析 Direction / Type / Attributes</span><br><span class="line">↓</span><br><span class="line">判斷是否可跨域驗證</span><br><span class="line">↓</span><br><span class="line">尋找跨域可濫用權限</span><br><span class="line">↓</span><br><span class="line">User Hunting（高權限帳號在哪?）</span><br><span class="line">↓</span><br><span class="line">定位落點主機</span><br><span class="line">↓</span><br><span class="line">橫向移動至 Domain B or 提權</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">已控制 Domain A</span><br><span class="line">↓</span><br><span class="line">枚舉 Trust 關係</span><br><span class="line">↓</span><br><span class="line">分析 Direction / Type / Attributes</span><br><span class="line">↓</span><br><span class="line">判斷是否可跨域驗證</span><br><span class="line">↓</span><br><span class="line">尋找跨域可濫用權限</span><br><span class="line">↓</span><br><span class="line">User Hunting（高權限帳號在哪?）</span><br><span class="line">↓</span><br><span class="line">定位落點主機</span><br><span class="line">↓</span><br><span class="line">橫向移動至 Domain B</span><br></pre></td></tr></table></figure>
 
 <h3 id="Module-2"><a href="#Module-2" class="headerlink" title="Module 2"></a>Module 2</h3><ul>
 <li>Local Privilege Escalation</li>
@@ -550,7 +550,7 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 <li>可覆寫服務 binary</li>
 <li>可修改服務參數（Unquoted Service Path）</li>
 <li>過度寬鬆的 Service ACL</li>
-<li>DLL Hijacking &#x2F; DLL Side-loading</li>
+<li>DLL Hijacking</li>
 <li>AlwaysInstallElevated 設定錯誤</li>
 </ul>
 <p>由於本地提權可能性眾多，通常會搭配自動化工具進行檢查：</p>
@@ -564,6 +564,54 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Foothold</span><br><span class="line">   ↓</span><br><span class="line">檢查系統弱點（Patch / Kernel）</span><br><span class="line">   ↓</span><br><span class="line">檢查憑證殘留（XML / Registry / AutoLogon）</span><br><span class="line">   ↓</span><br><span class="line">檢查 ACL 與服務配置</span><br><span class="line">   ↓</span><br><span class="line">嘗試提升為 SYSTEM</span><br></pre></td></tr></table></figure>
 
 <p>本地特權提升的關鍵在於尋找「憑證殘留」與「系統設定錯誤」，而不是單純依賴漏洞。</p>
+<p>Feature Abuse（企業服務功能濫用）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">濫用企業應用程式或服務的功能來取得更高權限。</span><br></pre></td></tr></table></figure>
+
+<p>為什麼企業環境容易出現，因為企業內部常存在大量系統：</p>
+<ul>
+<li>DevOps、CI&#x2F;CD</li>
+<li>監控系統</li>
+<li>自動化服務</li>
+</ul>
+<p>服務通常安全設計較弱，但卻常常以 <code>SYSTEM / Administrator</code> 權限運行。</p>
+<p>典型案例：</p>
+<ul>
+<li>Jenkins</li>
+</ul>
+<p>早期 Jenkins：</p>
+<ul>
+<li>預設沒有 Authentication</li>
+<li>任何人可以存取 console</li>
+<li>可直接執行 command</li>
+</ul>
+<p>攻擊流程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Script Console</span><br><span class="line">↓</span><br><span class="line">Groovy script execution</span><br><span class="line">↓</span><br><span class="line">Command execution on host</span><br></pre></td></tr></table></figure>
+
+<p>如果 Jenkins 服務是 SYSTEM 執行 → 直接 SYSTEM shell</p>
+<p>NTLM Relaying</p>
+<p>核心概念：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">轉發身份驗證，而不是竊取密碼。</span><br></pre></td></tr></table></figure>
+
+<p>攻擊流程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Victim authentication</span><br><span class="line">        ↓</span><br><span class="line">Attacker relay</span><br><span class="line">        ↓</span><br><span class="line">Target service</span><br></pre></td></tr></table></figure>
+
+<p>攻擊者只需要轉發 authentication 即可登入目標服務。</p>
+<p>GPO Abuse（Group Policy 濫用）</p>
+<p>核心概念：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果 Group Policy ACL 過於寬鬆，修改 Group Policy 並影響整個網域的電腦。</span><br></pre></td></tr></table></figure>
+
+<p>常見 GPO 攻擊方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">修改 GPO</span><br><span class="line">↓</span><br><span class="line">建立 scheduled task</span><br><span class="line">↓</span><br><span class="line">在所有 Domain Computer 執行 payload</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<ul>
+<li>powershell payload</li>
+<li>cmd execution</li>
+<li>新增 admin user</li>
+</ul>
+<p>GPOddity 一種較新的攻擊技術。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NTLM Relay</span><br><span class="line">      ↓</span><br><span class="line">修改 GPO attribute</span><br><span class="line">      ↓</span><br><span class="line">修改 GPCFileSysPath</span><br><span class="line">      ↓</span><br><span class="line">指向 attacker share</span><br><span class="line">      ↓</span><br><span class="line">Domain computer 載入惡意 policy</span><br></pre></td></tr></table></figure>
+
 <hr>
 <h3 id="Module-3"><a href="#Module-3" class="headerlink" title="Module 3"></a>Module 3</h3><ul>
 <li>Domain Persistensce</li>
@@ -574,7 +622,7 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 <li>Monitoring and Detections</li>
 </ul>
 <p>本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。</p>
-<h2 id="Lab-Methodology-Assume-Breach-實驗室方法論"><a href="#Lab-Methodology-Assume-Breach-實驗室方法論" class="headerlink" title="Lab Methodology - Assume Breach (實驗室方法論)"></a>Lab Methodology - Assume Breach (實驗室方法論)</h2><p>預設攻擊者已取得內網初始立足點（Initial Foothold），並是否能沿著攻擊鏈持續擴張權限，最終達成 : </p>
+<h2 id="Lab-Methodology-Assume-Breach-實驗室方法論"><a href="#Lab-Methodology-Assume-Breach-實驗室方法論" class="headerlink" title="Lab Methodology - Assume Breach (實驗室方法論)"></a>Lab Methodology - Assume Breach (實驗室方法論)</h2><p>預設攻擊者已取得內網初始立足點（Initial Foothold），並是否能沿著攻擊鏈持續擴張權限，最終達成： </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">控制整個 AD 網域環境</span><br></pre></td></tr></table></figure>
 
 <p>Lab 入口資訊</p>
@@ -587,7 +635,7 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 </ul>
 </li>
 </ul>
-<p>重點 : </p>
+<p>重點：</p>
 <ul>
 <li>最少 30 天存取權限</li>
 <li>若時間異常需立即確認</li>
@@ -599,7 +647,7 @@ CRTP（Certified Red Team Professional）是由 Altered Security 推出的紅隊
 <li>Europe</li>
 <li>East Asia &#x2F; Pacific</li>
 </ul>
-<p>原則 : </p>
+<p>原則：</p>
 <ul>
 <li>依地理位置選擇最近區域</li>
 <li>降低延遲 (Latency)</li>
