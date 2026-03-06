@@ -689,9 +689,7 @@ Command execution on host
 
 如果 Jenkins 服務是 SYSTEM 執行 → 直接 SYSTEM shell
 
-NTLM Relaying
-
-核心概念：
+NTLM Relaying 核心概念：
 
 ```
 轉發身份驗證，而不是竊取密碼。
@@ -733,6 +731,8 @@ GPO Abuse（Group Policy 濫用）
 - 新增 admin user
 
 GPOddity 一種較新的攻擊技術。
+
+攻擊流程：
 
 ```bash=
 NTLM Relay
