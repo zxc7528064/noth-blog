@@ -599,7 +599,7 @@ User Hunting（高權限帳號在哪?）
 ↓
 定位落點主機
 ↓
-橫向移動至 Domain B or 提權
+橫向移動至 Domain B
 ```
 
 ### Module 2 
@@ -631,7 +631,7 @@ User Hunting（高權限帳號在哪?）
 - 可覆寫服務 binary
 - 可修改服務參數（Unquoted Service Path）
 - 過度寬鬆的 Service ACL
-- DLL Hijacking / DLL Side-loading
+- DLL Hijacking
 - AlwaysInstallElevated 設定錯誤
 
 由於本地提權可能性眾多，通常會搭配自動化工具進行檢查：
@@ -656,6 +656,96 @@ Foothold
 
 本地特權提升的關鍵在於尋找「憑證殘留」與「系統設定錯誤」，而不是單純依賴漏洞。
 
+Feature Abuse（企業服務功能濫用）
+
+```
+濫用企業應用程式或服務的功能來取得更高權限。
+```
+
+為什麼企業環境容易出現，因為企業內部常存在大量系統：
+- DevOps、CI/CD
+- 監控系統
+- 自動化服務
+
+服務通常安全設計較弱，但卻常常以 `SYSTEM / Administrator` 權限運行。
+
+典型案例：
+- Jenkins
+
+早期 Jenkins：
+- 預設沒有 Authentication
+- 任何人可以存取 console
+- 可直接執行 command
+
+攻擊流程：
+
+```bash=
+Script Console
+↓
+Groovy script execution
+↓
+Command execution on host
+```
+
+如果 Jenkins 服務是 SYSTEM 執行 → 直接 SYSTEM shell
+
+NTLM Relaying
+
+核心概念：
+
+```
+轉發身份驗證，而不是竊取密碼。
+```
+
+攻擊流程：
+
+```bash=
+Victim authentication
+        ↓
+Attacker relay
+        ↓
+Target service
+```
+
+攻擊者只需要轉發 authentication 即可登入目標服務。
+
+GPO Abuse（Group Policy 濫用）
+
+核心概念：
+
+```bash=
+如果 Group Policy ACL 過於寬鬆，修改 Group Policy 並影響整個網域的電腦。
+```
+
+常見 GPO 攻擊方式：
+
+```bash=
+修改 GPO
+↓
+建立 scheduled task
+↓
+在所有 Domain Computer 執行 payload
+```
+
+例如：
+- powershell payload
+- cmd execution
+- 新增 admin user
+
+GPOddity 一種較新的攻擊技術。
+
+```bash=
+NTLM Relay
+      ↓
+修改 GPO attribute
+      ↓
+修改 GPCFileSysPath
+      ↓
+指向 attacker share
+      ↓
+Domain computer 載入惡意 policy
+```
+
 ---
 
 ### Module 3
@@ -670,7 +760,7 @@ Foothold
 
 ## Lab Methodology - Assume Breach (實驗室方法論)
 
-預設攻擊者已取得內網初始立足點（Initial Foothold），並是否能沿著攻擊鏈持續擴張權限，最終達成 : 
+預設攻擊者已取得內網初始立足點（Initial Foothold），並是否能沿著攻擊鏈持續擴張權限，最終達成： 
 
 ```bash=
 控制整個 AD 網域環境
@@ -683,7 +773,7 @@ Lab 入口資訊
   - Lab 存取剩餘時間
   - 最近一次考試嘗試時間
 
-重點 : 
+重點：
 - 最少 30 天存取權限
 - 若時間異常需立即確認
 - Lab 時間與考試資格直接相關
@@ -693,7 +783,7 @@ Lab 入口資訊
 - Europe
 - East Asia / Pacific
 
-原則 : 
+原則：
 - 依地理位置選擇最近區域
 - 降低延遲 (Latency)
 - 確保操作流暢度
