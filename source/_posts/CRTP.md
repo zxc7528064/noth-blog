@@ -973,6 +973,237 @@ High Noise：
 - Credential vault
 - Browser credentials
 
+# Lateral Movement - Mimikatz 重點整理
+
+## 一、Lateral Movement 概念
+
+在 Active Directory 內網滲透中，當攻擊者取得一台主機的存取權後，下一步通常會進行：
+
+```
+Lateral Movement
+```
+
+目的：
+
+- 存取其他主機
+- 取得更高權限
+- 接近 Domain Controller
+- 最終控制整個 AD 環境
+
+典型攻擊流程：
+
+```
+Initial Foothold
+↓
+Privilege Escalation
+↓
+Credential Extraction
+↓
+Lateral Movement
+↓
+Domain Dominance
+```
+
+---
+
+# 二、Mimikatz 在 AD 攻擊中的角色
+
+Mimikatz 是 AD 內網滲透中最著名的工具之一。
+
+主要用途：
+
+- Credential Dumping
+- Pass-the-Hash
+- Pass-the-Ticket
+- Token Manipulation
+- Kerberos Ticket Forgery
+
+常見模組：
+
+```
+sekurlsa
+lsadump
+kerberos
+token
+privilege
+```
+
+---
+
+# 三、Pass-the-Hash (PtH)
+
+Pass-the-Hash 是利用 **NTLM Hash** 進行身份驗證，而不需要知道明文密碼。
+
+原理：
+
+```
+Password
+↓
+NTLM Hash
+↓
+Authentication
+```
+
+如果攻擊者取得：
+
+```
+NTLM Hash
+```
+
+即可直接利用該 Hash 登入其他系統。
+
+典型流程：
+
+```
+Dump NTLM Hash
+↓
+Inject Hash
+↓
+Authenticate to Remote System
+```
+
+效果：
+
+- 不需要知道密碼
+- 可以模仿使用者登入
+
+---
+
+# 四、Pass-the-Ticket (PtT)
+
+Pass-the-Ticket 是利用 **Kerberos Ticket** 進行身份偽裝。
+
+Kerberos 基本流程：
+
+```
+User
+↓
+Authentication Service
+↓
+Ticket Granting Ticket (TGT)
+↓
+Ticket Granting Service (TGS)
+↓
+Service Access
+```
+
+如果攻擊者取得：
+
+```
+Kerberos Ticket
+```
+
+就可以：
+
+```
+Inject ticket
+```
+
+達到：
+
+```
+Impersonate user
+Access services
+```
+
+---
+
+# 五、Golden Ticket
+
+Golden Ticket 是 AD 攻擊中最強大的技術之一。
+
+核心概念：
+
+```
+取得 KRBTGT hash
+↓
+偽造 TGT
+↓
+模仿任意使用者
+```
+
+流程：
+
+```
+Dump KRBTGT hash
+↓
+Forge Kerberos TGT
+↓
+Inject Ticket
+↓
+Access any resource in domain
+```
+
+效果：
+
+- Domain Persistence
+- 可偽造任何使用者身份
+- Domain Controller 會信任該票證
+
+---
+
+# 六、Silver Ticket
+
+Silver Ticket 是偽造 **Service Ticket (TGS)**。
+
+與 Golden Ticket 不同的是：
+
+```
+不需要 Domain Controller
+```
+
+流程：
+
+```
+取得 Service Account Hash
+↓
+Forge TGS
+↓
+Access specific service
+```
+
+常見服務：
+
+```
+CIFS
+HTTP
+MSSQL
+HOST
+```
+
+特性：
+
+- 不需要聯絡 DC
+- 偵測難度較高
+- 只影響特定服務
+
+---
+
+# 七、Token Impersonation
+
+Windows 使用 **Access Token** 來表示使用者身份。
+
+Token 包含：
+
+```
+User SID
+Group SID
+Privileges
+```
+
+如果攻擊者取得 Token：
+
+```
+可以模仿該使用者
+```
+
+常見操作：
+
+```
+token::impersonate
+token::elevate
+```
+`
 ### Module 3
 - Domain Persistensce
 - Cross Trust Attacks
