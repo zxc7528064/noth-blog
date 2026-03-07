@@ -817,6 +817,182 @@ Process:
 - 成功連線會建立 wsmprovhost.exe
 - 取得 Local Administrator 權限可進行 lateral movement
 
+在 Windows 內網滲透（Active Directory 攻擊）中，只要取得 `Local Administrator / SYSTEM 權限`，下一步通常會進行Credential Extraction，目的是取得身份驗證資料，例如：
+- NTLM Hash
+- Kerberos Ticket
+- AES Key
+- Plaintext Password
+- Cached Credentials
+
+取得憑證後即可進行：
+- Pass-the-Hash
+- Pass-the-Ticket
+- Kerberoasting
+- Lateral Movement
+- Privilege Escalation
+
+LSASS – Credential 的核心來源
+
+Windows 身份驗證系統由 `LSA (Local Security Authority)` 負責，實際運作的 process 為 `lsass.exe`
+
+LSASS 負責：
+- User Authentication
+- Kerberos Authentication
+- NTLM Authentication
+- Security Policy
+- Token Creation
+
+當使用者登入系統時，憑證會被載入 `LSASS memory`。
+
+常見情境：
+- Local login
+- RDP login
+- RunAs
+- Scheduled tasks
+- Service login
+- Remote administration
+
+因此：
+
+```
+LSASS memory = Credential Gold Mine
+```
+
+從 LSASS 記憶體中通常可以取得：
+- NTLM Hash
+- Kerberos Tickets
+- AES Keys
+- Plaintext Password
+- WDigest Credentials
+- SSP Credentials
+
+常見工具：
+- mimikatz
+- sekurlsa
+- dumpert
+- procdump
+
+LSASS 是 Windows 系統中 **最容易被監控的 process**。
+
+EDR / Defender 會監控：
+- OpenProcess(lsass)
+- ReadProcessMemory
+- MiniDumpWriteDump
+- Process Handle Access
+
+因此：Dump LSASS 常會觸發告警。
+
+# SAM + SYSTEM
+
+本地帳號 hash 儲存在 registry：
+
+```bash=
+HKLM\SAM
+HKLM\SYSTEM
+```
+
+可取得： Local NTLM Hash
+
+常用工具：
+
+```bash=
+reg save
+secretsdump.py
+```
+
+LSA Secrets 儲存在 `HKLM\SECURITY`
+包含：
+- Service account password
+- Scheduled task credentials
+- Cached domain credentials
+
+Windows Data Protection API 用於加密應用程式憑證。
+
+常見使用：
+- Credential Manager
+- Browser password
+- Browser cookies
+- Private keys
+- Azure tokens
+
+Windows Credential Manager 儲存各種登入資訊。
+
+工具：
+- vaultcmd
+
+取得：
+- RDP credentials
+- Stored passwords
+
+瀏覽器也常儲存登入資訊。
+
+例如：
+- Chrome
+- Edge
+- Firefox
+
+取得：
+- Saved passwords
+- Cookies
+- Session tokens
+
+PowerShell command history 可能包含憑證。
+
+路徑：`%APPDATA%\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt`
+
+整體 Credential 儲存位置可以整理為：
+
+```bash=
+Windows System
+│
+├─ LSASS memory
+│    ├ NTLM Hash
+│    ├ Kerberos Ticket
+│    ├ Plaintext Password
+│
+├─ Registry
+│    ├ SAM
+│    ├ LSA Secrets
+│
+├─ DPAPI
+│    ├ Browser Password
+│    ├ Credential Vault
+│
+├─ Applications
+│    ├ Browser Cookies
+│    ├ Azure Tokens
+│
+└─ User Artifacts
+     ├ PowerShell History
+     ├ Scripts
+```
+
+在實戰中通常會依據 `Detection Risk` 使用技術。
+
+Low Noise：
+- Registry extraction
+- DPAPI
+- Credential vault
+- Browser credential
+- PowerShell history
+
+Medium Noise：
+- SAM dump
+- LSA secrets
+
+High Noise：
+- LSASS dump
+- Mimikatz
+
+成熟的 Red Team 會優先使用 `Non-LSASS Credential Extraction`
+
+例如：
+- SAM
+- LSA secrets
+- DPAPI
+- Credential vault
+- Browser credentials
+
 ### Module 3
 - Domain Persistensce
 - Cross Trust Attacks
