@@ -754,7 +754,7 @@ Domain computer 載入惡意 policy
 - PowerShell Remoting
 - WinRM
 
-其中 `PowerShell Remoting` 是現代 Windows 環境常見的一種方式，運用的底層技術 **WinRM (Windows Remote Management)**
+其中 **PowerShell Remoting** 是現代 Windows 環境常見的一種方式，運用的底層技術 **WinRM (Windows Remote Management)**
 - 透過 PowerShell 遠端控制另一台 Windows 主機
 
 ```bash=
@@ -830,7 +830,7 @@ Process：
 
 LSASS – Credential 的核心來源
 
-Windows 身份驗證系統由 `LSA (Local Security Authority)` 負責，實際運作的 process 為 `lsass.exe`
+Windows 身份驗證系統由 **LSA (Local Security Authority)** 負責，實際運作的 process 為 **lsass.exe**
 
 LSASS 負責：
 - User Authentication
@@ -839,7 +839,7 @@ LSASS 負責：
 - Security Policy
 - Token Creation
 
-當使用者登入系統時，憑證會被載入 `LSASS memory`。
+當使用者登入系統時，憑證會被載入 **LSASS memory**
 
 常見情境：
 - Local login
@@ -863,7 +863,7 @@ LSASS 負責：
 - dumpert
 - procdump
 
-LSASS 是 Windows 系統中 **最容易被監控的 process** 因此 Dump LSASS 常會觸發告警。
+LSASS 是 Windows 系統中 **最容易被監控的 process** ，因此 Dump LSASS 常會觸發告警。
 
 EDR / Defender 會監控：
 - OpenProcess(lsass)
@@ -875,7 +875,7 @@ EDR / Defender 會監控：
 - HKLM\SAM
 - HKLM\SYSTEM
 
-可取得： Local NTLM Hash
+取得： Local NTLM Hash
 
 常用工具：
 - reg save
@@ -947,7 +947,7 @@ Windows System
      ├ Scripts
 ```
 
-實戰中通常會依據 `Detection Risk` 使用技術。
+實戰中通常會依據 **Detection Risk** 使用技術。
 
 Low Noise：
 - Registry extraction
