@@ -707,9 +707,7 @@ Target service
 
 攻擊者只需要轉發 authentication 即可登入目標服務。
 
-GPO Abuse（Group Policy 濫用）
-
-核心概念：
+GPO Abuse（Group Policy 濫用）核心概念：
 
 ```bash=
 如果 Group Policy ACL 過於寬鬆，修改 Group Policy 並影響整個網域的電腦。
@@ -747,6 +745,77 @@ Domain computer 載入惡意 policy
 ```
 
 ---
+
+常見的橫向移動技術：
+- PSExec
+- WMI
+- RDP
+- SMB
+- PowerShell Remoting
+- WinRM
+
+其中 `PowerShell Remoting` 是現代 Windows 環境非常常見的一種方式，透過 PowerShell 遠端控制另一台 Windows 主機：
+
+```bash=
+Local PowerShell
+↓
+PowerShell Remoting
+↓
+WinRM (WS-Management implementation)
+↓
+Remote Host
+↓
+wsmprovhost.exe
+↓
+Remote PowerShell Session
+```
+
+特性：
+- Windows 原生功能
+- 不需要額外工具
+- 在企業環境非常常見
+- 適合用於 Lateral Movement
+
+底層技術是：WinRM (Windows Remote Management)
+
+Default Ports：
+
+```bash=
+5985 → HTTP
+5986 → HTTPS
+```
+
+常用指令：
+
+建立遠端 session：
+
+```bash=
+New-PSSession
+```
+
+進入遠端 shell：
+
+```bash=
+Enter-PSSession -ComputerName TARGET
+```
+
+遠端執行指令：
+
+```bash=
+Invoke-Command -ComputerName TARGET -ScriptBlock { command }
+```
+
+PowerShell Remoting 會留下以下痕跡：
+
+Process:
+- wsmprovhost.exe
+- powershell.exe
+
+核心重點：
+- PowerShell Remoting 使用 WinRM
+- WinRM 使用 5985 / 5986 port
+- 成功連線會建立 wsmprovhost.exe
+- 取得 Local Administrator 權限可進行 lateral movement
 
 ### Module 3
 - Domain Persistensce
@@ -798,8 +867,6 @@ CRTP 最主要是在教
 OSCP → CRTP → OSEP → OSWE → OSED（選修）
 ```
 
-這樣的排序是依照能力模型的層次進行堆疊。
-
 ### 第一階段：建立滲透方法論（OSCP）
 
 OSCP 核心價值在於建立完整的滲透思維與攻擊流程：
@@ -847,4 +914,4 @@ OSED 偏向研究導向與 exploit engineering
 - DEP / ASLR Bypass
 - Shellcode 與 Windows Internals
 
-這並非一般紅隊必要能力，以目前市場現況而言，多數企業安全檢測仍以黑箱或灰箱滲透測試為主，真正需要底層漏洞利用開發能力的職缺相對較少，但對於希望深入理解漏洞本質或追求 OSCE3 的人而言，是重要進階方向，可作為長期興趣投入。
+這並非一般紅隊必要能力，以目前市場現況而言，多數企業安全檢測仍以黑箱或灰箱滲透測試為主，真正需要底層漏洞利用開發能力的職缺相對較少，但對於希望深入理解漏洞本質或追求 OSCE3 的人而言，可作為長期興趣投入。
