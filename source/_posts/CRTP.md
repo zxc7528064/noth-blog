@@ -964,7 +964,7 @@ High Noise：
 - LSASS dump
 - Mimikatz
 
-成熟的 Red Team 會優先使用 `Non-LSASS Credential Extraction`
+成熟的 Red Team 會優先使用 **Non-LSASS Credential Extraction**
 
 例如：
 - SAM
