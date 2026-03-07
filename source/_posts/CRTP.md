@@ -754,7 +754,8 @@ Domain computer 載入惡意 policy
 - PowerShell Remoting
 - WinRM
 
-其中 `PowerShell Remoting` 是現代 Windows 環境非常常見的一種方式，透過 PowerShell 遠端控制另一台 Windows 主機：
+其中 `PowerShell Remoting` 是現代 Windows 環境常見的一種方式，運用的底層技術 **WinRM (Windows Remote Management)**
+- 透過 PowerShell 遠端控制另一台 Windows 主機
 
 ```bash=
 Local PowerShell
@@ -776,16 +777,12 @@ Remote PowerShell Session
 - 在企業環境非常常見
 - 適合用於 Lateral Movement
 
-底層技術是：WinRM (Windows Remote Management)
-
 Default Ports：
 
 ```bash=
 5985 → HTTP
 5986 → HTTPS
 ```
-
-常用指令：
 
 建立遠端 session：
 
@@ -807,7 +804,7 @@ Invoke-Command -ComputerName TARGET -ScriptBlock { command }
 
 PowerShell Remoting 會留下以下痕跡：
 
-Process:
+Process：
 - wsmprovhost.exe
 - powershell.exe
 
@@ -817,7 +814,7 @@ Process:
 - 成功連線會建立 wsmprovhost.exe
 - 取得 Local Administrator 權限可進行 lateral movement
 
-在 Windows 內網滲透（Active Directory 攻擊）中，只要取得 `Local Administrator / SYSTEM 權限`，下一步通常會進行Credential Extraction，目的是取得身份驗證資料，例如：
+在 Windows 內網滲透（Active Directory 攻擊）中，只要取得 **Local Administrator / SYSTEM 權限**，下一步會進行**Credential Extraction**，目的是取得身份驗證資料，例如：
 - NTLM Hash
 - Kerberos Ticket
 - AES Key
@@ -852,12 +849,6 @@ LSASS 負責：
 - Service login
 - Remote administration
 
-因此：
-
-```
-LSASS memory = Credential Gold Mine
-```
-
 從 LSASS 記憶體中通常可以取得：
 - NTLM Hash
 - Kerberos Tickets
@@ -872,7 +863,7 @@ LSASS memory = Credential Gold Mine
 - dumpert
 - procdump
 
-LSASS 是 Windows 系統中 **最容易被監控的 process**。
+LSASS 是 Windows 系統中 **最容易被監控的 process** 因此 Dump LSASS 常會觸發告警。
 
 EDR / Defender 會監控：
 - OpenProcess(lsass)
@@ -880,28 +871,17 @@ EDR / Defender 會監控：
 - MiniDumpWriteDump
 - Process Handle Access
 
-因此：Dump LSASS 常會觸發告警。
-
-# SAM + SYSTEM
-
 本地帳號 hash 儲存在 registry：
-
-```bash=
-HKLM\SAM
-HKLM\SYSTEM
-```
+- HKLM\SAM
+- HKLM\SYSTEM
 
 可取得： Local NTLM Hash
 
 常用工具：
+- reg save
+- secretsdump.py
 
-```bash=
-reg save
-secretsdump.py
-```
-
-LSA Secrets 儲存在 `HKLM\SECURITY`
-包含：
+LSA Secrets 儲存在 `HKLM\SECURITY` 包含：
 - Service account password
 - Scheduled task credentials
 - Cached domain credentials
@@ -967,7 +947,7 @@ Windows System
      ├ Scripts
 ```
 
-在實戰中通常會依據 `Detection Risk` 使用技術。
+實戰中通常會依據 `Detection Risk` 使用技術。
 
 Low Noise：
 - Registry extraction
