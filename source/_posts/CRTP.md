@@ -973,45 +973,11 @@ High Noise：
 - Credential vault
 - Browser credentials
 
-# Lateral Movement - Mimikatz 重點整理
-
-## 一、Lateral Movement 概念
-
-在 Active Directory 內網滲透中，當攻擊者取得一台主機的存取權後，下一步通常會進行：
-
-```
-Lateral Movement
-```
-
-目的：
-
-- 存取其他主機
-- 取得更高權限
-- 接近 Domain Controller
-- 最終控制整個 AD 環境
-
-典型攻擊流程：
-
-```
-Initial Foothold
-↓
-Privilege Escalation
-↓
-Credential Extraction
-↓
-Lateral Movement
-↓
-Domain Dominance
-```
-
 ---
-
-# 二、Mimikatz 在 AD 攻擊中的角色
 
 Mimikatz 是 AD 內網滲透中最著名的工具之一。
 
 主要用途：
-
 - Credential Dumping
 - Pass-the-Hash
 - Pass-the-Ticket
@@ -1019,24 +985,17 @@ Mimikatz 是 AD 內網滲透中最著名的工具之一。
 - Kerberos Ticket Forgery
 
 常見模組：
+- sekurlsa
+- lsadump
+- kerberos
+- token
+- privilege
 
-```
-sekurlsa
-lsadump
-kerberos
-token
-privilege
-```
-
----
-
-# 三、Pass-the-Hash (PtH)
-
-Pass-the-Hash 是利用 **NTLM Hash** 進行身份驗證，而不需要知道明文密碼。
+Pass-the-Hash (PtH)： 利用 **NTLM Hash** 進行身份驗證，而不需要知道明文密碼，直接利用該 Hash 登入其他系統。
 
 原理：
 
-```
+```bash=
 Password
 ↓
 NTLM Hash
@@ -1044,38 +1003,17 @@ NTLM Hash
 Authentication
 ```
 
-如果攻擊者取得：
-
-```
-NTLM Hash
-```
-
-即可直接利用該 Hash 登入其他系統。
-
-典型流程：
-
-```
-Dump NTLM Hash
-↓
-Inject Hash
-↓
-Authenticate to Remote System
-```
-
 效果：
-
 - 不需要知道密碼
 - 可以模仿使用者登入
 
 ---
 
-# 四、Pass-the-Ticket (PtT)
-
-Pass-the-Ticket 是利用 **Kerberos Ticket** 進行身份偽裝。
+Pass-the-Ticket (PtT)：是利用 **Kerberos Ticket** 進行身份偽裝。
 
 Kerberos 基本流程：
 
-```
+```bash-
 User
 ↓
 Authentication Service
@@ -1108,9 +1046,7 @@ Access services
 
 ---
 
-# 五、Golden Ticket
-
-Golden Ticket 是 AD 攻擊中最強大的技術之一。
+Golden Ticket : 是 AD 攻擊中最強大的技術之一。
 
 核心概念：
 
@@ -1140,70 +1076,83 @@ Access any resource in domain
 - 可偽造任何使用者身份
 - Domain Controller 會信任該票證
 
----
+Silver Ticket 是攻擊者利用服務帳號的 **NTLM hash**，自行偽造 Kerberos Service Ticket (TGS) 來存取特定服務
 
-# 六、Silver Ticket
+與 Golden Ticket 不同的是，不需要 **Domain Controller**。
 
-Silver Ticket 是偽造 **Service Ticket (TGS)**。
-
-與 Golden Ticket 不同的是：
-
-```
-不需要 Domain Controller
-```
-
-流程：
-
-```
+完整流程：
+```bash=
 取得 Service Account Hash
 ↓
 Forge TGS
+↓
+Inject Ticket
 ↓
 Access specific service
 ```
 
 常見服務：
 
-```
-CIFS
-HTTP
-MSSQL
-HOST
-```
+| SPN   | 服務               |
+| ----- | ---------------- |
+| CIFS  | SMB / File Share |
+| HTTP  | Web Server / IIS |
+| MSSQL | SQL Server       |
+| HOST  | Windows 主機服務     |
 
 特性：
-
 - 不需要聯絡 DC
 - 偵測難度較高
 - 只影響特定服務
 
----
+Token Impersonation：使用其他使用者的 Access Token，讓目前的程序以該使用者的權限執行。
+在 Windows 中，每個 Process / Thread 都會綁定一個 Access Token。
 
-# 七、Token Impersonation
+在 Windows 中：
+- Process 會持有 Primary Token
+- Thread 可以使用 Impersonation Token
 
-Windows 使用 **Access Token** 來表示使用者身份。
+包含：
+- User SID
+- Group SID
+- Privileges
+- Integrity Level
 
-Token 包含：
+Access Token = 身份 + 群組 + 權限
 
-```
-User SID
-Group SID
-Privileges
-```
+Mimikatz 常見操作：
 
-如果攻擊者取得 Token：
-
-```
-可以模仿該使用者
-```
-
-常見操作：
-
-```
-token::impersonate
+```bash=
 token::elevate
 ```
-`
+
+搜尋可用 token → impersonate 高權限 token
+
+Meterpreter 常見操作：
+
+```bash=
+list_tokens -u
+impersonate_token DOMAIN\Administrator
+```
+
+Windows Token Privilege Escalation 全模型
+
+```bash= 
+Access Token
+↓
+SeImpersonatePrivilege
+↓
+Named Pipe / COM / RPC
+↓
+Potato Attack
+↓
+SYSTEM Token
+↓
+Privilege Escalation
+```
+
+---
+
 ### Module 3
 - Domain Persistensce
 - Cross Trust Attacks
@@ -1245,8 +1194,6 @@ Lab 入口資訊
 - 確保操作流暢度
 
 ## 總結
-
-CRTP 最主要是在教
 
 過去在軍中環境的觀察來說，OSCP 往往已被視為一個相當高的技術門檻，甚至可以說是「頂標」。在那樣的體系裡，能通過 OSCP 已經明顯高於平均水準。但如果放到具有實戰強度的乙方市場環境來看，OSCP 更像是一個起點，而不是終點。它代表的是基本滲透方法論與攻擊流程的建立，如果單純以「紅隊實戰能力成長」為目標，而非證照收藏，可以依照能力堆疊邏輯，規劃如下順序：
 
