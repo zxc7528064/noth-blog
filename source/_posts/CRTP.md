@@ -1007,50 +1007,31 @@ Authentication
 - 不需要知道密碼
 - 可以模仿使用者登入
 
----
-
-Pass-the-Ticket (PtT)：是利用 **Kerberos Ticket** 進行身份偽裝。
+Pass-the-Ticket (PtT) 是攻擊者將已取得的 Kerberos Ticket 注入到目前 Session 中，藉此模仿該使用者身份。
 
 Kerberos 基本流程：
 
-```bash-
+```bash=
 User
 ↓
-Authentication Service
+AS (Authentication Service)
 ↓
-Ticket Granting Ticket (TGT)
+TGT
 ↓
-Ticket Granting Service (TGS)
+TGS (Ticket Granting Service)
+↓
+Service Ticket
 ↓
 Service Access
 ```
 
-如果攻擊者取得：
+如果攻擊者取得 Kerberos Ticket (TGT / TGS) 就可以 Inject ticket，達到 Impersonate user、Access services、Lateral movement。
 
-```
-Kerberos Ticket
-```
-
-就可以：
-
-```
-Inject ticket
-```
-
-達到：
-
-```
-Impersonate user
-Access services
-```
-
----
-
-Golden Ticket : 是 AD 攻擊中最強大的技術之一。
+Golden Ticket 是攻擊者偽造 Kerberos TGT 的技術，用於取得整個 Active Directory Domain 的存取權限。
 
 核心概念：
 
-```
+```bash=
 取得 KRBTGT hash
 ↓
 偽造 TGT
@@ -1058,7 +1039,7 @@ Golden Ticket : 是 AD 攻擊中最強大的技術之一。
 模仿任意使用者
 ```
 
-流程：
+完整流程：
 
 ```
 Dump KRBTGT hash
@@ -1071,7 +1052,6 @@ Access any resource in domain
 ```
 
 效果：
-
 - Domain Persistence
 - 可偽造任何使用者身份
 - Domain Controller 會信任該票證
