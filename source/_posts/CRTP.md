@@ -603,7 +603,7 @@ User Hunting（高權限帳號在哪?）
 ```
 
 ### Module 2 
-- Local Privilege Escalation & Domain Privilege Escalation
+- Local Privilege Escalation
 - Credential Extraction & Lateral Movement
 - Domain Privilege Escalation
 
@@ -743,62 +743,6 @@ Privilege Escalation
 
 在 Windows Privilege Escalation 中，Token Impersonation 常與 **SeImpersonatePrivilege** 或 **SeAssignPrimaryTokenPrivilege** 搭配使用。
 
-網域層級提權（Domain Privilege Escalation）
-
-NTLM Relaying：
-一種利用 NTLM 身份驗證機制的攻擊技術，攻擊者不需要取得使用者的密碼，而是將受害者的 NTLM 身份驗證 **即時轉發（relay）** 到其他服務，以冒充該使用者進行存取。
-
-核心概念：
-
-```bash=
-Victim authentication
-        ↓
-Attacker relay
-        ↓
-Target service
-```
-
-GPO Abuse（Group Policy 濫用）：
-如果 **Group Policy Object (GPO)** 的 ACL 權限設定過於寬鬆，攻擊者可以修改 GPO 設定，進而影響整個網域的電腦。
-
-核心概念：
-
-```bash=
-取得 GPO 修改權限
-      ↓
-修改 GPO 設定
-      ↓
-建立 Scheduled Task / Startup Script
-      ↓
-Domain Computer 套用 GPO
-      ↓
-在多台主機執行 payload
-```
-
-例如：
-- powershell payload
-- cmd execution
-- 新增 admin user
-
-GPO 會影響所有被 linked 的 OU / Domain Computer
-
-GPOddity：
-一種利用 **Group Policy 與 SYSVOL 設計特性** 的攻擊技術，攻擊者可以透過修改 GPO 的屬性，使 Domain Computer 從攻擊者控制的位置載入惡意 Policy。
-
-核心概念：
-
-```bash=
-NTLM Relay
-      ↓
-修改 GPO attribute
-      ↓
-修改 GPCFileSysPath
-      ↓
-指向 attacker share
-      ↓
-Domain computer 載入惡意 policy
-```
-
 ---
 
 在取得 **Local Administrator / SYSTEM** 權限後，攻擊者通常會嘗試取得系統中的 Credential，以便進一步進行橫向移動或權限提升。
@@ -809,7 +753,7 @@ Domain computer 載入惡意 policy
 - AES Key
 - Plaintext Password
 
-LSASS – Credential 的核心來源：
+LSASS - Credential 的核心來源：
 Windows 身份驗證系統由 **LSA (Local Security Authority)** 負責，實際運作的 process 為 **lsass.exe**。
 
 LSASS 負責：
@@ -1134,6 +1078,62 @@ Process：
 - 取得 Local Administrator 權限可進行 lateral movement
 
 ---
+
+網域層級提權（Domain Privilege Escalation）
+
+NTLM Relaying：
+一種利用 NTLM 身份驗證機制的攻擊技術，攻擊者不需要取得使用者的密碼，而是將受害者的 NTLM 身份驗證 **即時轉發（relay）** 到其他服務，以冒充該使用者進行存取。
+
+核心概念：
+
+```bash=
+Victim authentication
+        ↓
+Attacker relay
+        ↓
+Target service
+```
+
+GPO Abuse（Group Policy 濫用）：
+如果 **Group Policy Object (GPO)** 的 ACL 權限設定過於寬鬆，攻擊者可以修改 GPO 設定，進而影響整個網域的電腦。
+
+核心概念：
+
+```bash=
+取得 GPO 修改權限
+      ↓
+修改 GPO 設定
+      ↓
+建立 Scheduled Task / Startup Script
+      ↓
+Domain Computer 套用 GPO
+      ↓
+在多台主機執行 payload
+```
+
+例如：
+- powershell payload
+- cmd execution
+- 新增 admin user
+
+GPO 會影響所有被 linked 的 OU / Domain Computer
+
+GPOddity：
+一種利用 **Group Policy 與 SYSVOL 設計特性** 的攻擊技術，攻擊者可以透過修改 GPO 的屬性，使 Domain Computer 從攻擊者控制的位置載入惡意 Policy。
+
+核心概念：
+
+```bash=
+NTLM Relay
+      ↓
+修改 GPO attribute
+      ↓
+修改 GPCFileSysPath
+      ↓
+指向 attacker share
+      ↓
+Domain computer 載入惡意 policy
+```
 
 ### Module 3
 - Domain Persistensce
