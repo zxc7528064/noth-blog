@@ -610,24 +610,28 @@ User Hunting（高權限帳號在哪?）
 當取得初始立足點（Foothold）後，下一個目標通常是：
 
 ```bash=
-將目前低權限使用者 → 提升為 SYSTEM 或 Local Administrator
+低權限使用者
+    ↓
+Local Administrator
+    ↓
+SYSTEM 權限
 ```
 
-漏洞型（Patch / Exploit）
-利用系統尚未修補的漏洞進行提權，例如：
-- Kernel 漏洞
+漏洞型（Patch / Exploit）：
+利用系統尚未修補的漏洞進行提權
+如：
 - 已知 Local Privilege Escalation CVE
 
-憑證型（Credential Exposure）
+憑證型（Credential Exposure）：
 透過系統遺留的明文憑證進行提權。
-常見來源包括：
+包括：
 - unattended.xml（自動部署檔）
 - 自動登入密碼（AutoLogon）
 - Registry 中的明文憑證
 - 特殊設備（kiosk / 自動化設備）的內建帳號
 
-設定錯誤型（Misconfiguration）
-例如：
+設定錯誤型（Misconfiguration）：
+如：
 - 可覆寫服務 binary
 - 可修改服務參數（Unquoted Service Path）
 - 過度寬鬆的 Service ACL
@@ -654,7 +658,7 @@ Foothold
 嘗試提升為 SYSTEM
 ```
 
-本地特權提升的關鍵在於尋找「憑證殘留」與「系統設定錯誤」，而不是單純依賴漏洞。
+本地特權提升的關鍵在於尋找 **憑證殘留** 與 **系統設定錯誤**，而不是單純依賴漏洞。
 
 Feature Abuse（企業服務功能濫用）
 
@@ -667,7 +671,7 @@ Feature Abuse（企業服務功能濫用）
 - 監控系統
 - 自動化服務
 
-服務通常安全設計較弱，但卻常常以 `SYSTEM / Administrator` 權限運行。
+服務通常安全設計較弱，但卻常常以 **SYSTEM / Administrator** 權限運行。
 
 典型案例：
 - Jenkins
@@ -1035,7 +1039,7 @@ Pass-the-Ticket (PtT)：
 Pass-the-Ticket = 使用已取得的 **Kerberos Ticket(TGT 或 TGS)** 來冒充使用者身份。
 
 Golden Ticket：
-是攻擊者偽造 **Kerberos TGT (Ticket Granting Ticket)** 的技術，藉此取得整個 Active Directory Domain 中任意服務的存取權限。
+攻擊者偽造 **Kerberos TGT (Ticket Granting Ticket)** 的技術，藉此取得整個 Active Directory Domain 中任意服務的存取權限。
 
 核心概念：
 
@@ -1085,7 +1089,7 @@ Silver Ticket：
 - 只影響特定服務
 
 Token Impersonation：
-是讓一個 **Thread** 暫時使用另一個使用者的 **Access Token**，以該使用者身份存取系統資源。
+是讓 Process 中的某個 **Thread** 暫時使用另一個使用者的 **Access Token**，以該使用者身份存取系統資源。
 
 在 Windows 中：
 - Process 會持有 Primary Token (預設身份)
