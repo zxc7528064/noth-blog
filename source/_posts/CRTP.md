@@ -1095,13 +1095,13 @@ Token Impersonation：
 
 Access Token 代表 Windows 的 Security Context，包含：
 - User SID
- - Administrators
+      - ex : Administrators
 - Group SID
- - Administrators
+      - ex : Administrators
 - Privileges
- - SeDebugPrivilege
+      - ex : SeDebugPrivilege
 - Integrity Level
- - High
+      - ex : High
 
 **Access Token = 身份 + 群組 + 權限**
 
