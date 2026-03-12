@@ -806,7 +806,7 @@ EDR / Defender 會監控：
 - reg save
 - secretsdump.py
 
-LSA Secrets 儲存在 `HKLM\SECURITY` 包含：
+LSA Secrets 儲存在 **HKLM\SECURITY** 包含：
 - Service account password
 - Scheduled task credentials
 - Cached domain credentials
