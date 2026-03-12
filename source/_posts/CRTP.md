@@ -604,7 +604,7 @@ User Hunting（高權限帳號在哪?）
 
 ### Module 2 
 - Local Privilege Escalation & Domain Privilege Escalation
-- Lateral Movement
+- Credential Extraction & Lateral Movement
 - Domain Privilege Escalation
 
 當取得初始立足點（Foothold）後，下一個目標通常是：
@@ -693,6 +693,56 @@ Command execution on host
 
 如果 Jenkins 服務是 SYSTEM 執行 → 直接 SYSTEM shell
 
+Token Impersonation：
+是讓 Process 中的某個 **Thread** 暫時使用另一個使用者的 **Access Token**，以該使用者身份存取系統資源。
+
+在 Windows 中：
+- Process 會持有 Primary Token (預設身份)
+- Thread 可以使用 Impersonation Token (暫時身份)
+
+Access Token 代表 Windows 的 Security Context，包含：
+- User SID
+      ex : Administrators
+- Group SID
+      ex : Administrators
+- Privileges
+      ex : SeDebugPrivilege、SeImpersonatePrivilege
+- Integrity Level
+      ex : High
+
+**Access Token = 身份 + 群組 + 權限**
+
+Mimikatz 常見操作：
+
+```bash=
+token::elevate
+```
+
+Meterpreter 常見操作：
+
+```bash=
+list_tokens -u
+impersonate_token DOMAIN\Administrator
+```
+
+核心概念：
+
+```bash= 
+Access Token
+↓
+SeImpersonatePrivilege
+↓
+Named Pipe / COM / RPC
+↓
+Potato Attack
+↓
+SYSTEM Token
+↓
+Privilege Escalation
+```
+
+在 Windows Privilege Escalation 中，Token Impersonation 常與 **SeImpersonatePrivilege** 或 **SeAssignPrimaryTokenPrivilege** 搭配使用。
+
 網域層級提權（Domain Privilege Escalation）
 
 NTLM Relaying：
@@ -751,91 +801,16 @@ Domain computer 載入惡意 policy
 
 ---
 
-常見的橫向移動技術：
-- PSExec
-- WMI
-- RDP
-- SMB
-- PowerShell Remoting
-- WinRM
+在取得 **Local Administrator / SYSTEM** 權限後，攻擊者通常會嘗試取得系統中的 Credential，以便進一步進行橫向移動或權限提升。
 
-其中 **PowerShell Remoting** 是現代 Windows 環境常見的一種方式，運用的底層技術 **WinRM (Windows Remote Management)**
-- 透過 PowerShell 遠端控制另一台 Windows 主機
-
-```bash=
-Local PowerShell
-↓
-PowerShell Remoting
-↓
-WinRM (WS-Management implementation)
-↓
-Remote Host
-↓
-wsmprovhost.exe
-↓
-Remote PowerShell Session
-```
-
-特性：
-- Windows 原生功能
-- 不需要額外工具
-- 在企業環境非常常見
-- 適合用於 Lateral Movement
-
-Default Ports：
-
-```bash=
-5985 → HTTP
-5986 → HTTPS
-```
-
-建立遠端 session：
-
-```bash=
-New-PSSession
-```
-
-進入遠端 shell：
-
-```bash=
-Enter-PSSession -ComputerName TARGET
-```
-
-遠端執行指令：
-
-```bash=
-Invoke-Command -ComputerName TARGET -ScriptBlock { command }
-```
-
-PowerShell Remoting 會留下以下痕跡：
-
-Process：
-- wsmprovhost.exe
-- powershell.exe
-
-核心重點：
-- PowerShell Remoting 使用 WinRM
-- WinRM 使用 5985 / 5986 port
-- 成功連線會建立 wsmprovhost.exe
-- 取得 Local Administrator 權限可進行 lateral movement
-
-在 Windows 內網滲透（Active Directory 攻擊）中，只要取得 **Local Administrator / SYSTEM 權限**，下一步會進行**Credential Extraction**，目的是取得身份驗證資料，例如：
+常見取得的憑證包括：
 - NTLM Hash
 - Kerberos Ticket
 - AES Key
 - Plaintext Password
-- Cached Credentials
 
-取得憑證後即可進行：
-- Pass-the-Hash
-- Pass-the-Ticket
-- Kerberoasting
-- Lateral Movement
-- Privilege Escalation
-
-LSASS – Credential 的核心來源
-
-Windows 身份驗證系統由 **LSA (Local Security Authority)** 負責，實際運作的 process 為 **lsass.exe**
+LSASS – Credential 的核心來源：
+Windows 身份驗證系統由 **LSA (Local Security Authority)** 負責，實際運作的 process 為 **lsass.exe**。
 
 LSASS 負責：
 - User Authentication
@@ -844,7 +819,7 @@ LSASS 負責：
 - Security Policy
 - Token Creation
 
-當使用者登入系統時，憑證會被載入 **LSASS memory**
+當使用者登入系統時，憑證會被載入 **LSASS memory**。
 
 常見情境：
 - Local login
@@ -868,7 +843,7 @@ LSASS 負責：
 - dumpert
 - procdump
 
-LSASS 是 Windows 系統中 **最容易被監控的 process** ，因此 Dump LSASS 常會觸發告警。
+LSASS 是 Windows 系統中 **最容易被監控的 process**，因此 Dump LSASS 常會觸發告警。
 
 EDR / Defender 會監控：
 - OpenProcess(lsass)
@@ -878,9 +853,10 @@ EDR / Defender 會監控：
 
 本地帳號 hash 儲存在 registry：
 - HKLM\SAM
-- HKLM\SYSTEM
+- HKLM\SYSTEM（BootKey 用於解密 SAM）
 
-取得： Local NTLM Hash
+可取得
+- Local NTLM Hash
 
 常用工具：
 - reg save
@@ -923,7 +899,7 @@ Windows Credential Manager 儲存各種登入資訊。
 
 PowerShell command history 可能包含憑證。
 
-路徑：`%APPDATA%\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt`
+路徑：**%APPDATA%\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt**
 
 整體 Credential 儲存位置可以整理為：
 
@@ -969,7 +945,7 @@ High Noise：
 - LSASS dump
 - Mimikatz
 
-成熟的 Red Team 會優先使用 **Non-LSASS Credential Extraction**
+成熟的 Red Team 會優先使用 **Non-LSASS Credential Extraction**。
 
 例如：
 - SAM
@@ -977,6 +953,8 @@ High Noise：
 - DPAPI
 - Credential vault
 - Browser credentials
+
+---
 
 在取得初始立足點（Initial Foothold）後，攻擊者通常會嘗試在內網環境中進行橫向移動（Lateral Movement），以存取更多主機與資源。
 
@@ -1087,55 +1065,73 @@ Silver Ticket：
 - 偵測難度較高
 - 只影響特定服務
 
-Token Impersonation：
-是讓 Process 中的某個 **Thread** 暫時使用另一個使用者的 **Access Token**，以該使用者身份存取系統資源。
+常見的橫向移動技術：
+- PSExec
+- WMI
+- RDP
+- SMB
+- PowerShell Remoting
+- WinRM
 
-在 Windows 中：
-- Process 會持有 Primary Token (預設身份)
-- Thread 可以使用 Impersonation Token (暫時身份)
-
-Access Token 代表 Windows 的 Security Context，包含：
-- User SID
-      ex : Administrators
-- Group SID
-      ex : Administrators
-- Privileges
-      ex : SeDebugPrivilege、SeImpersonatePrivilege
-- Integrity Level
-      ex : High
-
-**Access Token = 身份 + 群組 + 權限**
-
-Mimikatz 常見操作：
+其中 **PowerShell Remoting** 是現代 Windows 環境常見的一種方式，運用的底層技術 **WinRM (Windows Remote Management)**
+- 透過 PowerShell 遠端控制另一台 Windows 主機
 
 ```bash=
-token::elevate
+Local PowerShell
+↓
+PowerShell Remoting
+↓
+WinRM (WS-Management implementation)
+↓
+Remote Host
+↓
+wsmprovhost.exe
+↓
+Remote PowerShell Session
 ```
 
-Meterpreter 常見操作：
+特性：
+- Windows 原生功能
+- 不需要額外工具
+- 在企業環境非常常見
+- 適合用於 Lateral Movement
+
+Default Ports：
 
 ```bash=
-list_tokens -u
-impersonate_token DOMAIN\Administrator
+5985 → HTTP
+5986 → HTTPS
 ```
 
-核心概念：
+建立遠端 session：
 
-```bash= 
-Access Token
-↓
-SeImpersonatePrivilege
-↓
-Named Pipe / COM / RPC
-↓
-Potato Attack
-↓
-SYSTEM Token
-↓
-Privilege Escalation
+```bash=
+New-PSSession
 ```
 
-在 Windows Privilege Escalation 中，Token Impersonation 常與 **SeImpersonatePrivilege** 或 **SeAssignPrimaryTokenPrivilege** 搭配使用。
+進入遠端 shell：
+
+```bash=
+Enter-PSSession -ComputerName TARGET
+```
+
+遠端執行指令：
+
+```bash=
+Invoke-Command -ComputerName TARGET -ScriptBlock { command }
+```
+
+PowerShell Remoting 會留下以下痕跡：
+
+Process：
+- wsmprovhost.exe
+- powershell.exe
+
+核心重點：
+- PowerShell Remoting 使用 WinRM
+- WinRM 使用 5985 / 5986 port
+- 成功連線會建立 wsmprovhost.exe
+- 取得 Local Administrator 權限可進行 lateral movement
 
 ---
 
@@ -1194,7 +1190,7 @@ OSCP 核心價值在於建立完整的滲透思維與攻擊流程：
 - 攻擊面拆解與優先順序判斷
 - 橫向移動與權限提升
 
-這個階段的重點不是招式，而是方法論，從這一步開始，才真正具備「能獨立完成滲透流程」的能力。
+這個階段的重點不是招式，而是方法論，從這一步開始，才真正具備 **能獨立完成滲透流程** 的能力。
 
 ### 第二階段：理解企業內網權限模型（CRTP）
 
@@ -1204,7 +1200,7 @@ CRTP 補足的是企業環境中最核心的 Active Directory 架構理解。
 - Delegation 設計邏輯
 - Forest / Domain Trust 邊界
 
-這一步讓能力從「會打」轉向「看懂設計」，開始理解攻擊之所以成立，是因為架構本身如何運作。
+這一步讓能力從 **會打** 轉向 **看懂設計**，開始理解攻擊之所以成立，是因為架構本身如何運作。
 
 ### 第三階段：真實環境對抗能力（OSEP）
 
@@ -1214,7 +1210,7 @@ OSEP 強調的是攻防對抗思維。
 - Logging 與 Detection Surface 理解
 - Payload 與執行鏈設計
 
-這個階段讓攻擊能力從實驗室場景，進化到真實企業環境，不再只是「能打成功」，而是「能在被監控下打成功」。
+這個階段讓攻擊能力從實驗室場景，進化到真實企業環境，不再只是 **能打成功**，而是 **能在被監控下打成功**。
 
 ### 第四階段：漏洞原理與程式閱讀能力（OSWE）
 
