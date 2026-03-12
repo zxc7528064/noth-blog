@@ -1056,20 +1056,19 @@ Access any resource in domain
 - 可偽造任何使用者身份
 - Domain Controller 會信任該票證
 
-Silver Ticket 是攻擊者利用服務帳號的 **NTLM hash**，自行偽造 Kerberos Service Ticket (TGS) 來存取特定服務
-
-與 Golden Ticket 不同的是，不需要 **Domain Controller**。
+Silver Ticket： 
+攻擊者利用服務帳號的 **NTLM hash**，自行偽造 **Kerberos Service Ticket (TGS)**，以冒充任意使用者存取該服務，與 Golden Ticket 不同的是 Silver Ticket 不需要與 **Domain Controller (KDC)** 互動。
 
 完整流程：
 
 ```bash=
-取得 Service Account Hash
+取得服務帳號的 NTLM Hash
 ↓
-Forge TGS
+偽造 Kerberos 服務票證（TGS）
 ↓
-Inject Ticket
+將票證注入目前的 Session
 ↓
-Access specific service
+以偽造身份存取目標服務
 ```
 
 常見服務：
@@ -1118,7 +1117,7 @@ list_tokens -u
 impersonate_token DOMAIN\Administrator
 ```
 
-Windows Token Privilege Escalation 運作模型
+運作模型：
 
 ```bash= 
 Access Token
