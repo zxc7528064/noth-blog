@@ -1050,7 +1050,7 @@ Golden Ticket：
 - Domain Controller 會將偽造的 TGT 視為合法票證
 
 Silver Ticket： 
-攻擊者利用服務帳號的 **NTLM hash**，自行偽造 **Kerberos Service Ticket (TGS)**，以冒充任意使用者存取該服務，與 Golden Ticket 不同的是 Silver Ticket 不需要與 **Domain Controller (KDC)** 互動。
+攻擊者利用服務帳號的 **NTLM hash**，自行偽造 **Kerberos Service Ticket (TGS)** 以冒充任意使用者存取該服務，與 Golden Ticket 不同的是 Silver Ticket 不需要與 **Domain Controller (KDC)** 互動。
 
 核心概念：
 
