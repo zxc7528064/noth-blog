@@ -975,41 +975,13 @@ High Noise：
 
 ---
 
-Mimikatz 是 AD 內網滲透中最著名的工具之一。
+在取得初始立足點（Initial Foothold）後，攻擊者通常會嘗試在內網環境中進行橫向移動（Lateral Movement），以存取更多主機與資源。
 
-主要用途：
-- Credential Dumping
-- Pass-the-Hash
-- Pass-the-Ticket
-- Token Manipulation
-- Kerberos Ticket Forgery
-
-常見模組：
-- sekurlsa
-- lsadump
-- kerberos
-- token
-- privilege
-
-Pass-the-Hash (PtH)： 利用 **NTLM Hash** 進行身份驗證，而不需要知道明文密碼，直接利用該 Hash 登入其他系統。
-
-原理：
-
-```bash=
-Password
-↓
-NTLM Hash
-↓
-Authentication
-```
-
-效果：
-- 不需要知道密碼
-- 可以模仿使用者登入
-
-Pass-the-Ticket (PtT) 是攻擊者將已取得的 Kerberos Ticket 注入到目前 Session 中，藉此模仿該使用者身份。
+在 Windows / Active Directory 環境中，橫向移動往往建立在身份驗證機制之上，例如 **NTLM** 與 **Kerberos**。一旦攻擊者取得憑證資料（Credential），例如 **NTLM Hash、Kerberos Ticket 或 Access Token**，即可模仿其他使用者身份並存取遠端系統。
 
 Kerberos 基本流程：
+
+![Kerberos](/img/Kerberos.png)
 
 ```bash=
 User
@@ -1025,7 +997,42 @@ Service Ticket
 Service Access
 ```
 
-如果攻擊者取得 Kerberos Ticket (TGT / TGS) 就可以 Inject ticket，達到 Impersonate user、Access services、Lateral movement。
+如果攻擊者取得 Kerberos Ticket（TGT 或 TGS），即可將 Ticket 注入目前的 Session，藉此模仿使用者身份並存取相關服務，進而進行 Lateral Movement。
+
+Pass-the-Hash (PtH)： 
+攻擊者利用已取得的 **NTLM Hash** 進行身份驗證，而不需要知道使用者的明文密碼，直接利用該 Hash 登入其他系統。
+
+核心概念：
+
+```bash=
+取得 NTLM Hash
+↓
+使用 Hash 進行 NTLM 認證
+↓
+存取遠端系統
+```
+
+效果：
+- 不需要知道明文密碼
+- 可以冒充使用者身份
+- 可進行橫向移動（Lateral Movement）
+
+Pass-the-Ticket (PtT)：
+攻擊者將已取得的 Kerberos Ticket 注入到目前 Session 中，藉此模仿該使用者身份並存取相關服務。
+
+核心概念：
+
+```bash=
+取得 Kerberos Ticket（TGT 或 TGS）
+↓
+將 Ticket 注入目前 Session
+↓
+模仿該使用者身份
+↓
+存取相關服務
+```
+
+Pass-the-Ticket = 使用已取得的 **Kerberos Ticket(TGT 或 TGS)** 來冒充使用者身份。
 
 Golden Ticket：
 是攻擊者偽造 **Kerberos TGT (Ticket Granting Ticket)** 的技術，藉此取得整個 Active Directory Domain 中任意服務的存取權限。
@@ -1109,7 +1116,7 @@ list_tokens -u
 impersonate_token DOMAIN\Administrator
 ```
 
-運作模型：
+核心概念：
 
 ```bash= 
 Access Token
@@ -1171,7 +1178,7 @@ Lab 入口資訊
 
 ## 總結
 
-過去在軍中環境的觀察來說，OSCP 往往已被視為一個相當高的技術門檻，甚至可以說是「頂標」。在那樣的體系裡，能通過 OSCP 已經明顯高於平均水準。但如果放到具有實戰強度的乙方市場環境來看，OSCP 更像是一個起點，而不是終點。它代表的是基本滲透方法論與攻擊流程的建立，如果單純以「紅隊實戰能力成長」為目標，而非證照收藏，可以依照能力堆疊邏輯，規劃如下順序：
+過去在軍中環境的觀察來說，OSCP 往往已被視為一個相當高的技術門檻，甚至可以說是「頂標」。在那樣的體系裡，能通過 OSCP 已經明顯高於平均水準。但如果放到具有實戰強度的乙方市場環境來看，OSCP 更像是一個起點，而不是終點。它代表的是基本滲透方法論與攻擊流程的建立，但如果單純以「紅隊實戰能力成長」為目標，而非證照收藏，可以依照能力堆疊邏輯，規劃如下順序：
 
 ```bash=
 OSCP → CRTP → OSEP → OSWE → OSED（選修）
