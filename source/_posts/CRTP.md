@@ -1061,6 +1061,7 @@ Silver Ticket 是攻擊者利用服務帳號的 **NTLM hash**，自行偽造 Ker
 與 Golden Ticket 不同的是，不需要 **Domain Controller**。
 
 完整流程：
+
 ```bash=
 取得 Service Account Hash
 ↓
@@ -1073,40 +1074,42 @@ Access specific service
 
 常見服務：
 
-| SPN   | 服務               |
+| SPN   | 服務              |
 | ----- | ---------------- |
 | CIFS  | SMB / File Share |
 | HTTP  | Web Server / IIS |
 | MSSQL | SQL Server       |
-| HOST  | Windows 主機服務     |
+| HOST  | Windows 主機服務  |
 
 特性：
 - 不需要聯絡 DC
 - 偵測難度較高
 - 只影響特定服務
 
-Token Impersonation：使用其他使用者的 Access Token，讓目前的程序以該使用者的權限執行。
-在 Windows 中，每個 Process / Thread 都會綁定一個 Access Token。
+Token Impersonation：
+是讓一個 Thread 暫時使用另一個使用者的 Access Token，以該使用者身份存取系統資源。
 
 在 Windows 中：
-- Process 會持有 Primary Token
-- Thread 可以使用 Impersonation Token
+- Process 會持有 Primary Token (預設身份)
+- Thread 可以使用 Impersonation Token (暫時身份)
 
-包含：
+Access Token 代表 Windows 的 Security Context，包含：
 - User SID
+ - Administrators
 - Group SID
+ - Administrators
 - Privileges
+ - SeDebugPrivilege
 - Integrity Level
+ - High
 
-Access Token = 身份 + 群組 + 權限
+**Access Token = 身份 + 群組 + 權限**
 
 Mimikatz 常見操作：
 
 ```bash=
 token::elevate
 ```
-
-搜尋可用 token → impersonate 高權限 token
 
 Meterpreter 常見操作：
 
@@ -1115,7 +1118,7 @@ list_tokens -u
 impersonate_token DOMAIN\Administrator
 ```
 
-Windows Token Privilege Escalation 全模型
+Windows Token Privilege Escalation 運作模型
 
 ```bash= 
 Access Token
@@ -1130,6 +1133,8 @@ SYSTEM Token
 ↓
 Privilege Escalation
 ```
+
+在 Windows Privilege Escalation 中，Token Impersonation 常與 **SeImpersonatePrivilege** 或 **SeAssignPrimaryTokenPrivilege** 搭配使用。
 
 ---
 
@@ -1223,9 +1228,9 @@ OSWE 著重於：
 
 ### 第五階段：底層漏洞利用研究（OSED）
 
-OSED 偏向研究導向與 exploit engineering
+OSED 偏向研究導向與 Exploit Engineering
 - ROP Chain
 - DEP / ASLR Bypass
 - Shellcode 與 Windows Internals
 
-這並非一般紅隊必要能力，以目前市場現況而言，多數企業安全檢測仍以黑箱或灰箱滲透測試為主，真正需要底層漏洞利用開發能力的職缺相對較少，但對於希望深入理解漏洞本質或追求 OSCE3 的人而言，可作為長期興趣投入。
+並非一般紅隊必要能力，以目前市場現況而言，多數企業安全檢測仍以黑箱或灰箱滲透測試為主，真正需要底層漏洞利用開發能力的職缺相對較少，但對於希望深入理解漏洞本質或追求 OSCE3 的人而言，可作為長期興趣投入。
