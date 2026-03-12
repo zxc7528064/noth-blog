@@ -1027,28 +1027,21 @@ Service Access
 
 如果攻擊者取得 Kerberos Ticket (TGT / TGS) 就可以 Inject ticket，達到 Impersonate user、Access services、Lateral movement。
 
-Golden Ticket 是攻擊者偽造 Kerberos TGT 的技術，用於取得整個 Active Directory Domain 的存取權限。
+Golden Ticket：
+是攻擊者偽造 **Kerberos TGT (Ticket Granting Ticket)** 的技術，藉此取得整個 Active Directory Domain 中任意服務的存取權限。
 
 核心概念：
 
 ```bash=
-取得 KRBTGT hash
+取得 KRBTGT Hash
 ↓
-偽造 TGT
+偽造 Kerberos TGT
 ↓
-模仿任意使用者
-```
-
-完整流程：
-
-```
-Dump KRBTGT hash
+注入票證
 ↓
-Forge Kerberos TGT
+向 KDC 取得任意 TGS
 ↓
-Inject Ticket
-↓
-Access any resource in domain
+存取網域資源
 ```
 
 效果：
@@ -1059,7 +1052,7 @@ Access any resource in domain
 Silver Ticket： 
 攻擊者利用服務帳號的 **NTLM hash**，自行偽造 **Kerberos Service Ticket (TGS)**，以冒充任意使用者存取該服務，與 Golden Ticket 不同的是 Silver Ticket 不需要與 **Domain Controller (KDC)** 互動。
 
-完整流程：
+核心概念：
 
 ```bash=
 取得服務帳號的 NTLM Hash
@@ -1073,12 +1066,11 @@ Silver Ticket：
 
 常見服務：
 
-| SPN   | 服務              |
+| SPN   | 服務  |
 | ----- | ---------------- |
 | CIFS  | SMB / File Share |
 | HTTP  | Web Server / IIS |
 | MSSQL | SQL Server       |
-| HOST  | Windows 主機服務  |
 
 特性：
 - 不需要聯絡 DC
