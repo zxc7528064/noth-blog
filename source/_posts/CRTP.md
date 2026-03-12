@@ -603,7 +603,7 @@ User Hunting（高權限帳號在哪?）
 ```
 
 ### Module 2 
-- Local Privilege Escalation
+- Local Privilege Escalation & Domain Privilege Escalation
 - Lateral Movement
 - Domain Privilege Escalation
 
@@ -693,13 +693,12 @@ Command execution on host
 
 如果 Jenkins 服務是 SYSTEM 執行 → 直接 SYSTEM shell
 
-NTLM Relaying 核心概念：
+網域層級提權（Domain Privilege Escalation）
 
-```
-轉發身份驗證，而不是竊取密碼。
-```
+NTLM Relaying：
+一種利用 NTLM 身份驗證機制的攻擊技術，攻擊者不需要取得使用者的密碼，而是將受害者的 NTLM 身份驗證 **即時轉發（relay）** 到其他服務，以冒充該使用者進行存取。
 
-攻擊流程：
+核心概念：
 
 ```bash=
 Victim authentication
@@ -709,22 +708,21 @@ Attacker relay
 Target service
 ```
 
-攻擊者只需要轉發 authentication 即可登入目標服務。
+GPO Abuse（Group Policy 濫用）：
+如果 **Group Policy Object (GPO)** 的 ACL 權限設定過於寬鬆，攻擊者可以修改 GPO 設定，進而影響整個網域的電腦。
 
-GPO Abuse（Group Policy 濫用）核心概念：
-
-```bash=
-如果 Group Policy ACL 過於寬鬆，修改 Group Policy 並影響整個網域的電腦。
-```
-
-常見 GPO 攻擊方式：
+核心概念：
 
 ```bash=
-修改 GPO
-↓
-建立 scheduled task
-↓
-在所有 Domain Computer 執行 payload
+取得 GPO 修改權限
+      ↓
+修改 GPO 設定
+      ↓
+建立 Scheduled Task / Startup Script
+      ↓
+Domain Computer 套用 GPO
+      ↓
+在多台主機執行 payload
 ```
 
 例如：
@@ -732,9 +730,12 @@ GPO Abuse（Group Policy 濫用）核心概念：
 - cmd execution
 - 新增 admin user
 
-GPOddity 一種較新的攻擊技術。
+GPO 會影響所有被 linked 的 OU / Domain Computer
 
-攻擊流程：
+GPOddity：
+一種利用 **Group Policy 與 SYSVOL 設計特性** 的攻擊技術，攻擊者可以透過修改 GPO 的屬性，使 Domain Computer 從攻擊者控制的位置載入惡意 Policy。
+
+核心概念：
 
 ```bash=
 NTLM Relay
@@ -976,8 +977,6 @@ High Noise：
 - DPAPI
 - Credential vault
 - Browser credentials
-
----
 
 在取得初始立足點（Initial Foothold）後，攻擊者通常會嘗試在內網環境中進行橫向移動（Lateral Movement），以存取更多主機與資源。
 
