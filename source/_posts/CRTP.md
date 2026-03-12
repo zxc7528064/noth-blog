@@ -1087,7 +1087,7 @@ Access specific service
 - 只影響特定服務
 
 Token Impersonation：
-是讓一個 Thread 暫時使用另一個使用者的 Access Token，以該使用者身份存取系統資源。
+是讓一個 **Thread** 暫時使用另一個使用者的 **Access Token**，以該使用者身份存取系統資源。
 
 在 Windows 中：
 - Process 會持有 Primary Token (預設身份)
@@ -1099,7 +1099,7 @@ Access Token 代表 Windows 的 Security Context，包含：
 - Group SID
       - ex : Administrators
 - Privileges
-      - ex : SeDebugPrivilege
+      - ex : SeDebugPrivilege、SeImpersonatePrivilege
 - Integrity Level
       - ex : High
 
