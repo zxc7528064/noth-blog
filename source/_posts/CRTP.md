@@ -1045,9 +1045,9 @@ Golden Ticket：
 ```
 
 效果：
-- Domain Persistence
-- 可偽造任何使用者身份
-- Domain Controller 會信任該票證
+- 可以在整個 Domain 中維持長期存取權限
+- 可以偽造任何使用者身份（例如 Administrator）
+- Domain Controller 會將偽造的 TGT 視為合法票證
 
 Silver Ticket： 
 攻擊者利用服務帳號的 **NTLM hash**，自行偽造 **Kerberos Service Ticket (TGS)**，以冒充任意使用者存取該服務，與 Golden Ticket 不同的是 Silver Ticket 不需要與 **Domain Controller (KDC)** 互動。
