@@ -1171,7 +1171,12 @@ Golden Ticket 允許攻擊者：
 
 除了用於橫向移動外，Golden Ticket 最典型的 **Domain Persistence 技術之一** 只要攻擊者持有 **KRBTGT Hash**，就可以持續偽造 Kerberos Ticket，即使帳號或憑證被重置，仍然能重新取得對 Domain 的控制權。
 
+在實際攻擊中，生成 Golden Ticket 通常需要以下資訊：
+- Domain SID
+- User RID
+- KRBTGT Hash
 
+攻擊者可以利用這些資訊偽造 Kerberos TGT，並冒充任意使用者，Golden Ticket 的 **Ticket Lifetime** 可以由攻擊者自行設定，例如： **10 years**
 
 ### Module 4
 - Bypass Defenses (MDE and MDI)
