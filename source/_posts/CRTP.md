@@ -1139,6 +1139,38 @@ Domain computer 載入惡意 policy
 - Domain Persistensce
 - Cross Trust Attacks
 
+在 Active Directory 攻擊流程中，許多初學者的目標往往是取得 **Domain Admin**。然而在成熟的紅隊攻擊模型中 **Domain Admin 並不是最終目標**。真正的目標是能夠 **長期控制 Active Directory**，攻擊者通常會建立 **Domain Persistence**，確保即使帳號或憑證被重置，仍然能重新取得對 AD 的控制權。
+
+Active Directory 的身份驗證核心機制是 **Kerberos**。
+
+Kerberos 的基本流程如下：
+
+```bash=
+Client  
+↓  
+KDC (Domain Controller)  
+↓  
+TGT (Ticket Granting Ticket)  
+↓  
+Service Ticket  
+↓  
+Access Service
+```
+
+在 Kerberos 中，所有 Ticket 都是由一個特殊帳號簽發：**KRBTGT**。
+
+如果攻擊者取得 **KRBTGT Hash**，就可以偽造 Kerberos Ticket，這就是著名的 **Golden Ticket Attack**。
+
+Golden Ticket 允許攻擊者：
+
+- 偽造任意使用者身份
+- 偽造 Domain Admin 權限
+- 在憑證被重置後仍然重新取得存取權
+
+在前面的橫向移動章節中已經介紹過，攻擊者可以透過取得 **KRBTGT Hash** 偽造 Kerberos TGT，進而向 KDC 請求任意服務的 TGS，取得對網域資源的存取權限。
+
+除了用於橫向移動外，Golden Ticket 也是 Active Directory 中最典型的 **Domain Persistence 技術之一**。只要攻擊者持有 **KRBTGT Hash**，就可以持續偽造 Kerberos Ticket，即使帳號或憑證被重置，仍然能重新取得對 Domain 的控制權。
+
 ### Module 4
 - Bypass Defenses (MDE and MDI)
 - Monitoring and Detections
