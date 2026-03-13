@@ -1159,7 +1159,7 @@ Access Service
 
 在 Kerberos 中，所有 Ticket 都是由一個特殊帳號簽發：**KRBTGT**。
 
-如果攻擊者取得 **KRBTGT Hash**，就可以偽造 Kerberos Ticket，這就是著名的 **Golden Ticket Attack**。
+如果攻擊者取得 **KRBTGT Hash**，就可以偽造 Kerberos Ticket = **Golden Ticket Attack**。
 
 Golden Ticket 允許攻擊者：
 
@@ -1169,7 +1169,9 @@ Golden Ticket 允許攻擊者：
 
 在前面的橫向移動章節中已經介紹過，攻擊者可以透過取得 **KRBTGT Hash** 偽造 Kerberos TGT，進而向 KDC 請求任意服務的 TGS，取得對網域資源的存取權限。
 
-除了用於橫向移動外，Golden Ticket 也是 Active Directory 中最典型的 **Domain Persistence 技術之一**。只要攻擊者持有 **KRBTGT Hash**，就可以持續偽造 Kerberos Ticket，即使帳號或憑證被重置，仍然能重新取得對 Domain 的控制權。
+除了用於橫向移動外，Golden Ticket 最典型的 **Domain Persistence 技術之一** 只要攻擊者持有 **KRBTGT Hash**，就可以持續偽造 Kerberos Ticket，即使帳號或憑證被重置，仍然能重新取得對 Domain 的控制權。
+
+
 
 ### Module 4
 - Bypass Defenses (MDE and MDI)
