@@ -1159,7 +1159,7 @@ Access Service
 
 在 Kerberos 中，所有 Ticket 都是由一個特殊帳號簽發：**KRBTGT**。
 
-如果攻擊者取得 **KRBTGT Hash**，就可以偽造 Kerberos Ticket = **Golden Ticket Attack**。
+如果攻擊者取得 **KRBTGT Hash**，就可以偽造 Kerberos Ticket 這種攻擊方式被稱為 **Golden Ticket Attack**。
 
 Golden Ticket 允許攻擊者：
 
@@ -1178,6 +1178,15 @@ Golden Ticket 允許攻擊者：
 
 攻擊者可以利用這些資訊偽造 Kerberos TGT，並冒充任意使用者，Golden Ticket 的 **Ticket Lifetime** 可以由攻擊者自行設定，例如： **10 years**
 
+Silver Ticket 是一種 **Kerberos Ticket Forgery 攻擊** 攻擊者透過取得 **Service Account Hash**，偽造 **Kerberos Service Ticket (TGS)**，進而取得對特定服務的存取權限，與 Golden Ticket 不同的是，Silver Ticket **不需要與 Domain Controller (DC) 互動**，攻擊者可以直接使用偽造的 TGS 存取目標服務。
+
+
+| 攻擊          | 偽造  | 需要什麼 Hash     | 權限範圍       |
+| ------------- | --- | -------------------- | ---------- |
+| Golden Ticket | TGT | KRBTGT Hash          | 整個 Domain  |
+| Silver Ticket | TGS | Service Account Hash | 單一 Service |
+
+
 ### Module 4
 - Bypass Defenses (MDE and MDI)
 - Monitoring and Detections
@@ -1193,7 +1202,7 @@ Golden Ticket 允許攻擊者：
 ```
 
 Lab 入口資訊
-- Portal URL： `https://enterprisesecurity.io`
+- Portal URL： **https://enterprisesecurity.io**
 - 登入後可查看：
   - 訂閱開始與結束時間
   - Lab 存取剩餘時間
