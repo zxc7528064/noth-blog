@@ -1139,6 +1139,16 @@ Domain computer 載入惡意 policy
 - Domain Persistensce
 - Cross Trust Attacks
 
+AD Persistence
+├─ Golden Ticket
+├─ Silver Ticket
+├─ Diamond Ticket
+├─ Skeleton Key
+├─ Shadow Credentials
+├─ SID History
+├─ AdminSDHolder
+└─ GPO Persistence
+
 在 Active Directory 攻擊流程中，許多初學者的目標往往是取得 **Domain Admin** 然而在成熟的紅隊攻擊模型中 **Domain Admin 並不是最終目標**。
 真正的目標是能夠 **長期控制 Active Directory** 攻擊者通常會建立 **Domain Persistence**，確保即使帳號或憑證被重置，仍然能重新取得對 AD 的控制權。
 
@@ -1229,6 +1239,116 @@ Machine Account 的格式通常為：
 
 因此 Machine Account Hash 也是常見的 Silver Ticket 攻擊來源。
 
+Diamond Ticket： 並不是 **偽造 Kerberos Ticket** 而是修改合法的 TGT (Ticket Granting Ticket)
+
+核心概念：
+
+```bash=
+合法 Kerberos Authentication
+↓
+取得合法 TGT
+↓
+解密 TGT
+↓
+修改 Ticket 內容
+↓
+使用 KRBTGT key 重新加密
+↓
+重新注入並使用 Ticket
+```
+
+Domain Controller 在驗證 Ticket 時，主要檢查： **Ticket 是否能用 KRBTGT key 成功解密**
+如果 **Signature Valid** Domain Controller 就會接受該 Ticket。
+
+Golden Ticket vs Diamond Ticket
+
+| 攻擊類型 | 偽造內容 | 需要 Hash | 權限範圍 | OPSEC |
+|----------|----------|-----------|----------|-------|
+| Golden Ticket | TGT | KRBTGT Hash | 整個 Domain | 高風險 |
+| Silver Ticket | TGS | Service Hash | 單一 Service | 中等 |
+| Diamond Ticket | 修改 TGT | KRBTGT Hash | 整個 Domain | 較低 |
+
+Skeleton Key 是一種 Active Directory persistence 技術。
+
+核心概念：
+
+```bash=
+在 Domain Controller 的 LSASS (LSA) process 中注入惡意程式
+↓
+修改認證邏輯
+↓
+允許一個「萬用密碼」登入所有帳號
+```
+
+也就是：
+```bash=
+任何帳號 + Skeleton Key password
+↓
+Authentication success
+```
+
+DSRM 是 **Active Directory 的維護與復原模式**。
+
+每一台 Domain Controller 在安裝 AD 時，都會建立一個 **DSRM Administrator 帳號**
+
+核心概念：
+
+```bash=
+取得 Domain Admin 權限
+↓
+Dump DSRM Administrator Hash
+↓
+保存該 Hash
+↓
+未來可再次登入 Domain Controller
+```
+
+DSRM Administrator 本質上是： **Domain Controller 的 Local Administrator**
+
+因此如果攻擊者取得 **DSRM Hash**，就可以在未來重新存取 **Domain Controller**。
+
+SSP 是 Windows 的 **Authentication Plugin Mechanism**，負責處理系統的認證流程，例如：
+- NTLM
+- Kerberos
+- Negotiate
+- Schannel
+
+Windows 的驗證流程：
+
+```bash=
+User Login
+↓
+LSASS
+↓
+Security Support Provider (SSP)
+↓
+Authentication
+```
+
+核心概念：
+
+攻擊者透過註冊惡意 SSP DLL，使其被 **LSASS 在登入時自動載入** 從而攔截登入憑證。
+
+```bash=
+Domain Admin 權限
+↓
+在系統中放入惡意 SSP DLL
+↓
+註冊 SSP
+↓
+重啟系統
+↓
+LSASS 載入 SSP
+↓
+攔截登入憑證
+```
+
+可以取得：
+- Username
+- Password
+- Domain
+
+---
 
 ### Module 4
 - Bypass Defenses (MDE and MDI)
