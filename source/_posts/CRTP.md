@@ -1348,6 +1348,10 @@ LSASS 載入 SSP
 - Password
 - Domain
 
+SSP 會註冊在 **HKLM\SYSTEM\CurrentControlSet\Control\Lsa\Security Packages**
+
+SSP persistence 是透過 Registry 註冊惡意 Authentication Provider
+
 ---
 
 ### Module 4
