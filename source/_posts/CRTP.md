@@ -1139,7 +1139,8 @@ Domain computer 載入惡意 policy
 - Domain Persistensce
 - Cross Trust Attacks
 
-在 Active Directory 攻擊流程中，許多初學者的目標往往是取得 **Domain Admin**。然而在成熟的紅隊攻擊模型中 **Domain Admin 並不是最終目標**。真正的目標是能夠 **長期控制 Active Directory**，攻擊者通常會建立 **Domain Persistence**，確保即使帳號或憑證被重置，仍然能重新取得對 AD 的控制權。
+在 Active Directory 攻擊流程中，許多初學者的目標往往是取得 **Domain Admin** 然而在成熟的紅隊攻擊模型中 **Domain Admin 並不是最終目標**。
+真正的目標是能夠 **長期控制 Active Directory** 攻擊者通常會建立 **Domain Persistence**，確保即使帳號或憑證被重置，仍然能重新取得對 AD 的控制權。
 
 Active Directory 的身份驗證核心機制是 **Kerberos**。
 
@@ -1176,15 +1177,57 @@ Golden Ticket 允許攻擊者：
 - User RID
 - KRBTGT Hash
 
-攻擊者可以利用這些資訊偽造 Kerberos TGT，並冒充任意使用者，Golden Ticket 的 **Ticket Lifetime** 可以由攻擊者自行設定，例如： **10 years**
+攻擊者可以利用這些資訊偽造 Kerberos TGT，並冒充任意使用者，Golden Ticket 的 **Ticket Lifetime** 可以由攻擊者自行設定，例如：**10 years**
 
-Silver Ticket 是一種 **Kerberos Ticket Forgery 攻擊** 攻擊者透過取得 **Service Account Hash**，偽造 **Kerberos Service Ticket (TGS)**，進而取得對特定服務的存取權限，與 Golden Ticket 不同的是，Silver Ticket **不需要與 Domain Controller (DC) 互動**，攻擊者可以直接使用偽造的 TGS 存取目標服務。
+Silver Ticket 在 Active Directory 攻擊中不僅可用於 **橫向移動（Lateral Movement）**，在某些情況下也可以作為 **Persistence 技術**。
 
+由於 Silver Ticket 是攻擊者 **自行偽造 Kerberos Service Ticket (TGS)**，服務端只會使用自己的 **Service Key** 驗證票證是否合法，因此不需要與 **Domain Controller (KDC)** 進行驗證。
 
-| 攻擊          | 偽造  | 需要什麼 Hash     | 權限範圍       |
-| ------------- | --- | -------------------- | ---------- |
-| Golden Ticket | TGT | KRBTGT Hash          | 整個 Domain  |
-| Silver Ticket | TGS | Service Account Hash | 單一 Service |
+這代表只要攻擊者持有 **Service Account Hash**，就可以在任何時候重新生成合法的 Kerberos Service Ticket (TGS)。
+
+核心概念：
+
+```bash=
+Service Account Hash
+↓
+偽造 Kerberos Service Ticket (TGS)
+↓
+注入 Ticket
+↓
+持續存取該服務
+```
+
+與 Golden Ticket 的差異：
+
+| 攻擊          | 偽造  | 需要什麼 Hash     | 權限範圍      | Persistence 強度 |
+| ------------- | --- | -------------------- | ---------- | --------------- |
+| Golden Ticket | TGT | KRBTGT Hash          | 整個 Domain  | 非常高 | 
+| Silver Ticket | TGS | Service Account Hash | 單一 Service | 中等 |
+
+Silver Ticket 通常無法直接控制整個 Domain，但可以對特定服務維持長期存取權。
+
+在 Active Directory 環境中，許多服務其實是使用 **Machine Account（電腦帳號）** 運行，而不是一般使用者帳號。
+
+Machine Account 的格式通常為：
+- WEB01$
+- SQL01$
+- DC01$
+
+許多 Windows 服務（如 SMB、WinRM、WMI、IIS 等）在 Domain 環境中，實際上是以 **Machine Account** 的身分運作。
+
+這代表如果攻擊者取得某台主機的 **Machine Account Hash**，就可以偽造該主機服務的 Kerberos Service Ticket。
+
+例如：
+
+```bash= 
+取得 WEB01$ NTLM Hash
+↓
+偽造 CIFS/WEB01 的 TGS
+↓
+存取 \\WEB01\C$
+```
+
+因此 Machine Account Hash 也是常見的 Silver Ticket 攻擊來源。
 
 
 ### Module 4
