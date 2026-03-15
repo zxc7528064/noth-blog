@@ -1139,6 +1139,7 @@ Domain computer 載入惡意 policy
 - Domain Persistensce
 - Cross Trust Attacks
 
+```bash=
 AD Persistence
 ├─ Golden Ticket
 ├─ Silver Ticket
@@ -1148,6 +1149,7 @@ AD Persistence
 ├─ SID History
 ├─ AdminSDHolder
 └─ GPO Persistence
+```
 
 在 Active Directory 攻擊流程中，許多初學者的目標往往是取得 **Domain Admin** 然而在成熟的紅隊攻擊模型中 **Domain Admin 並不是最終目標**。
 真正的目標是能夠 **長期控制 Active Directory** 攻擊者通常會建立 **Domain Persistence**，確保即使帳號或憑證被重置，仍然能重新取得對 AD 的控制權。
