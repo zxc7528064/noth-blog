@@ -1139,16 +1139,26 @@ Domain computer 載入惡意 policy
 - Domain Persistensce
 - Cross Trust Attacks
 
+AD 持久化攻擊技術分類
+
 ```bash=
 AD Persistence
-├─ Golden Ticket
-├─ Silver Ticket
-├─ Diamond Ticket
-├─ Skeleton Key
-├─ Shadow Credentials
-├─ SID History
-├─ AdminSDHolder
-└─ GPO Persistence
+│
+├─ Kerberos Abuse
+│   ├─ Golden Ticket
+│   ├─ Silver Ticket
+│   └─ Diamond Ticket
+│
+├─ Credential Backdoor
+│   ├─ Skeleton Key
+│   └─ Shadow Credentials
+│
+├─ Privilege Manipulation
+│   ├─ SID History
+│   └─ AdminSDHolder
+│
+└─ Policy / Configuration Abuse
+    └─ GPO Persistence
 ```
 
 在 Active Directory 攻擊流程中，許多初學者的目標往往是取得 **Domain Admin** 然而在成熟的紅隊攻擊模型中 **Domain Admin 並不是最終目標**。
@@ -1172,7 +1182,7 @@ Access Service
 
 在 Kerberos 中，所有 Ticket 都是由一個特殊帳號簽發：**KRBTGT**。
 
-如果攻擊者取得 **KRBTGT Hash**，就可以偽造 Kerberos Ticket 這種攻擊方式被稱為 **Golden Ticket Attack**。
+如果攻擊者取得 **KRBTGT Hash** 就可以偽造 Kerberos Ticket 這種攻擊方式被稱為 **Golden Ticket Attack**。
 
 Golden Ticket 允許攻擊者：
 
@@ -1193,9 +1203,9 @@ Golden Ticket 允許攻擊者：
 
 Silver Ticket 在 Active Directory 攻擊中不僅可用於 **橫向移動（Lateral Movement）**，在某些情況下也可以作為 **Persistence 技術**。
 
-由於 Silver Ticket 是攻擊者 **自行偽造 Kerberos Service Ticket (TGS)**，服務端只會使用自己的 **Service Key** 驗證票證是否合法，因此不需要與 **Domain Controller (KDC)** 進行驗證。
+由於 Silver Ticket 是攻擊者 **自行偽造 Kerberos Service Ticket (TGS)** 服務端只會使用自己的 **Service Key** 驗證票證是否合法，因此不需要與 **Domain Controller (KDC)** 進行驗證。
 
-這代表只要攻擊者持有 **Service Account Hash**，就可以在任何時候重新生成合法的 Kerberos Service Ticket (TGS)。
+代表只要攻擊者持有 **Service Account Hash** 就可以在任何時候重新生成合法的 Kerberos Service Ticket (TGS)。
 
 核心概念：
 
@@ -1227,7 +1237,7 @@ Machine Account 的格式通常為：
 
 許多 Windows 服務（如 SMB、WinRM、WMI、IIS 等）在 Domain 環境中，實際上是以 **Machine Account** 的身分運作。
 
-這代表如果攻擊者取得某台主機的 **Machine Account Hash**，就可以偽造該主機服務的 Kerberos Service Ticket。
+這代表如果攻擊者取得某台主機的 **Machine Account Hash** 就可以偽造該主機服務的 Kerberos Service Ticket。
 
 例如：
 
@@ -1270,28 +1280,29 @@ Golden Ticket vs Diamond Ticket
 | Silver Ticket | TGS | Service Hash | 單一 Service | 中等 |
 | Diamond Ticket | 修改 TGT | KRBTGT Hash | 整個 Domain | 較低 |
 
-Skeleton Key 是一種 Active Directory persistence 技術。
+Skeleton Key ： 一種 Active Directory persistence 技術。
 
 核心概念：
+在 Domain Controller 的 LSASS (Local Security Authority Subsystem Service) process 中
+注入惡意程式碼，修改 Kerberos / NTLM 的認證流程。
 
 ```bash=
-在 Domain Controller 的 LSASS (LSA) process 中注入惡意程式
+LSASS memory patch
 ↓
-修改認證邏輯
+authentication logic modified
 ↓
-允許一個「萬用密碼」登入所有帳號
-```
+允許特定的 master password 通過驗證
 
-也就是：
-```bash=
-任何帳號 + Skeleton Key password
+任何有效帳號 + Skeleton Key password
 ↓
 Authentication success
 ```
 
 DSRM 是 **Active Directory 的維護與復原模式**。
 
-每一台 Domain Controller 在安裝 AD 時，都會建立一個 **DSRM Administrator 帳號**
+當 Domain Controller 安裝 Active Directory 時，系統會建立一個 **DSRM Administrator** 帳號，此帳號用於在 Directory Services Restore Mode 下登入並進行 AD 修復。
+
+DSRM Administrator 本質上可以視為： 利用 Domain Controller 的本機管理帳號作為後門存取方式。
 
 核心概念：
 
@@ -1305,11 +1316,9 @@ Dump DSRM Administrator Hash
 未來可再次登入 Domain Controller
 ```
 
-DSRM Administrator 本質上是： **Domain Controller 的 Local Administrator**
+因此即使 **Domain Admin 帳號被重設、或 AD 密碼變更**，攻擊者仍可透過 **DSRM Administrator** 重新存取 Domain Controller。
 
-因此如果攻擊者取得 **DSRM Hash**，就可以在未來重新存取 **Domain Controller**。
-
-SSP 是 Windows 的 **Authentication Plugin Mechanism**，負責處理系統的認證流程，例如：
+SSP（Security Support Provider）是 Windows 的 **Authentication Plugin Mechanism**，負責處理系統的認證流程，例如：
 - NTLM
 - Kerberos
 - Negotiate
@@ -1328,8 +1337,7 @@ Authentication
 ```
 
 核心概念：
-
-攻擊者透過註冊惡意 SSP DLL，使其被 **LSASS 在登入時自動載入** 從而攔截登入憑證。
+攻擊者透過註冊惡意 SSP DLL，使其被 **LSASS 在登入時自動載入** 從而攔截使用者登入憑證(Username、Password、Domain)。
 
 ```bash=
 Domain Admin 權限
@@ -1345,16 +1353,23 @@ LSASS 載入 SSP
 攔截登入憑證
 ```
 
-可以取得：
-- Username
-- Password
-- Domain
+SSP 會註冊於以下 Registry：
 
-SSP 會註冊在 **HKLM\SYSTEM\CurrentControlSet\Control\Lsa\Security Packages**
+```bash=
+HKLM\SYSTEM\CurrentControlSet\Control\Lsa\Security Packages
+```
 
-SSP persistence 是透過 Registry 註冊惡意 Authentication Provider
+當系統啟動時：
 
----
+```bash=
+LSASS
+↓
+讀取 Security Packages
+↓
+載入 SSP DLL
+```
+
+因此攻擊者可透過 Registry 註冊惡意 Authentication Provider 建立持久化。
 
 ### Module 4
 - Bypass Defenses (MDE and MDI)
