@@ -1099,6 +1099,49 @@ Offline Crack
 取得 Service Account
 ```
 
+Kerberos Delegation 是一種 **服務可以代表使用者存取其他服務的機制**。
+
+核心概念：
+```bash=
+User → Service A → Service B
+```
+Service A 可以使用 **使用者的身份** 去存取其他服務。
+
+常見應用場景：
+```bash=
+User
+ ↓
+Web Server
+ ↓
+SQL Server
+```
+
+當使用者登入 Web Server 時，Web Server 需要 代表使用者身份 存取 SQL Server，因此需要使用 **Kerberos Delegation**
+
+主要有三種 Delegation：
+- Unconstrained Delegation
+- Constrained Delegation
+- Resource-Based Constrained Delegation (RBCD)
+
+其中 **Unconstrained Delegation** 風險最高。
+
+Unconstrained Delegation 原理：
+如果一台主機被設定為 **Trusted for delegation** 當使用者登入該主機時，KDC 會將使用者的 TGT (Ticket Granting Ticket) 傳給該主機，因此 User TGT 會被儲存在該服務主機上，因此該服務可以代表使用者存取其他服務。
+
+如果攻擊者控制了 Unconstrained Delegation 主機
+
+```bash=
+控制 Unconstrained Delegation 主機
+        ↓
+等待高權限使用者登入
+        ↓
+取得使用者 TGT
+        ↓
+使用 TGT 冒充該使用者
+```
+
+如果登入的使用者是 Domain Admin 攻擊者即可取得 Domain Admin 權限。
+
 ---
 
 網域層級提權（Domain Privilege Escalation）
