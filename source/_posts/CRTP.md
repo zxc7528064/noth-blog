@@ -1143,15 +1143,18 @@ Unconstrained Delegation 原理：
 如果登入的使用者是 Domain Admin 攻擊者即可取得 Domain Admin 權限。
 
 RBCD(Resource-Based Constrained Delegation) 是 **Kerberos Delegation 的一種形式** 
-核心概念：
-由 **目標主機 (Target Resource)** 決定誰可以代表使用者存取自己
+
+核心概念： 由 **目標主機 (Target Resource)** 決定誰可以代表使用者存取自己
 
 這與傳統 Delegation 的差異是：
+
+```bash=
 Traditional Delegation → Service 決定可以代理誰
 RBCD → Target Resource 決定誰可以代理自己
+```
 
-主要依賴 AD 中的一個屬性 **msDS-AllowedToActOnBehalfOfOtherIdentity** 此屬性定義 **哪些帳號可以代表使用者存取該主機**
-如果攻擊者可以修改該屬性，就可以建立 RBCD Delegation。
+主要依賴 AD 中的一個屬性 **msDS-AllowedToActOnBehalfOfOtherIdentity** 
+屬性定義 **哪些帳號可以代表使用者存取該主機** 如果攻擊者可以修改該屬性，就可以建立 RBCD Delegation。
 
 RBCD 通常搭配 **Kerberos S4U (Service for User)** 機制：
 - S4U2Self
@@ -1170,9 +1173,10 @@ S4U2Proxy
 存取目標服務
 ```
 
-透過 S4U 機制，服務可以 **冒充任意使用者存取目標服務**。
+透過 S4U 機制，服務可以 **冒充任意使用者存取目標服務**
 
 RBCD 攻擊流程：
+
 ```bash=
 取得 Domain User
 ↓
