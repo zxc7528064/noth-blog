@@ -784,7 +784,6 @@ LSASS 負責：
 常見工具：
 - mimikatz
 - sekurlsa
-- dumpert
 - procdump
 
 LSASS 是 Windows 系統中 **最容易被監控的 process**，因此 Dump LSASS 常會觸發告警。
@@ -1076,6 +1075,29 @@ Process：
 - WinRM 使用 5985 / 5986 port
 - 成功連線會建立 wsmprovhost.exe
 - 取得 Local Administrator 權限可進行 lateral movement
+
+Kerberoasting：是一種 Active Directory Credential Extraction 攻擊技術。
+
+目的：取得 Service Account 密碼
+條件：只需要 Domain User 權限，因為任何 Domain User 都可以請求 SPN 的 Service Ticket
+
+核心概念：
+
+```bash=
+取得 Domain User
+        ↓
+列舉 SPN
+        ↓
+請求 Service Ticket
+        ↓
+取得 Kerberos TGS
+        ↓
+擷取 TGS 內的加密資料
+        ↓
+Offline Crack
+        ↓
+取得 Service Account
+```
 
 ---
 
@@ -1420,6 +1442,8 @@ ACL 自動套用到 Protected Groups
 ```
 
 利用的是：AdminSDHolder ACL Template + SDProp 同步機制。
+
+
 
 ---
 
