@@ -1143,22 +1143,20 @@ AD 持久化攻擊技術分類
 
 ```bash=
 AD Persistence
-│
 ├─ Kerberos Abuse
-│   ├─ Golden Ticket
-│   ├─ Silver Ticket
-│   └─ Diamond Ticket
+│  ├─ Golden Ticket
+│  ├─ Silver Ticket
 │
 ├─ Credential Backdoor
-│   ├─ Skeleton Key
-│   └─ Shadow Credentials
+│  ├─ Skeleton Key
+│  └─ SSP Persistence
 │
-├─ Privilege Manipulation
-│   ├─ SID History
-│   └─ AdminSDHolder
+├─ ACL Abuse
+│  └─ AdminSDHolder
 │
-└─ Policy / Configuration Abuse
-    └─ GPO Persistence
+└─ Configuration Abuse
+   ├─ GPO Persistence
+   └─ DSRM
 ```
 
 在 Active Directory 攻擊流程中，許多初學者的目標往往是取得 **Domain Admin** 然而在成熟的紅隊攻擊模型中 **Domain Admin 並不是最終目標**。
@@ -1371,6 +1369,60 @@ LSASS
 
 因此攻擊者可透過 Registry 註冊惡意 Authentication Provider 建立持久化。
 
+AdminSDHolder ACL 濫用：是一種利用 **Active Directory 權限機制（ACL）** 建立長期控制權的 Persistence 技術。
+
+Active Directory 中存在一組被稱為 **Protected Groups** 的高權限群組。  
+由於這些群組擁有極高的系統權限，AD 會對其 **ACL（Access Control List）** 進行額外保護。
+常見的 Protected Groups 包括：
+- Domain Admins
+- Enterprise Admins
+- Administrators
+- Schema Admins
+- Account Operators
+- Server Operators
+- Backup Operators
+- Print Operators
+
+Active Directory 中存在一個特殊物件 **AdminSDHolder** 用於保存 Protected Groups 的 ACL 模板。
+
+```bash=
+CN=AdminSDHolder,CN=System,DC=domain,DC=local
+```
+
+SDProp 機制：Domain Controller 會定期執行一個程序（預設行為每 60 分鐘執行一次）
+
+其運作流程：
+
+```bash=
+AdminSDHolder ACL
+        ↓
+SDProp process
+        ↓
+同步到 Protected Objects ACL
+```
+
+也就是： Protected Groups 的 ACL 會定期被 AdminSDHolder ACL 覆蓋
+
+核心概念：
+
+```bash=
+取得 Domain Admin 權限
+        ↓
+修改 AdminSDHolder ACL
+        ↓
+給攻擊者帳號 FullControl / WriteDACL
+        ↓
+等待 SDProp 執行
+        ↓
+ACL 自動套用到 Protected Groups
+        ↓
+攻擊者持續擁有高權限
+```
+
+利用的是：AdminSDHolder ACL Template + SDProp 同步機制。
+
+---
+
 ### Module 4
 - Bypass Defenses (MDE and MDI)
 - Monitoring and Detections
@@ -1409,7 +1461,7 @@ Lab 入口資訊
 
 ## 總結
 
-過去在軍中環境的觀察來說，OSCP 往往已被視為一個相當高的技術門檻，甚至可以說是「頂標」。在那樣的體系裡，能通過 OSCP 已經明顯高於平均水準。但如果放到具有實戰強度的乙方市場環境來看，OSCP 更像是一個起點，而不是終點。它代表的是基本滲透方法論與攻擊流程的建立，但如果單純以「紅隊實戰能力成長」為目標，而非證照收藏，可以依照能力堆疊邏輯，規劃如下順序：
+過去在軍中環境的觀察來說，OSCP 往往已被視為一個相當高的技術門檻，甚至可以說是「頂標」。在那樣的體系裡，能通過 OSCP 已經明顯高於平均水準。但如果放到具有實戰強度的乙方市場環境來看，OSCP 更像是一個起點，而不是終點。它代表的是基本滲透方法論與攻擊流程的建立，但如果單純以 **紅隊實戰能力成長** 為目標，而非證照收藏，可以依照能力堆疊邏輯，規劃如下順序：
 
 ```bash=
 OSCP → CRTP → OSEP → OSWE → OSED（選修）
