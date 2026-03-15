@@ -1142,139 +1142,53 @@ Unconstrained Delegation 原理：
 
 如果登入的使用者是 Domain Admin 攻擊者即可取得 Domain Admin 權限。
 
-1 RBCD 是什麼
+RBCD(Resource-Based Constrained Delegation) 是 **Kerberos Delegation 的一種形式** 
+核心概念：
+由 **目標主機 (Target Resource)** 決定誰可以代表使用者存取自己
 
-RBCD 是 Kerberos Delegation 的一種形式。
+這與傳統 Delegation 的差異是：
+Traditional Delegation → Service 決定可以代理誰
+RBCD → Target Resource 決定誰可以代理自己
 
-全名：
+主要依賴 AD 中的一個屬性 **msDS-AllowedToActOnBehalfOfOtherIdentity** 此屬性定義 **哪些帳號可以代表使用者存取該主機**
+如果攻擊者可以修改該屬性，就可以建立 RBCD Delegation。
 
-Resource-Based Constrained Delegation
+RBCD 通常搭配 **Kerberos S4U (Service for User)** 機制：
+- S4U2Self
+- S4U2Proxy
 
-其核心概念：
+流程概念：
+```
+Service
+↓
+S4U2Self
+↓
+取得 impersonation ticket
+↓
+S4U2Proxy
+↓
+存取目標服務
+```
 
-由「目標主機」決定誰可以代表使用者存取自己
+透過 S4U 機制，服務可以 **冒充任意使用者存取目標服務**。
 
-與傳統 Delegation 的差別：
-
-Traditional Delegation
-→ 由 Service Account 控制
-
-RBCD
-→ 由 Target Resource 控制
-2 RBCD 的控制屬性
-
-RBCD 主要依賴 AD 中的一個屬性：
-
-msDS-AllowedToActOnBehalfOfOtherIdentity
-
-這個屬性決定：
-
-哪些帳號可以代表使用者存取該主機
-
-換句話說：
-
-誰可以 impersonate 使用者
-3 RBCD 攻擊條件
-
-常見攻擊條件：
-
-攻擊者可以控制一個帳號 (User / Computer)
-
-並且可以：
-
-修改目標主機的 ACL
-
-如果攻擊者可以寫入：
-
-msDS-AllowedToActOnBehalfOfOtherIdentity
-
-就可以建立 RBCD。
-
-4 Machine Account 特性
-
-Active Directory 中有一個重要機制：
-
-MachineAccountQuota
-
-預設：
-
-Domain User 可以建立 10 個 Computer Account
-
-因此攻擊者可以：
-
-建立新的 Computer Account
-
-並利用它進行 Delegation 攻擊。
-
-5 RBCD 攻擊流程
-
-典型攻擊流程：
-
+RBCD 攻擊流程：
+```bash=
 取得 Domain User
-        ↓
+↓
 建立惡意 Computer Account
-        ↓
-修改 Target Host 的 RBCD 屬性
-        ↓
-允許惡意主機代表使用者
-        ↓
-使用 Kerberos S4U 攻擊
-        ↓
-取得目標主機權限
-6 S4U 攻擊
-
-RBCD 通常搭配 Kerberos S4U (Service for User)。
-
-主要包含兩個階段：
-
-S4U2Self
-S4U2Proxy
-
-流程：
-
-Attacker Service
-        ↓
-S4U2Self
-        ↓
-取得 User Ticket
-        ↓
-S4U2Proxy
-        ↓
-取得 Target Service Ticket
-
-這樣攻擊者就可以：
-
-冒充任何使用者
-7 攻擊效果
-
-成功後攻擊者可以：
-
-以高權限使用者身份存取目標主機
-
-例如：
-
-Administrator
-Domain Admin
-
-通常可以達到：
-
-Lateral Movement
-Privilege Escalation
-
-
-總結
-
-RBCD 是一種 Active Directory Delegation 攻擊技術。
-
-核心重點：
-
-使用 msDS-AllowedToActOnBehalfOfOtherIdentity
-
-利用 MachineAccountQuota 建立 Computer Account
-
+↓
+修改 Target Host 的 ACL
+↓
+寫入 msDS-AllowedToActOnBehalfOfOtherIdentity
+↓
+建立 RBCD Delegation
+↓
 使用 Kerberos S4U 進行 impersonation
+↓
+取得 Target Host 存取權
+```
 
-取得目標主機的存取權
 ---
 
 網域層級提權（Domain Privilege Escalation）
