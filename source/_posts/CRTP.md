@@ -134,9 +134,7 @@ https://github.com/zxc7528064/SRT-Translator
 
 ![sucess_srt_zn](/img/sucess_srt_zn.png)
 
-### Active Directory 攻擊框架
-
-待畫心智圖
+## 課程
 
 ### Module 1 
 - Introduction to Active Directory and Attack Methodology
@@ -617,13 +615,11 @@ Local Administrator
 SYSTEM 權限
 ```
 
-漏洞型（Patch / Exploit）：
-利用系統尚未修補的漏洞進行提權
+漏洞型（Patch / Exploit）：利用系統尚未修補的漏洞進行提權
 如：
 - 已知 Local Privilege Escalation CVE
 
-憑證型（Credential Exposure）：
-透過系統遺留的明文憑證進行提權。
+憑證型（Credential Exposure）：透過系統遺留的明文憑證進行提權。
 包括：
 - unattended.xml（自動部署檔）
 - 自動登入密碼（AutoLogon）
@@ -658,7 +654,7 @@ Foothold
 嘗試提升為 SYSTEM
 ```
 
-本地特權提升的關鍵在於尋找 **憑證殘留** 與 **系統設定錯誤**，而不是單純依賴漏洞。
+本地特權提升的關鍵在於尋找 **憑證殘留** 與 **系統設定錯誤** 而不是單純依賴漏洞。
 
 Feature Abuse（企業服務功能濫用）
 
@@ -693,8 +689,7 @@ Command execution on host
 
 如果 Jenkins 服務是 SYSTEM 執行 → 直接 SYSTEM shell
 
-Token Impersonation：
-是讓 Process 中的某個 **Thread** 暫時使用另一個使用者的 **Access Token**，以該使用者身份存取系統資源。
+Token Impersonation：是讓 Process 中的某個 **Thread** 暫時使用另一個使用者的 **Access Token**，以該使用者身份存取系統資源。
 
 在 Windows 中：
 - Process 會持有 Primary Token (預設身份)
@@ -1961,6 +1956,10 @@ Lab 入口資訊
 - 依地理位置選擇最近區域
 - 降低延遲 (Latency)
 - 確保操作流暢度
+
+## Active Directory Roadmap
+
+待畫心智圖
 
 ## 總結
 
