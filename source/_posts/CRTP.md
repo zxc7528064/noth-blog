@@ -1656,6 +1656,76 @@ Kerberos 認證時帶入該 SID
 獲得 Enterprise Admin 權限
 ```
 
+利用 **krbtgt secret** 偽造 **Golden Ticket**，並透過在 Kerberos Ticket 中加入 **ExtraSID**，可以從 **Child Domain Admin 提權到 Enterprise Admin**，最終控制整個 **Forest**。
+
+當攻擊者取得 **Child Domain 的 Domain Admin** 時，目標是：
+- 提權到 **Enterprise Admin**
+- 控制 **Root Domain**
+- 最終 **Forest Compromise**
+
+攻擊流程：
+
+```bash=
+Initial Foothold
+      ↓
+Local Privilege Escalation
+      ↓
+Domain Admin (Child Domain)
+      ↓
+DCSync
+      ↓
+Dump krbtgt hash
+      ↓
+Golden Ticket + ExtraSID
+      ↓
+Enterprise Admin
+      ↓
+Forest Compromise
+```
+
+Golden Ticket + ExtraSID
+
+攻擊者可以在偽造的 Kerberos TGT 中加入 ExtraSID。
+
+加入的 SID：
+
+```bash=
+Enterprise Admin SID
+```
+
+範例：
+
+```bash=
+S-1-5-21-ROOTDOMAIN-519
+```
+
+說明：
+- 519 = Enterprise Admins
+
+攻擊原理
+
+Kerberos 驗證流程：
+
+```bash=
+Child Domain DC 簽發 TGT
+        ↓
+Ticket 被 Root Domain DC 接受
+        ↓
+Root Domain DC 信任 Child Domain KDC
+        ↓
+Root Domain DC 只驗證 Ticket 是否可解密
+```
+
+Root Domain 不會重新驗證 Ticket 中的 SID。
+
+因此如果 Ticket 內包含：
+
+```bash=
+Enterprise Admin SID
+```
+
+Root Domain 會直接授予 Enterprise Admin 權限。
+
 ### Module 4
 - Bypass Defenses (MDE and MDI)
 - Monitoring and Detections
