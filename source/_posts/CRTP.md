@@ -1193,6 +1193,77 @@ RBCD 攻擊流程：
 取得 Target Host 存取權
 ```
 
+在 Active Directory 環境中 **Microsoft SQL Server** 是非常常見的服務，通常作為企業系統與應用程式的資料庫後端。
+
+常見場景包括：
+- 企業內部業務系統
+- Web Application Database
+- ERP / CRM 系統
+- 各種內部管理平台
+
+因此在大型企業 AD 環境中，通常會存在 **大量 SQL Server**
+
+在紅隊滲透測試中，SQL Server 經常被忽略，但實際上它可以提供 **Lateral Movement 的機會**。
+
+原因：**Domain User 可能被映射到 SQL Server 的 Database Role**
+
+即使某個使用者在 AD 中沒有任何特殊權限：
+- 不是 Local Admin
+- 沒有 AD ACL
+- 沒有高權限群組
+
+該使用者仍然可能在 SQL Server 中具有權限。
+
+例如：
+```
+db_datareader
+db_datawriter
+db_owner
+sysadmin
+```
+
+代表：
+
+```
+Low Privilege Domain User
+        ↓
+SQL Server Access
+```
+
+可能成為攻擊突破點。
+
+SQL Server 具有一個重要功能： **Linked Servers**
+
+Linked Server 允許一台 SQL Server 查詢另一台 SQL Server 的資料。
+
+結構如下：
+
+```
+SQL Server A
+      ↓
+Linked Server
+      ↓
+SQL Server B
+```
+
+攻擊者可以利用 Linked Server，實現跨主機存取，進一步橫向移動。
+
+攻擊流程：
+
+```bash=
+Initial Foothold
+      ↓
+Low Privilege Domain User
+      ↓
+Enumerate SQL Servers
+      ↓
+Access SQL Server
+      ↓
+Discover Linked Servers
+      ↓
+Pivot to Another Server
+```
+
 ---
 
 網域層級提權（Domain Privilege Escalation）
