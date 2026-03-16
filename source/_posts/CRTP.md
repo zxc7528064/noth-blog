@@ -34,7 +34,7 @@ CRTP 是一張專門針對 AD 攻擊路徑與權限濫用技術的證照。
 https://www.enterprisesecurity.io/
 ```
 
-成功登入後，可在 Dashboard 中看到 `Attacking and Defending Active Directory Lab - CRTP` 訂閱 Lab。
+成功登入後，可在 Dashboard 中看到 **Attacking and Defending Active Directory Lab - CRTP**
 
 主要功能區包含：
 - Lab Details
@@ -45,7 +45,7 @@ https://www.enterprisesecurity.io/
 - How to use Discord
 - FAQs
 
-其中最核心的學習資源集中在 `Lab Manual`，內容涵蓋課程影片、PDF 教材與相關工具包，是整套 CRTP 的知識主體，其他區塊則偏向環境說明、考試資訊與實驗室操作輔助。
+其中最核心的學習資源集中在 **Lab Manual** 內容涵蓋課程影片、PDF 教材與相關工具包，是整套 CRTP 的知識主體，其他區塊則偏向環境說明、考試資訊與實驗室操作輔助。
 
 ![CRTP-Lab Material](/img/Material.png)
 
@@ -100,7 +100,7 @@ Whisper
 
 ![Whisper](/img/Whisper.png)
 
-下載 full_build.7z 並將 `ffmpeg.exe` 加入環境變數。
+下載 full_build.7z 並將 **ffmpeg.exe** 加入環境變數。
 
 ```bash=
 https://www.gyan.dev/ffmpeg/builds/
@@ -108,7 +108,7 @@ https://www.gyan.dev/ffmpeg/builds/
 
 ![ffmpeg](/img/ffmpeg.png)
 
-批量將所有 `.mp4` 檔案轉成 `.srt` 檔案，並存放在 `Course_output_en` 資料夾中。
+批量將所有 **.mp4** 檔案轉成 **.srt** 檔案，並存放在 **Course_output_en** 資料夾中。
 
 ```bash= 
 for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir Course_output_en --output_format srt
@@ -126,7 +126,7 @@ for %f in (*.mp4) do whisper "%f" --model small --language English --output_dir 
 https://github.com/zxc7528064/SRT-Translator
 ```
 
-翻譯後生成 `srt_zh` 檔案，並確認時間軸未發生錯位。
+翻譯後生成 **srt_zh** 檔案，並確認時間軸未發生錯位。
 
 ![srt_cn](/img/srt_cn.png)
 
@@ -161,16 +161,16 @@ AD 的核心功能，它提供三大核心能力：
 ```bash=
 Forest
 │
-├── Schema Partition
+├── Schema
 │     ├── ObjectClass 定義
 │     └── Attribute 定義
 │
-├── Configuration Partition
+├── Configuration
 │     ├── Sites
 │     ├── Services
 │     └── Trust Objects
 │
-└── Domain Partition
+└── Domain
       └── Object Tree
             └── Object
                   ├── ObjectClass
