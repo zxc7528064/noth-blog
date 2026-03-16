@@ -1927,7 +1927,11 @@ In-Memory Execution
 
 這些攻擊可能不會留下惡意檔案，因此很難被傳統 AV 偵測，EDR 則透過行為監控來識別這類攻擊。
 
-## Lab Methodology - Assume Breach (實驗室方法論)
+## Active Directory Roadmap
+
+待畫心智圖
+
+## Lab Methodology - Assume Breach
 
 預設攻擊者已取得內網初始立足點（Initial Foothold），並是否能沿著攻擊鏈持續擴張權限，最終達成： 
 
@@ -1956,10 +1960,6 @@ Lab 入口資訊
 - 依地理位置選擇最近區域
 - 降低延遲 (Latency)
 - 確保操作流暢度
-
-## Active Directory Roadmap
-
-待畫心智圖
 
 ## 總結
 
