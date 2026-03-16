@@ -1535,11 +1535,126 @@ ACL 自動套用到 Protected Groups
 攻擊者持續擁有高權限
 ```
 
-利用的是：AdminSDHolder ACL Template + SDProp 同步機制。
-
-
+利用的是 **AdminSDHolder ACL Template + SDProp** 同步機制。
 
 ---
+
+跨 Domain / Forest 攻擊概念
+
+當攻擊者已經取得 **Domain Admin** 時，下一步通常是：
+- 提升到 **Enterprise Admin**
+- 或進行 **跨 Domain / Forest 攻擊**
+
+整體攻擊流程：
+
+```bash=
+Initial Foothold
+      ↓
+Local Admin
+      ↓
+Domain Admin (Child Domain)
+      ↓
+Enterprise Admin (Root Domain)
+      ↓
+Forest Compromise
+```
+
+重點：
+**當攻擊者取得 Child Domain 的 Domain Admin 時，可以透過 SIDHistory 濫用 提權到 Enterprise Admin，最終控制整個 Forest**
+
+SID（Security Identifier）
+
+Active Directory 中每個物件都有唯一的 SID。
+
+格式：
+
+```bash=
+DomainSID + RID
+```
+
+範例：
+
+```bash=
+S-1-5-21-XXXX-XXXX-XXXX-500
+```
+
+其中：
+- DomainSID：Domain 的唯一識別
+- RID：帳號識別（例如 500 = Administrator）
+ - 500 = Administrator
+ - 512 = Domain Admins
+ - 519 = Enterprise Admins
+
+SIDHistory 是 Active Directory 的 **向後相容機制 (Backward Compatibility Mechanism)**。
+
+用途：
+當帳號從一個 Domain 移到另一個 Domain，例如：
+
+```bash=
+companyA.local
+   ↓
+companyB.local
+```
+
+使用者 SID 會改變，因此 AD 會把舊 SID 存在 **SIDHistory** 中。
+
+結構：
+```bash=
+User
+ ├ SID = 新 Domain SID
+ └ SIDHistory = 舊 SID
+```
+
+在 Windows 授權時，系統會同時檢查：
+
+```bash=
+SID
++
+SIDHistory
+```
+
+修改 SIDHistory：利用 Domain Admin 權限直接修改使用者物件的 **SIDHistory** 屬性，將高權限 SID（如 Enterprise Admin）加入。
+
+常見工具：
+- mimikatz  
+- PowerView  
+- Invoke-Mimikatz  
+
+攻擊邏輯：
+```bash=
+取得 Domain Admin
+        ↓
+修改目標帳號 SIDHistory
+        ↓
+加入 Enterprise Admin SID
+        ↓
+系統授權時同時檢查 SID + SIDHistory
+        ↓
+帳號被視為 Enterprise Admin
+```
+
+Golden Ticket + SIDHistory：透過偽造 Kerberos Golden Ticket，並在 Ticket 中加入高權限 SID。
+
+範例：
+
+```bash=
+kerberos::golden
+/sids:<Enterprise Admin SID>
+```
+
+攻擊邏輯：
+
+```bash=
+取得 krbtgt hash
+        ↓
+偽造 Golden Ticket
+        ↓
+在 ticket 中加入 Enterprise Admin SID
+        ↓
+Kerberos 認證時帶入該 SID
+        ↓
+獲得 Enterprise Admin 權限
+```
 
 ### Module 4
 - Bypass Defenses (MDE and MDI)
@@ -1602,7 +1717,7 @@ CRTP 補足的是企業環境中最核心的 Active Directory 架構理解。
 - Delegation 設計邏輯
 - Forest / Domain Trust 邊界
 
-這一步讓能力從 **會打** 轉向 **看懂設計**，開始理解攻擊之所以成立，是因為架構本身如何運作。
+這一步讓能力從 **會打** 轉向 **看懂設計** 開始理解攻擊之所以成立，是因為架構本身如何運作。
 
 ### 第三階段：真實環境對抗能力（OSEP）
 
