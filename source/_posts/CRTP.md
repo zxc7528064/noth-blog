@@ -1251,6 +1251,81 @@ NTLM Relay
 Domain computer 載入惡意 policy
 ```
 
+在 Active Directory 環境中，**Active Directory Certificate Services (AD CS)** 是企業常見的 **PKI（Public Key Infrastructure）** 系統，用於簽發與管理憑證。
+
+通常會利用 AD CS 來實現：
+- Smart Card Login
+- TLS / SSL Authentication
+- Device Authentication
+- Kerberos PKINIT Authentication
+
+在紅隊實戰中，AD CS 經常成為 **Privilege Escalation 與 Domain Compromise 的重要入口點**
+
+AD CS 的核心概念可以用一句話理解： 
+
+**Certificate = Identity**
+
+AD CS 的基本架構如下：
+
+```
+Certificate Authority (CA)
+        ↓
+Certificate Templates
+        ↓
+Certificate Enrollment
+        ↓
+Certificate Authentication
+```
+
+憑證並不是隨意簽發，而是透過 **Certificate Template** 申請。
+
+Template 定義：
+- 哪些使用者可以申請憑證
+- 憑證用途
+- 憑證權限
+- 是否允許指定其他使用者
+
+在企業環境中，AD CS 通常存在 **配置錯誤 (Misconfiguration)**。
+
+常見問題包括：
+- Template 權限過寬
+- 低權限使用者可申請憑證
+- 允許替其他使用者申請憑證
+- Template 支援 Client Authentication
+
+如果存在這些問題，攻擊者可能：
+
+```
+申請高權限帳號的憑證
+```
+
+例如：
+
+```
+Domain Admin
+Enterprise Admin
+```
+
+一旦取得憑證就可以 **直接以該帳號進行身份驗證**
+
+AD CS 攻擊流程：
+
+```bash=
+Initial Foothold
+      ↓
+Low Privilege User
+      ↓
+Enumerate Certificate Templates
+      ↓
+Find Vulnerable Template
+      ↓
+Request Certificate
+      ↓
+Authenticate using Certificate
+      ↓
+Privilege Escalation
+```
+
 ### Module 3
 - Domain Persistensce
 - Cross Trust Attacks
