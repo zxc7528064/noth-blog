@@ -1892,7 +1892,45 @@ Root Domain 會直接授予 Enterprise Admin 權限。
 - Bypass Defenses (MDE and MDI)
 - Monitoring and Detections
 
-本文先記錄學習前的策略規劃，後續將依照實際進度拆解各模組內容。
+在現代企業環境中，傳統防毒（AV）已經無法有效偵測進階攻擊，因此許多企業開始部署 **EDR（Endpoint Detection and Response）** 來監控端點行為。
+
+EDR 不僅會偵測惡意檔案，還會監控系統上的各種行為，例如：
+- Process Creation
+- File Operations
+- Registry Changes
+- Network Connections
+- Memory Activity
+
+與傳統 AV 不同的是，EDR 更注重 **行為分析（Behavior Analysis）**
+
+在 Windows 環境中，常見的 EDR 解決方案之一是：**Microsoft Defender for Endpoint (MDE)**
+
+MDE 會在端點設備上收集大量 **Telemetry Data**，例如：
+
+```bash=
+Process Creation
+Command Line Arguments
+File Creation
+Registry Modifications
+Network Activity
+Logon Events
+```
+
+這些資料會被送往 Microsoft Security Cloud 進行分析與關聯。
+
+EDR 與傳統 AV 的差異
+
+傳統防毒主要依賴 **Signature-Based Detection** 也就是透過惡意程式特徵碼來識別病毒。
+
+現代攻擊常使用：
+
+```bash=
+Fileless Attacks
+Living-off-the-land Techniques
+In-Memory Execution
+```
+
+這些攻擊可能不會留下惡意檔案，因此很難被傳統 AV 偵測，EDR 則透過行為監控來識別這類攻擊。
 
 ## Lab Methodology - Assume Breach (實驗室方法論)
 
