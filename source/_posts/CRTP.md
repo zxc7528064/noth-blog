@@ -1203,7 +1203,7 @@ RBCD 攻擊流程：
 
 因此在大型企業 AD 環境中，通常會存在 **大量 SQL Server**
 
-在紅隊滲透測試中，SQL Server 經常被忽略，但實際上它可以提供 **Lateral Movement 的機會**。
+在紅隊滲透測試中，SQL Server 經常被忽略，但實際上它可以提供 **Lateral Movement 的機會**
 
 原因：**Domain User 可能被映射到 SQL Server 的 Database Role**
 
@@ -1230,7 +1230,17 @@ Low Privilege Domain User
 SQL Server Access
 ```
 
-可能成為攻擊突破點。
+可能成為攻擊突破點，此外，SQL Server 也可能儲存大量敏感資料，例如：
+
+```bash=
+Passwords
+Connection Strings
+API Keys
+Business Data
+Customer Information
+```
+
+因此 SQL Server 不只是 **Lateral Movement Platform**，同時也可能成為 **Data Exfiltration Target**。
 
 SQL Server 具有一個重要功能： **Linked Servers**
 
@@ -1245,6 +1255,12 @@ Linked Server
       ↓
 SQL Server B
 ```
+
+在 AD 環境中分析 SQL Server 時，常見工具之一是：**PowerUpSQL**
+攻擊者可以快速找到：
+- 可存取的 SQL Server
+- 具有權限的帳號
+- 可利用的 Linked Servers
 
 攻擊者可以利用 Linked Server，實現跨主機存取，進一步橫向移動。
 
