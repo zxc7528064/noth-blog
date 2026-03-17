@@ -171,7 +171,7 @@ Forest
 │     └── Trust
 │
 ├── Domain (資料)
-│     ├── OU / Container
+│     ├── OU
 │     │     ├── Users
 │     │     ├── Computers
 │     │     └── Groups
@@ -228,7 +228,7 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 多數 AD 攻擊建立在「物件 Attribute 屬性 + ACL 權限機制」之上。
 ```
 
-Domain (網域) ：
+Domain (網域)：
 
 公司內部帳號與電腦的管理範圍。
 
@@ -245,7 +245,7 @@ Domain 內部通常共享：
 重點：
 
 ```bash=
-MS-DRSR 協定 : Domain Controller 之間用來同步 Active Directory 資料的官方協定。
+MS-DRSR 協定：Domain Controller 之間用來同步 Active Directory 資料的官方協定。
 
 Active Directory
       ↓
@@ -264,7 +264,7 @@ DCShadow：濫用 AD 複寫機制，暫時將攻擊主機註冊為一台 Domain 
 控制 KRBTGT hash = 可偽造 Kerberos Golden Ticket，偽造任意使用者身份，而整個網域都會相信。
 ```
 
-Forest（森林）： AD 架構的最高層級。
+Forest（森林）：AD 架構的最高層級。
 
 ![Forest](/img/Forest.png)
 
@@ -273,7 +273,7 @@ Forest（森林）： AD 架構的最高層級。
 - 共用同一個 Schema（所有 Domain 的資料結構都必須一致）
 - 共用全域目錄（Global Catalog）
  
-重點 :
+重點：
 ```bash=
 Active Directory 森林權限與信任模型：
 
