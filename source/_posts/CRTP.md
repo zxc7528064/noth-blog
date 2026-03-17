@@ -161,25 +161,38 @@ AD 的核心功能，它提供三大核心能力：
 ```bash=
 Forest
 │
-├── Schema
-│     ├── ObjectClass 定義
-│     └── Attribute 定義
+├── Schema (規則)
+│     ├── ObjectClass
+│     └── Attribute
 │
-├── Configuration
+├── Configuration (環境設定)
 │     ├── Sites
 │     ├── Services
-│     └── Trust Objects
+│     └── Trust
 │
-└── Domain
-      └── Object Tree
-            └── Object
-                  ├── ObjectClass
-                  ├── Attributes (資料欄位)
-                  └── Security Descriptor (權限控制)
-                        ├── Owner
-                        ├── DACL (決定誰可以對這個 Object 做什麼)
-                        │     └── ACE
-                        └── SACL
+├── Domain (資料)
+│     ├── OU / Container
+│     │     ├── Users
+│     │     ├── Computers
+│     │     └── Groups
+│     │
+│     ├── GPO (Group Policy)
+│     │     └── Link to OU / Domain
+│     │
+│     └── Object
+│           ├── ObjectClass
+│           ├── Attributes
+│           └── Security Descriptor
+│                 ├── Owner
+│                 ├── DACL
+│                 │     └── ACE
+│                 └── SACL
+│
+├── Global Catalog
+│
+└── Authentication
+      ├── Kerberos
+      └── NTLM
 ```
 
 Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的目錄資料庫」。
