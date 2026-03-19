@@ -1093,13 +1093,17 @@ Offline Crack
 
 Kerberos Delegation 是一種 **服務可以代表使用者存取其他服務的機制**。
 
+![Kerberos Delegation](/img/Delegation.png)
+
 核心概念：
+
 ```bash=
 User → Service A → Service B
 ```
 Service A 可以使用 **使用者的身份** 去存取其他服務。
 
 常見應用場景：
+
 ```bash=
 User
  ↓
@@ -1107,8 +1111,6 @@ Web Server
  ↓
 SQL Server
 ```
-
-當使用者登入 Web Server 時，Web Server 需要 代表使用者身份 存取 SQL Server，因此需要使用 **Kerberos Delegation**
 
 主要有三種 Delegation：
 - Unconstrained Delegation
