@@ -1240,7 +1240,7 @@ Linked Server 允許一台 SQL Server 查詢另一台 SQL Server 的資料。
 
 結構如下：
 
-```
+```bash=
 SQL Server A
       ↓
 Linked Server
@@ -1346,14 +1346,14 @@ AD CS 的核心概念可以用一句話理解：
 
 AD CS 的基本架構如下：
 
-```
-Certificate Authority (CA)
+```bash=
+憑證授權中心（Certificate Authority, CA）
         ↓
-Certificate Templates
+憑證範本（Certificate Templates）
         ↓
-Certificate Enrollment
+憑證申請／簽發（Certificate Enrollment）
         ↓
-Certificate Authentication
+憑證驗證（Certificate Authentication）
 ```
 
 憑證並不是隨意簽發，而是透過 **Certificate Template** 申請。
@@ -1364,7 +1364,7 @@ Template 定義：
 - 憑證權限
 - 是否允許指定其他使用者
 
-在企業環境中，AD CS 通常存在 **配置錯誤 (Misconfiguration)**。
+在企業環境中，AD CS 通常存在 **配置錯誤 (Misconfiguration)**
 
 常見問題包括：
 - Template 權限過寬
@@ -1374,13 +1374,13 @@ Template 定義：
 
 如果存在這些問題，攻擊者可能：
 
-```
+```bash=
 申請高權限帳號的憑證
 ```
 
-例如：
+如：
 
-```
+```bash=
 Domain Admin
 Enterprise Admin
 ```
@@ -1390,19 +1390,19 @@ Enterprise Admin
 AD CS 攻擊流程：
 
 ```bash=
-Initial Foothold
+初始進入點（Initial Foothold）
       ↓
-Low Privilege User
+取得低權限帳號（Low Privilege User）
       ↓
-Enumerate Certificate Templates
+列舉憑證範本（Enumerate Certificate Templates）
       ↓
-Find Vulnerable Template
+找到有漏洞的範本（Find Vulnerable Template）
       ↓
-Request Certificate
+申請憑證（Request Certificate）
       ↓
-Authenticate using Certificate
+用憑證進行身份驗證（Authenticate using Certificate）
       ↓
-Privilege Escalation
+權限提升（Privilege Escalation）
 ```
 
 ### Module 3
