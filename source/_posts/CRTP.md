@@ -214,7 +214,7 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 - objectSID
 - servicePrincipalName
 
-| 攻擊類型                   | 關鍵屬性                               | 真正本質              |
+| 攻擊類型                | 關鍵屬性                                  | 真正本質              |
 | ---------------------- | ---------------------------------------- | --------------------- |
 | Kerberoasting          | servicePrincipalName                     | 可讀 SPN + 可請求 TGS  |
 | SPN Abuse              | servicePrincipalName                     | 可寫 SPN            |
@@ -227,7 +227,7 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 多數 AD 攻擊建立在「物件 Attribute 屬性 + ACL 權限機制」之上。
 ```
 
-Domain (網域)：
+Domain (網域)： 
 
 公司內部帳號與電腦的管理範圍。
 
@@ -235,7 +235,7 @@ Domain (網域)：
 - Domain 由一或多台 Domain Controller（DC）維護，負責儲存 AD 資料庫（NTDS.dit）、驗證使用者身分與發放存取權限。
 - 預設使用 Kerberos 作為主要驗證機制，在某些情況下（例如舊系統或 SPN 解析失敗）會回退至 NTLM。
 
-Domain 內部通常共享：
+內部通常共享：
 - 身份資料庫：所有帳號與群組資訊儲存在 AD 物件中。
 - 安全政策（Security Policy）：密碼長度、複雜度、帳號鎖定策略等。
 - 群組原則（GPO）：集中套用系統設定與安全設定至電腦與使用者。
