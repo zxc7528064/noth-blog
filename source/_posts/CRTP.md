@@ -244,8 +244,6 @@ Domain (網域)：
 重點：
 
 ```bash=
-MS-DRSR 協定：Domain Controller 之間用來同步 Active Directory 資料的官方協定。
-
 Active Directory
       ↓
 Replication 機制
@@ -255,6 +253,8 @@ MS-DRSR 協定
 DRSUAPI 介面
       ↓
 物件屬性資料同步
+
+MS-DRSR 協定：DC 之間「複製 AD 資料」的協定。
 
 DCSync：濫用 Directory Replication（目錄複寫）權限，透過 MS-DRSR（DRSUAPI）複寫介面向 Domain Controller，請求帳號屬性資料，可取得 NTLM hash、Kerberos 金鑰與 KRBTGT hash。
 
@@ -274,23 +274,22 @@ Forest（森林）：AD 架構的最高層級。
  
 重點：
 ```bash=
-Active Directory 森林權限與信任模型：
+
+AD 森林權限與信任模型：
 
 Forest
 │
-├── Schema Partition
-├── Configuration Partition
+├── Root Domain
+│     ├── Enterprise Admins（Forest 層級最高權限，可管理所有 Domain 與設定）
+│     ├── Schema Admins（Schema 控制）
+│     └── Domain Admins（Root Domain 管理）
 │
-├── Forest Root Domain
-│      ├── Domain Admins (管理 root domain)
-│      ├── Enterprise Admins (森林層級權限)
-│      └── Schema Admins (Schema 管理)
+├── Child Domains
+│     └── Domain Admins（各自 Domain 管理）
 │
-├── Child Domain A
-│      └── Domain Admins
-│
-└── Child Domain B
-       └── Domain Admins
+└── Trust（雙向 + 可傳遞）
+      ↓
+跨 Domain 權限關係
 
 在同一 Forest 內，各 Domain 透過 Parent-Child 與 Tree 架構，形成預設雙向且可傳遞（Transitive）的信任鏈。
 
@@ -298,7 +297,9 @@ Domain A ↔ Domain B ↔ Domain C
         ↑______________↑
          自動形成傳遞信任
 
-Enterprise Admins 存在於 Root Domain，具有管理整個 Forest 結構（Schema、Configuration、Domain）的能力，但實際資源存取仍受各 Domain ACL 控制。
+Enterprise Admins 存在於 Root Domain，
+具有管理整個 Forest 結構（Schema、Configuration、Domain）的能力，
+但實際資源存取仍受各 Domain ACL 控制。
 ```
 
 在 Active Directory 內網滲透中，PowerShell 與 .NET 是最核心的攻擊載體。
