@@ -161,44 +161,44 @@ AD 的核心功能，它提供三大核心能力：
 ```bash=
 Forest
 │
-├── Schema (規則)
-│     ├── ObjectClass
-│     └── Attribute
+├── Schema（規則）
+│     ├── ObjectClass（定義有哪些物件 user / computer / group）
+│     └── Attribute（定義物件有哪些屬性）
 │
-├── Configuration (環境設定)
-│     ├── Sites
-│     ├── Services
-│     └── Trust
+├── Configuration（全域設定）
+│     ├── Sites（網路拓樸）
+│     ├── Services（AD 服務）
+│     └── Trust（Domain 信任關係）
 │
-├── Domain (資料)
-│     ├── OU
-│     │     ├── Users
-│     │     ├── Computers
-│     │     └── Groups
+├── Domain（資料核心）
 │     │
-│     ├── GPO (Group Policy)
-│     │     └── Link to OU / Domain
+│     ├── OU（容器 / 部門）
+│     │     └── Object（user / computer / group）
 │     │
-│     └── Object
-│           ├── ObjectClass
-│           ├── Attributes
-│           └── Security Descriptor
-│                 ├── Owner
-│                 ├── DACL
-│                 │     └── ACE
-│                 └── SACL
+│     ├── Container（如 CN=Users）
+│     │     └── Object
+│     │
+│     ├── Object（所有資源本質）
+│     │     ├── ObjectClass（類型：user / computer）
+│     │     ├── Attributes（帳號、SID、SPN）
+│     │     └── Security Descriptor（權限核心）
+│     │           ├── Owner
+│     │           ├── DACL（核心）
+│     │           │     └── ACE（誰 → 做什麼）
+│     │           └── SACL
+│     │
+│     └── GPO（獨立物件）
+│           └── Link → OU / Domain
 │
-├── Global Catalog
+├── Global Catalog（跨 Domain 查詢）
 │
-└── Authentication
+└── Authentication（運作機制）
       ├── Kerberos
       └── NTLM
 ```
 
 Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的目錄資料庫」。
-
-在 AD 中，所有資源都以「物件（Object）」的形式存在，例如：
-
+在 AD 中，所有資源都以 **物件（Object）** 形式存在，例如：
 - User
 - Computer
 - Group
@@ -207,8 +207,7 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 - Service Account
 - GPO
 
-每個物件都包含多個「屬性（Attribute）」，例如：
-
+每個物件都包含多個 **屬性（Attribute）**，例如：
 - sAMAccountName
 - userPrincipalName
 - memberOf
@@ -216,7 +215,7 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 - servicePrincipalName
 
 | 攻擊類型                   | 關鍵屬性                               | 真正本質              |
-| ---------------------- | ---------------------------------------- | ----------------- |
+| ---------------------- | ---------------------------------------- | --------------------- |
 | Kerberoasting          | servicePrincipalName                     | 可讀 SPN + 可請求 TGS  |
 | SPN Abuse              | servicePrincipalName                     | 可寫 SPN            |
 | Constrained Delegation | msDS-AllowedToDelegateTo                 | 可控制委派目標           |
