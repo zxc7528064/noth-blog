@@ -302,16 +302,13 @@ Enterprise Admins 存在於 Root Domain，
 但實際資源存取仍受各 Domain ACL 控制。
 ```
 
-在 Active Directory 內網滲透中，PowerShell 與 .NET 是最核心的攻擊載體。
-
+在 AD 內網滲透中，PowerShell 與 .NET 是最核心的攻擊載體。
 - 理解 PowerShell 在 AD 攻擊中的角色
 - 理解 Windows 環境的偵測面
 - 理解何時應使用 PowerShell、何時應改用 .NET Binary
 
-為什麼 PowerShell 是 AD 攻擊核心載體 ?
-
+為什麼 PowerShell 是 AD 攻擊核心載體? 
 PowerShell 具備：
-
 - 預設安裝於 Windows 系統
 - 原生 .NET 支援
 - PowerShell 可直接跟 AD 交互（查資料、改資料，而不需要額外工具）
@@ -319,7 +316,6 @@ PowerShell 具備：
 - 可直接調用 Windows API
 
 在 AD 內網滲透中，幾乎所有 Enumeration 行為都可透過 PowerShell 完成：
-
 - 列出 User / Group / Computer
 - 查詢 SPN
 - 查詢 ACL
@@ -336,7 +332,6 @@ Get-Command -Module ActiveDirectory
 ```
 
 重點：
-- 使用 AD 相關 cmdlet
 - 進行 Domain Enumeration
 - 查詢 user / group / SPN / ACL
 
@@ -356,46 +351,46 @@ PowerShell Detection Surface（偵測面）
 理解防禦面，才能理解攻擊面。
 
 ```bash=
-System-wide transcription
-- 記錄整個 PowerShell 互動過程（指令與輸出）
-- 主要用於事後取證
+1. System-wide transcription
+記錄整個 PowerShell 互動過程（指令與輸出）
+主要用於事後取證（forensics）
+通常寫入檔案（log file）
 
-Script Block Logging
-- 記錄還原後的完整腳本內容
-- 即使混淆或編碼，仍可能被還原記錄
-- 重要事件 ID：4104
+2. Script Block Logging
+記錄還原後的完整腳本內容
+即使混淆或編碼，仍可能被還原記錄
+重要事件 ID：4104（最關鍵）
 
-AMSI (AntiMalware Scan Interface)
-- 將腳本內容送交 AV / EDR 掃描
-- 屬於即時掃描機制
-- 是否阻擋取決於防毒引擎
+3. AMSI (AntiMalware Scan Interface)
+在腳本執行前，將內容送給 AV / EDR 掃描
+屬於即時防禦機制（runtime detection）
+是否阻擋取決於防毒引擎與規則
 
-流程概念：
-PowerShell Script
+偵測流程概念：
+PowerShell Script（尚未執行）
         ↓
-AMSI Hook
+AMSI（AmsiScanBuffer）
         ↓
-AV / EDR Engine
+AV / EDR Engine（掃描內容）
         ↓
-Allow / Block
+返回結果（Clean / Malicious）
+        ↓
+PowerShell 決定是否執行（Allow / Block）
 
 Constrained Language Mode (CLM)
-- 限制 PowerShell 可使用的功能
-- 通常與 AppLocker
-- 屬於功能限制，而非純偵測機制
+限制 PowerShell 可使用的功能
+通常與 AppLocker
+屬於功能限制，而非純偵測機制
 ```
 
 Execution Policy（執行策略）
 
-常見參數：
-
-```bash= 
-powershell -ep bypass
-powershell -c <cmd>
-powershell -encodedcommand <base64>
+常見參數： 
+- powershell -ep bypass
+- powershell -c <cmd>
+- powershell -encodedcommand <base64>
 或在當前程序中：
-Set-ExecutionPolicy Bypass -Scope Process
-```
+- Set-ExecutionPolicy Bypass -Scope Process
 
 重點：
 - 它只是防止誤執行腳本
