@@ -1068,8 +1068,8 @@ Process：
 - 成功連線會建立 wsmprovhost.exe
 - 取得 Local Administrator 權限可進行 lateral movement
 
-Kerberoasting：是一種 Active Directory Credential Extraction 攻擊技術。
-
+Kerberoasting：
+是一種 Active Directory Credential Extraction 攻擊技術。
 目的：取得 Service Account 密碼
 條件：只需要 Domain User 權限，因為任何 Domain User 都可以請求 SPN 的 Service Ticket
 
@@ -1122,8 +1122,6 @@ SQL Server
 Unconstrained Delegation 原理：
 如果一台主機被設定為 **Trusted for delegation** 當使用者登入該主機時，KDC 會將使用者的 TGT (Ticket Granting Ticket) 傳給該主機，因此 User TGT 會被儲存在該服務主機上，因此該服務可以代表使用者存取其他服務。
 
-如果攻擊者控制了 Unconstrained Delegation 主機
-
 ```bash=
 控制 Unconstrained Delegation 主機
         ↓
@@ -1134,7 +1132,7 @@ Unconstrained Delegation 原理：
 使用 TGT 冒充該使用者
 ```
 
-如果登入的使用者是 Domain Admin 攻擊者即可取得 Domain Admin 權限。
+如果登入的使用者是 Domain Admin，攻擊者即可取得 Domain Admin 權限。
 
 RBCD(Resource-Based Constrained Delegation) 是 **Kerberos Delegation 的一種形式** 
 
