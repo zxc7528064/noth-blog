@@ -227,7 +227,7 @@ Schema 與物件屬性 ： Active Directory 本質上是一個「物件導向的
 多數 AD 攻擊建立在「物件 Attribute 屬性 + ACL 權限機制」之上。
 ```
 
-Domain (網域)： 
+Domain(網域)： 
 
 公司內部帳號與電腦的管理範圍。
 
@@ -274,8 +274,7 @@ Forest（森林）：AD 架構的最高層級。
  
 重點：
 ```bash=
-
-AD 森林權限與信任模型：
+AD 森林權限與信任模型
 
 Forest
 │
@@ -297,9 +296,7 @@ Domain A ↔ Domain B ↔ Domain C
         ↑______________↑
          自動形成傳遞信任
 
-Enterprise Admins 存在於 Root Domain，
-具有管理整個 Forest 結構（Schema、Configuration、Domain）的能力，
-但實際資源存取仍受各 Domain ACL 控制。
+Enterprise Admins 存在於 Root Domain，具有管理整個 Forest 結構（Schema、Configuration、Domain）的能力，但實際資源存取仍受各 Domain ACL 控制。
 ```
 
 在 AD 內網滲透中，PowerShell 與 .NET 是最核心的攻擊載體。
@@ -397,7 +394,6 @@ Execution Policy（執行策略）
 - 真正的限制來自 AMSI / CLM / AV
 
 Tradecraft 不是工具清單，而是：
-
 - 目標環境是否啟用 Script Block Logging？
 - 是否部署 EDR？
 - 是否開啟 CLM？
@@ -406,7 +402,7 @@ Tradecraft 不是工具清單，而是：
 
 PowerShell 本質是 .NET。
 
-在高監控環境中，可能改用：
+在高監控環境中，改用：
 - 直接撰寫 C# 工具
 - 使用 .NET API 操作 LDAP
 - 減少 PowerShell 特徵
@@ -417,7 +413,7 @@ PowerShell 本質是 .NET。
 - API 間接調用
 - 編譯為獨立 Binary
 
-混淆與偵測研究工具（研究用途）
+混淆與偵測研究工具
 
 工具的價值在於理解偵測邏輯，而非盲目繞過。
 
@@ -428,9 +424,10 @@ PowerShell 本質是 .NET。
 
 ---
 
-AD 後滲透模型流程：
+AD 後滲透模型流程
 
 ```bash=
+
 Initial Foothold
       ↓
 PowerView 手動枚舉
@@ -455,11 +452,7 @@ Domain Controller Compromise
 | PowerHuntShares | 共享枚舉 | 尋找敏感檔案與憑證（GPP密碼、備份檔、設定檔）|
 | RunWithRegistryNonAdmin.bat | 執行技巧 | 利用註冊表機制在低權限情境下啟動程式 |
 
-AD / Windows 權限判斷的核心機制：
-
-```bash=
-Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先。
-```
+Windows 權限判斷核心機制： **Access Token 對 DACL 中 ACE 的逐條匹配過程，而 Deny 永遠優先**。
 
 驗證流程：
 
@@ -485,13 +478,9 @@ Process 繼承 Access Token
 全部未命中 → 拒絕
 ```
 
-在 Active Directory 中：
+在 AD 中 **GPO + OU Link = 批量控制行為的機制**
 
-```bash=
-GPO + OU Link = 批量控制行為的機制
-```
-
-重要的是： OU 與 GPO 本身也是受 ACL 控制的物件，可以被濫用的控制節點。
+重點： OU 與 GPO 本身也是受 ACL 控制的物件，可以被濫用的控制節點。
 
 常見濫用權限，如果攻擊者對 OU 具有以下權限：
 
@@ -504,7 +493,7 @@ WriteOwner
 GPO（Group Policy Object）的本質
 
 ```bash=
-一種可以套用到 OU / Domain 的設定物件。
+可以套用到 OU / Domain 的設定物件。
 ```
 
 可以影響：
