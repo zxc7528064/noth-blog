@@ -577,24 +577,26 @@ A ↔ B ↔ C
 
 ![Transitive](/img/Transitive.png)
 
-跨域攻擊決策模型：
+跨域攻擊模型：
 
 ```bash=
 已控制 Domain A
 ↓
 枚舉 Trust 關係
 ↓
-分析 Direction / Type / Attributes
+分析 Trust（Direction / Type / Transitivity）
 ↓
-判斷是否可跨域驗證
+判斷「我能不能過去」（Authentication）
 ↓
-尋找跨域可濫用權限
+判斷「過去能幹嘛」（Authorization / ACL）
 ↓
-User Hunting（高權限帳號在哪?）
+尋找可濫用權限（ACL / Delegation / Group）
 ↓
-定位落點主機
+User Hunting（高權限在哪裡登入過）
 ↓
-橫向移動至 Domain B
+定位落點主機（Session / Host）
+↓
+橫向移動 → 控制 Domain B
 ```
 
 ### Module 2 
