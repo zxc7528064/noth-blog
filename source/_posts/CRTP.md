@@ -1937,6 +1937,10 @@ In-Memory Execution
 
 ![CRTP-Lab](/img/CRTP-Lab.png)
 
+Lab 開通後會再 Lab Details 出現面板。
+
+![CRTP-Lab-2](/img/CRTP-Lab2.png)
+
 Lab 入口資訊
 - Portal URL： **https://enterprisesecurity.io**
 - 登入後可查看：
