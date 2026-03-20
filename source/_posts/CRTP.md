@@ -1429,10 +1429,9 @@ AD Persistence
    └─ DSRM
 ```
 
-在 Active Directory 攻擊流程中，許多初學者的目標往往是取得 **Domain Admin** 然而在成熟的紅隊攻擊模型中 **Domain Admin 並不是最終目標**。
-真正的目標是能夠 **長期控制 Active Directory** 攻擊者通常會建立 **Domain Persistence**，確保即使帳號或憑證被重置，仍然能重新取得對 AD 的控制權。
+在 Active Directory 攻擊流程中，許多初學者的目標往往是取得 **Domain Admin** 然而在成熟的紅隊攻擊模型中 **Domain Admin 並不是最終目標**。真正的目標是能夠 **長期控制 Active Directory** 攻擊者通常會建立 **Domain Persistence**，確保即使帳號或憑證被重置，仍然能重新取得對 AD 的控制權。
 
-Active Directory 的身份驗證核心機制是 **Kerberos**。
+Active Directory 身份驗證核心機制是 **Kerberos**。
 
 Kerberos 的基本流程如下：
 
@@ -1931,6 +1930,8 @@ In-Memory Execution
 ## Lab Methodology - Assume Breach
 
 預設攻擊者已取得內網初始立足點（Initial Foothold），並是否能沿著攻擊鏈持續擴張權限，最終達成： 
+
+![Lab](/img/Lab.png)
 
 ```bash=
 控制整個 AD 網域環境
