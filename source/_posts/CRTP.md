@@ -1931,11 +1931,11 @@ In-Memory Execution
 
 預設攻擊者已取得內網初始立足點（Initial Foothold），並是否能沿著攻擊鏈持續擴張權限，最終達成： 
 
-![Lab](/img/Lab.png)
-
 ```bash=
 控制整個 AD 網域環境
 ```
+
+![開通 Lab](/img/Lab.png)
 
 Lab 入口資訊
 - Portal URL： **https://enterprisesecurity.io**
