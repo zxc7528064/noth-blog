@@ -1937,7 +1937,7 @@ In-Memory Execution
 
 ![CRTP-Lab](/img/CRTP-Lab.png)
 
-Lab 開通後會再 Lab Details 出現面板。
+Lab 開通後即在 Lab Details 出現面板。
 
 ![CRTP-Lab-2](/img/CRTP-Lab2.png)
 
