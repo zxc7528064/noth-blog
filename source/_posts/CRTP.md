@@ -1935,7 +1935,7 @@ In-Memory Execution
 控制整個 AD 網域環境
 ```
 
-![開通 Lab](/img/Lab.png)
+![CRTP-Lab](/img/CRTP-Lab.png)
 
 Lab 入口資訊
 - Portal URL： **https://enterprisesecurity.io**
