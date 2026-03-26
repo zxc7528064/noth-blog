@@ -322,9 +322,10 @@ Proxy: DNS only（關橘雲）
 
 重點：一定要灰雲（DNS only）
 如果開啟橘雲（Proxied），可能會導致：
-- GitHub Pages SSL 驗證失敗
-- Custom Domain 無法生效
-- Custom Domain 無法生效
+- GitHub Pages 無法驗證 Custom Domain
+- DNS check failed
+- HTTPS 無法啟用
+- 網站可能出現 404
 
 GitHub Pages 設定 Custom Domain
 
@@ -413,7 +414,13 @@ CI/CD（GitHub Actions）
 
 每次 git push 後 Custom Domain 消失，GitHub Pages 設定被清掉
 
-原因：GitHub Actions 會覆蓋整個 gh-pages 分支
+Custom Domain 並不是 GitHub 記住的設定  
+而是透過 `gh-pages` 分支中的 `CNAME` 檔來維持
+
+當使用 GitHub Actions 部署時：
+
+→ 每次都會覆蓋整個 gh-pages 分支  
+→ 如果沒有包含 CNAME，設定就會被清除
 
 在專案中新增：
 
