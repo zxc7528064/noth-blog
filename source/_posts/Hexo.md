@@ -444,12 +444,14 @@ blog.noth.tech
 
 實際踩過的問題，本質上可以歸納為三種類型：
 
-1. **資源路徑問題（Hexo root 設定）**
-2. **部署覆蓋問題（gh-pages 與 CNAME）**
-3. **請求路徑改變（Cloudflare Proxy 導致驗證失敗）**
+**資源路徑問題（Hexo root 設定）**
+**部署覆蓋問題（gh-pages 與 CNAME）**
+**請求路徑改變（Cloudflare Proxy 導致驗證失敗）**
 
 在這次實作後，更清楚理解：
 
-> 部署不只是把網站丟上去，而是理解 build、deploy、hosting 與 DNS 如何協同運作。
+```bash=
+部署不只是把網站丟上去，而是理解 build、deploy、hosting 與 DNS 如何協同運作。
+```
 
 這也是從「會使用工具」走向「理解系統」的一個過程。
