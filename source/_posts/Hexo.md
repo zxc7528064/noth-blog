@@ -269,7 +269,7 @@ https://www.spaceship.com/
 
 完成購買後，即可在後台看到你的網域（例如：noth.tech）。
 
-![SpaceShip後台](/img/SpaceShip.png)
+![SpaceShip後台](/img/SpaceShip-1.png)
 
 #### 將網域加入 Cloudflare
 
