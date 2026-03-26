@@ -370,7 +370,7 @@ CI/CD（GitHub Actions）
 
 這類問題大多不是單一設定錯誤，而是 DNS、CI/CD 與靜態資源路徑之間的連動問題。
 
-### Hexo + GitHub Pages + Cloudflare 部署踩坑紀錄
+### 部署踩坑紀錄
 
 這次在把 Hexo Blog 部署到 GitHub Pages，並搭配 Cloudflare 綁定自訂網域時，實際踩了幾個關鍵坑，這裡整理最重要的幾點。
 
@@ -414,8 +414,7 @@ CI/CD（GitHub Actions）
 
 每次 git push 後 Custom Domain 消失，GitHub Pages 設定被清掉
 
-Custom Domain 並不是 GitHub 記住的設定  
-而是透過 `gh-pages` 分支中的 `CNAME` 檔來維持
+Custom Domain 並不是 GitHub 記住的設定，而是透過 `gh-pages` 分支中的 `CNAME` 檔來維持
 
 當使用 GitHub Actions 部署時：
 
