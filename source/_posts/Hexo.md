@@ -242,7 +242,16 @@ Branch: gh-pages
 Folder: / (root)
 ```
 
-### 常見錯誤與排錯
-
-
 ### Cloudflare CDN
+
+https://www.spaceship.com/ 購買域名
+
+🧩 Step 1：把網域丟進 Cloudflare
+到 Cloudflare
+點 Add a site
+輸入你的 domain（例如：noth.blog）
+選 Free Plan
+
+👉 Cloudflare 會給你 2 個 Nameserver（超重要）
+
+### 常見錯誤與排錯
