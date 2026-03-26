@@ -300,11 +300,50 @@ nile.ns.cloudflare.com
 
 ![Change-NameServer](/img/NameServer.png)
 
-修改完成後，需等待 DNS 更新（約 5～30 分鐘），當 Cloudflare 顯示網域狀態為： **Active** ; 代表已成功接管該網域。
+修改完成後，需等待 DNS 更新（約 5～30 分鐘）
+當 Cloudflare 顯示網域狀態為： **Active** ; 代表已成功接管該網域。
 
 ![NS-Active](/img/NS-Active.png)
 
 #### 設定 DNS
 
+到 Cloudflare → DNS → Add record
+
+新增一筆：
+
+```bash=
+Type: CNAME
+Name: blog
+Target: zxc7528064.github.io
+Proxy: DNS only（一定要關橘雲）
+```
+
+![CNAME](/img/CNAME.png)
+
+GitHub Pages 設定 Custom Domain
+
+進入：
+
+```bash=
+repo → Settings → Pages
+```
+
+Custom domain 填入： **blog.noth.tech** 
+
+![Custom Domain](/img/Custom-Domain.png)
+
+出現 
+
+![alt text](image.png)
+
+修改 
+
+![alt text](image-1.png)
+
+```
+hexo clean
+hexo g
+hexo d
+```
 
 ### 常見錯誤與排錯
