@@ -1,14 +1,14 @@
 body
   background-color #f5f5f5
 
-#page-header
+#page-header.full_page
   background-size contain !important
   background-position center !important
   background-repeat no-repeat !important
   background-color #000 !important
   background-attachment fixed
 
-#page-header::before
+#page-header.full_page::before
   content ''
   position absolute
   top 0
@@ -18,10 +18,10 @@ body
   background rgba(0,0,0,0.4) !important
   z-index 1
 
-#page-header .site-title
+#page-header.full_page .site-title
   position relative
   z-index 2
 
-#page-header .site-subtitle
+#page-header.full_page .site-subtitle
   position relative
   z-index 2
