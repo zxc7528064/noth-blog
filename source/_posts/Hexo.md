@@ -315,7 +315,7 @@ nile.ns.cloudflare.com
 Type: CNAME
 Name: blog
 Target: zxc7528064.github.io
-Proxy: DNS only（一定要關橘雲）
+Proxy: DNS only（關橘雲）
 ```
 
 ![CNAME](/img/CNAME.png)
@@ -331,8 +331,6 @@ repo → Settings → Pages
 Custom domain 填入： **blog.noth.tech** 
 
 ![Custom Domain](/img/Custom-Domain.png)
-
-![alt text](image.png)
 
 修改 
 
