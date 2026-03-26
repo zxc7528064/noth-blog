@@ -292,7 +292,7 @@ nile.ns.cloudflare.com
 
 #### 修改 Nameserver（Spaceship）
 
-- 進入 域名管理器
+- 進入域名管理器
 - 選擇你的網域（例如：noth.tech）
 - 找到 Nameserver 設定
 - 選擇「自訂 Nameserver」
@@ -300,10 +300,8 @@ nile.ns.cloudflare.com
 
 ![Change-NameServer](/img/NameServer.png)
 
-修改完成後，需等待 DNS 更新（約 5～30 分鐘），當 Cloudflare 顯示網域狀態為： **Active**
+修改完成後，需等待 DNS 更新（約 5～30 分鐘），當 Cloudflare 顯示網域狀態為： **Active** 代表已成功接管該網域。
 
 ![NS-Active](/img/NS-Active.png)
-
-代表已成功接管該網域。
 
 ### 常見錯誤與排錯
