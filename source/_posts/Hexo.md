@@ -244,13 +244,20 @@ Folder: / (root)
 
 ### Cloudflare CDN 設定
 
-Spaceship 購買域名，選擇自己看得順眼且便宜的即可。
+#### 購買網域
 
+首先到 **Spaceship** 購買網域，選擇名稱簡單、價格合理的即可。
+
+官方網站：
 ```bash=
 https://www.spaceship.com/ 
 ```
 
+完成購買後，即可在後台看到你的網域（例如：noth.tech）。
+
 ![Spaceship](/img/Spaceship.png)
+
+#### 將網域加入 Cloudflare
 
 Cloudflare 官網進行設定，把 **noth.tech** 域名加進 Cloudflare。
 
@@ -260,11 +267,22 @@ Cloudflare 官網進行設定，把 **noth.tech** 域名加進 Cloudflare。
 
 ![Cloudflare-2](/img/Cloudflare-2.png)
 
-Cloudflare 給 Name Server
+在設定流程中，Cloudflare 會分配兩組 Nameserver，例如：
+
+```bash=
+amy.ns.cloudflare.com
+nile.ns.cloudflare.com
+```
 
 ![NS](/img/NS.png)
 
-去 Spaceship 改 Nameserver -> 域名管理器
+#### 修改 Nameserver（Spaceship）
+
+- 進入 域名管理器
+- 選擇你的網域（例如：noth.tech）
+- 找到 Nameserver 設定
+- 選擇「自訂 Nameserver」
+- 將原本的 NS 改為 Cloudflare 提供的
 
 ![Change-NameServer](/img/NameServer.png)
 
