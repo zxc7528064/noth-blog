@@ -34,6 +34,15 @@ header#page-header(class=`${headerClassName + isFixedClass}` style=bg_img)
     else if globalPageType === 'home'
       #site-info
         h1#site-title=config.title
+        // 👇 在這裡插入
+        .marquee-wrapper
+      .marquee Never deter till the goal is in sight
+
+    if theme.subtitle.enable
+      - var loadSubJs = true
+      #site-subtitle
+        span#subtitle
+        
         if theme.subtitle.enable
           - var loadSubJs = true
           #site-subtitle
