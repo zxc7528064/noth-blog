@@ -253,7 +253,7 @@ Folder: / (root)
         ↓
 取得 Nameserver
         ↓
-回 Spaceship 修改 NS
+回 Spaceship 修改 NS（Nameserver）
         ↓
 Cloudflare 接管成功（Active）
 ```
@@ -273,7 +273,7 @@ https://www.spaceship.com/
 
 #### 將網域加入 Cloudflare
 
-Cloudflare 官網進行設定，把 **noth.tech** 域名加進 Cloudflare。
+將 **noth.tech** 域名加進 Cloudflare。
 
 ![Cloudflare](/img/Cloudflare.png)
 
@@ -300,11 +300,9 @@ nile.ns.cloudflare.com
 
 ![Change-NameServer](/img/NameServer.png)
 
-修改完成後，需等待 DNS 傳播（約 5～30 分鐘）。
+修改完成後，需等待 DNS 更新（約 5～30 分鐘），當 Cloudflare 顯示網域狀態為： **Active**
 
-當 Cloudflare 顯示網域狀態為：
-
-Active
+![NS-Active](/img/NS-Active.png)
 
 代表已成功接管該網域。
 
