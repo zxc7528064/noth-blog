@@ -372,11 +372,11 @@ CI/CD（GitHub Actions）
 
 ### 部署踩坑紀錄
 
-這次在把 Hexo Blog 部署到 GitHub Pages，並搭配 Cloudflare 綁定自訂網域時，實際踩了幾個關鍵坑，這裡整理最重要的幾點。
+把 Hexo Blog 部署到 GitHub Pages，並搭配 Cloudflare 綁定自訂網域時，實際踩了幾個關鍵坑，這裡整理最重要的幾點。
 
 #### DNS 設定（Cloudflare）
 
-重點：一定要關橘雲（Proxy）
+重點：關橘雲（Proxy）
 
 如果開啟 Proxy（橘雲），會出現：
 - GitHub Pages 無法驗證 Custom Domain
@@ -414,16 +414,15 @@ CI/CD（GitHub Actions）
 
 每次 git push 後 Custom Domain 消失，GitHub Pages 設定被清掉
 
-Custom Domain 並不是 GitHub 記住的設定，而是透過 `gh-pages` 分支中的 `CNAME` 檔來維持
+Custom Domain 並不是 GitHub 記住的設定，而是透過 **gh-pages** 分支中的 **CNAME** 檔來維持
 
 當使用 GitHub Actions 部署時：
-
 → 每次都會覆蓋整個 gh-pages 分支  
 → 如果沒有包含 CNAME，設定就會被清除
 
 在專案中新增：
 
-```bash=s
+```bash=
 source/CNAME
 ```
 
