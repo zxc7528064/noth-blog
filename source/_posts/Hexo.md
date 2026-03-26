@@ -368,3 +368,61 @@ CI/CD（GitHub Actions）
 - 修改設定後網站未更新
 
 這類問題大多不是單一設定錯誤，而是 DNS、CI/CD 與靜態資源路徑之間的連動問題。
+
+### Hexo + GitHub Pages + Cloudflare 部署踩坑紀錄
+
+這次在把 Hexo Blog 部署到 GitHub Pages，並搭配 Cloudflare 綁定自訂網域時，實際踩了幾個關鍵坑，這裡整理最重要的幾點。
+
+#### DNS 設定（Cloudflare）
+
+重點：一定要關橘雲（Proxy）
+
+如果開啟 Proxy（橘雲），會出現：
+- GitHub Pages 無法驗證 Custom Domain
+- DNS check failed
+- HTTPS 無法啟用
+- 甚至出現 404
+
+原因： Cloudflare Proxy 會攔截流量，導致 GitHub 無法直接驗證網域
+
+#### CI/CD（GitHub Actions）
+
+部署流程：
+
+```bash=
+- run: |
+    npx hexo clean
+    npx hexo generate
+
+- uses: peaceiris/actions-gh-pages@v3
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    publish_dir: ./public
+```
+
+重點：一定要加 hexo clean
+
+如果缺少 hexo clean，會出現：
+- 舊 CSS / JS 殘留
+- 修改設定後網站沒有變化
+- 錯誤的路徑持續存在
+
+原因：public/ 會殘留舊 build
+
+#### CNAME 被覆蓋
+
+每次 git push 後 Custom Domain 消失，GitHub Pages 設定被清掉
+
+原因：GitHub Actions 會覆蓋整個 gh-pages 分支
+
+在專案中新增：
+
+```bash=s
+source/CNAME
+```
+
+內容：
+
+```bash=
+blog.noth.tech
+```
