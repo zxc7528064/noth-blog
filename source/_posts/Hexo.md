@@ -246,6 +246,8 @@ Folder: / (root)
 
 https://www.spaceship.com/ 購買域名
 
+![Spaceship](/img/Spaceship.png)
+
 🧩 Step 1：把網域丟進 Cloudflare
 到 Cloudflare
 點 Add a site
@@ -253,5 +255,7 @@ https://www.spaceship.com/ 購買域名
 選 Free Plan
 
 👉 Cloudflare 會給你 2 個 Nameserver（超重要）
+
+![Cloudflare](/img/Cloudflare.png)
 
 ### 常見錯誤與排錯
