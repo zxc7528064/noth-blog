@@ -252,7 +252,7 @@ https://www.spaceship.com/
 
 ![Spaceship](/img/Spaceship.png)
 
-Cloudflare 官網進行設定，把 *noth.tech* 域名加進 Cloudflare。
+Cloudflare 官網進行設定，把 **noth.tech** 域名加進 Cloudflare。
 
 ![Cloudflare](/img/Cloudflare.png)
 
@@ -264,8 +264,9 @@ Cloudflare 給 Name Server
 
 ![NS](/img/NS.png)
 
-去 Spaceship 改 Nameserver
+去 Spaceship 改 Nameserver -> 域名管理器
 
+![Change-NameServer](/img/NameServer.png)
 
 
 ### 常見錯誤與排錯
