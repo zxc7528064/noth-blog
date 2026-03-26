@@ -242,20 +242,30 @@ Branch: gh-pages
 Folder: / (root)
 ```
 
-### Cloudflare CDN
+### Cloudflare CDN 設定
 
-https://www.spaceship.com/ 購買域名
+Spaceship 購買域名，選擇自己看得順眼且便宜的即可。
+
+```bash=
+https://www.spaceship.com/ 
+```
 
 ![Spaceship](/img/Spaceship.png)
 
-🧩 Step 1：把網域丟進 Cloudflare
-到 Cloudflare
-點 Add a site
-輸入你的 domain（例如：noth.blog）
-選 Free Plan
-
-👉 Cloudflare 會給你 2 個 Nameserver（超重要）
+Cloudflare 官網進行設定，把 *noth.tech* 域名加進 Cloudflare。
 
 ![Cloudflare](/img/Cloudflare.png)
+
+選擇 free 方案
+
+![Cloudflare-2](/img/Cloudflare-2.png)
+
+Cloudflare 給 Name Server
+
+![NS](/img/NS.png)
+
+去 Spaceship 改 Nameserver
+
+
 
 ### 常見錯誤與排錯
