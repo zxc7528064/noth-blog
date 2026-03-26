@@ -300,8 +300,11 @@ nile.ns.cloudflare.com
 
 ![Change-NameServer](/img/NameServer.png)
 
-修改完成後，需等待 DNS 更新（約 5～30 分鐘），當 Cloudflare 顯示網域狀態為： **Active** 代表已成功接管該網域。
+修改完成後，需等待 DNS 更新（約 5～30 分鐘），當 Cloudflare 顯示網域狀態為： **Active** ; 代表已成功接管該網域。
 
 ![NS-Active](/img/NS-Active.png)
+
+#### 設定 DNS
+
 
 ### 常見錯誤與排錯
