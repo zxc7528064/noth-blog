@@ -24,6 +24,7 @@ jobs:
       - run: npm install
 
       # 4️⃣ 產生靜態網站（生成 public/ 資料夾）
+      - run: npx hexo clean
       - run: npx hexo generate
 
       # 5️⃣ 把 public/ 裡的靜態檔 push 到 gh-pages 分支
