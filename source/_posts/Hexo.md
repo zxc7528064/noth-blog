@@ -244,6 +244,20 @@ Folder: / (root)
 
 ### Cloudflare CDN 設定
 
+整體流程如下：
+
+```bash=
+購買網域（Spaceship）
+        ↓
+加入 Cloudflare
+        ↓
+取得 Nameserver
+        ↓
+回 Spaceship 修改 NS
+        ↓
+Cloudflare 接管成功（Active）
+```
+
 #### 購買網域
 
 首先到 **Spaceship** 購買網域，選擇名稱簡單、價格合理的即可。
@@ -286,5 +300,12 @@ nile.ns.cloudflare.com
 
 ![Change-NameServer](/img/NameServer.png)
 
+修改完成後，需等待 DNS 傳播（約 5～30 分鐘）。
+
+當 Cloudflare 顯示網域狀態為：
+
+Active
+
+代表已成功接管該網域。
 
 ### 常見錯誤與排錯
