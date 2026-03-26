@@ -7913,7 +7913,8 @@ body {
 }
 .marquee {
   white-space: nowrap;
-  color: #00eaff;
+  color: #00ff9c;
+  text-shadow: 0 0 5px #00ff9c, 0 0 10px #00ff9c;
   font-size: 18px;
   font-family: monospace;
   -webkit-animation: marquee 12s linear infinite;
