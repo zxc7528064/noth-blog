@@ -242,7 +242,7 @@ Branch: gh-pages
 Folder: / (root)
 ```
 
-### Cloudflare CDN 設定
+### Cloudflare 設定
 
 整體流程如下：
 
@@ -320,6 +320,12 @@ Proxy: DNS only（關橘雲）
 
 ![CNAME](/img/CNAME.png)
 
+重點：一定要灰雲（DNS only）
+如果開啟橘雲（Proxied），可能會導致：
+- GitHub Pages SSL 驗證失敗
+- Custom Domain 無法生效
+- Custom Domain 無法生效
+
 GitHub Pages 設定 Custom Domain
 
 進入：
@@ -328,12 +334,37 @@ GitHub Pages 設定 Custom Domain
 repo → Settings → Pages
 ```
 
-Custom domain 填入： **blog.noth.tech** 
+Custom domain 填入 **blog.noth.tech** 
 
 ![Custom Domain](/img/Custom-Domain.png)
 
-修改 
+Hexo 設定，修改 **_config.yml**
+
+```bash=
+url: https://blog.noth.tech
+root: /
+```
 
 ![fix-Hexopath](/img/fix-Hexopath.png)
 
-### 常見錯誤與排錯
+如果設定錯誤（例如 /noth-blog），會導致：
+- CSS / JS 路徑錯誤
+- 頁面樣式異常
+- 資源 404
+
+CI/CD（GitHub Actions）
+
+確保 workflow 一定要 clean 步驟
+
+```bash=
+- run: |
+    npx hexo clean
+    npx hexo generate
+```
+
+若缺少 hexo clean，可能出現：
+- 舊 CSS / JS 殘留
+- Mixed Content（HTTP 資源）
+- 修改設定後網站未更新
+
+這類問題大多不是單一設定錯誤，而是 DNS、CI/CD 與靜態資源路徑之間的連動問題。
