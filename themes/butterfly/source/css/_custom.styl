@@ -25,3 +25,33 @@ body
 #page-header.full_page .site-subtitle
   position relative
   z-index 2
+
+
+/* ✅ 一定要獨立出來（不能縮排錯） */
+#site-info
+  text-align center
+  position relative
+  z-index 2
+
+
+/* 跑馬燈 */
+.marquee-wrapper
+  margin-top 10px
+  width 100%
+  overflow hidden
+  display flex
+  justify-content center
+
+.marquee
+  white-space nowrap
+  color #00eaff
+  font-size 18px
+  font-family monospace
+  animation marquee 12s linear infinite
+
+
+@keyframes marquee
+  0%
+    transform translateX(100%)
+  100%
+    transform translateX(-100%)
