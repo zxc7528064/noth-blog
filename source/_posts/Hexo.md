@@ -354,7 +354,7 @@ root: /
 
 CI/CD（GitHub Actions）
 
-確保 workflow 一定要 clean 步驟
+確保 workflow 一定要有 **clean** 步驟
 
 ```bash=
 - run: |
@@ -400,9 +400,9 @@ CI/CD（GitHub Actions）
     publish_dir: ./public
 ```
 
-重點：一定要加 hexo clean
+重點：一定要加 **hexo clean**
 
-如果缺少 hexo clean，會出現：
+如果缺少 **hexo clean**，會出現：
 - 舊 CSS / JS 殘留
 - 修改設定後網站沒有變化
 - 錯誤的路徑持續存在
@@ -430,3 +430,26 @@ source/CNAME
 ```bash=
 blog.noth.tech
 ```
+
+## 結論
+
+這次的部署過程，其實並不是單一設定錯誤，而是多個系統之間的交互影響：
+
+- Hexo 負責靜態資源生成（build）
+- GitHub Actions 負責自動化部署（deploy）
+- GitHub Pages 負責網站託管（hosting）
+- Cloudflare 負責 DNS 與流量轉發（DNS/CDN）
+
+在這樣的架構下，任何一層設定錯誤，都可能導致整體行為異常。
+
+實際踩過的問題，本質上可以歸納為三種類型：
+
+1. **資源路徑問題（Hexo root 設定）**
+2. **部署覆蓋問題（gh-pages 與 CNAME）**
+3. **請求路徑改變（Cloudflare Proxy 導致驗證失敗）**
+
+在這次實作後，更清楚理解：
+
+> 部署不只是把網站丟上去，而是理解 build、deploy、hosting 與 DNS 如何協同運作。
+
+這也是從「會使用工具」走向「理解系統」的一個過程。
