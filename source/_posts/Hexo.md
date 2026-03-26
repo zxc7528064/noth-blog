@@ -332,18 +332,10 @@ Custom domain 填入： **blog.noth.tech**
 
 ![Custom Domain](/img/Custom-Domain.png)
 
-出現 
-
 ![alt text](image.png)
 
 修改 
 
-![alt text](image-1.png)
-
-```
-hexo clean
-hexo g
-hexo d
-```
+![fix-Hexopath](/img/fix-Hexopath.png)
 
 ### 常見錯誤與排錯
