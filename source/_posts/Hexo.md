@@ -288,7 +288,7 @@ amy.ns.cloudflare.com
 nile.ns.cloudflare.com
 ```
 
-![NS](/img/NS.png)
+![Name-Server](/img/NameServer-2.png)
 
 #### 修改 Nameserver（Spaceship）
 
