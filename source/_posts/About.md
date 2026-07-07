@@ -49,7 +49,8 @@ Hi，我是 Noth Shen
 
 ### Preparing / 準備中
 
-- CRTP  
+- CRTP
+- CRTE  
 - CISSP
 
 ### Security Hall of Fame / 安全名人堂
@@ -59,7 +60,7 @@ Hi，我是 Noth Shen
 - Dcard (2020)  
 - Trend Micro (2020)  
 - Telekom (2020)  
-- Naver – Special Contributor (2020)  
+- Naver - Special Contributor (2020)  
 - CERT-EU (2020)  
 - ResMed (2020)  
 - UN Women (2020)  
