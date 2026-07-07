@@ -33,6 +33,7 @@ Hi，我是 Noth Shen
 - CVE-2020-25453
 - CVE-2020-27533
 - CVE-2020-23522
+- CVE-2026-9003
 
 ### Security Certificates / 安全證書
 
